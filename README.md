@@ -1,22 +1,10 @@
 # SMI (smi-mobile)
+O SMI mobile é uma aplicação PWA para recebimento de alertas relacionados ao SMI.
 
-A Quasar Framework app
+## Como rodar
+Para subir a aplicação em sua máquina, rode o comando abaixo:
 
-## Install the dependencies
-```bash
-npm install
 ```
-
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
-```bash
-quasar dev
+docker-compose up
 ```
-
-
-### Build the app for production
-```bash
-quasar build
-```
-
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+A aplicação estará disponível na porta `8081` do seu computador. Para acessa-lo acesse: `localhost:8081`

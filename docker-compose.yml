@@ -1,0 +1,15 @@
+version: '3.5'
+services:
+  mobile:
+    container_name: mobile
+    build: .
+    ports:
+      - 8081:8080
+    volumes:
+      - .:/smi-mobile
+      - yarn_cache:/smi-mobile/node_modules
+    entrypoint: ["sh", "./scripts/start.sh"]
+        
+volumes:
+  yarn_cache:
+
