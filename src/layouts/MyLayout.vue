@@ -1,37 +1,66 @@
+
 <template>
   <q-layout view="lHh Lpr lFf">
-    <div class="q-pa-md toolbar">
-        <q-tabs 
-          v-model="tab"
-          indicator-color="transparent"
-          active-color="black"
-          class="text-teal"
-        >
-          <q-tab clickable name="mails" icon="warning" class="text" href="/" exact>Ocorrências</q-tab>
-          <q-tab clickable name="alarms" icon="list"  class="text" href="/medidores" exact>Medidores</q-tab>
-          <q-tab clickable name="movies" icon="settings" class="text" href="/configuracoes" exact>Configurações</q-tab>
-        </q-tabs>
+    <div class="q-pa-md">
+      <div class="q-gutter-y-md">
+
+        <q-tab-panels v-model="tab">
+          <q-tab-panel name="occurences">
+            <header-vue :title= "'Ocorrências em andamento'" :last72h="true"/>
+          </q-tab-panel>
+
+          <q-tab-panel name="meters">
+
+          </q-tab-panel>
+
+          <q-tab-panel name="settings">
+            <header-vue :title= "'Configurações'"/>
+.
+          </q-tab-panel>
+        </q-tab-panels>
+
+        <div class="q-pa-md toolbar">
+          <q-tabs 
+            v-model="tab"
+            indicator-color="transparent"
+            active-color="black"
+            class="text-teal"
+          >
+            <q-tab clickable name="occurences" icon="warning" class="text" href="/" exact>Ocorrências</q-tab>
+            <q-tab clickable name="meters" icon="list"  class="text" href="/medidores" exact>Medidores</q-tab>
+            <q-tab clickable name="settings" icon="settings" class="text" href="/configuracoes" exact>Configurações</q-tab>
+          </q-tabs>
+        </div>
+      </div>
     </div>
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
-
 <script>
 import { colors } from 'quasar'
+import headerVue from '../components/header.vue';
 
 colors.setBrand('black', '#000000')
 colors.setBrand('red', '#4B4B4B')
 
 export default {
-  
   name: "MyLayout",
+  
+  components: {
+    headerVue: headerVue
+  },
 
   data() {
     return {
-      tab: "mails"
+      tab: "occurences"
     };
+  },
+  methods:{
+    setTitle(){
+      return "ahhhhhhhh"
+    }
   }
 };
 </script>
