@@ -10,7 +10,7 @@
           </q-tab-panel>
 
           <q-tab-panel name="meters">
-
+            <header-vue :isDropdown="true"/>
           </q-tab-panel>
 
           <q-tab-panel name="settings">
