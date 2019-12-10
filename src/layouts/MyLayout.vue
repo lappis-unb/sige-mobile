@@ -6,15 +6,15 @@
 
         <q-tab-panels v-model="tab">
           <q-tab-panel name="occurences">
-            <header-vue :title= "'Ocorrências em andamento'" :last72h="true"/>
+            <occurences/>
           </q-tab-panel>
 
           <q-tab-panel name="meters">
-            <header-vue :isDropdown="true"/>
+            <page-header :isDropdown="true"/>
           </q-tab-panel>
 
           <q-tab-panel name="settings">
-            <header-vue :title= "'Configurações'"/>
+            <page-header :title= "'Configurações'"/>
 .
           </q-tab-panel>
         </q-tab-panels>
@@ -40,7 +40,8 @@
 </template>
 <script>
 import { colors } from 'quasar'
-import headerVue from '../components/header.vue';
+import pageHeader from '../components/header.vue';
+import occurences from '../components/occurences.vue';
 
 colors.setBrand('black', '#000000')
 colors.setBrand('red', '#4B4B4B')
@@ -49,7 +50,8 @@ export default {
   name: "MyLayout",
   
   components: {
-    headerVue: headerVue
+    pageHeader: pageHeader,
+    occurences: occurences
   },
 
   data() {
