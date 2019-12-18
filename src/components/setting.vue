@@ -9,7 +9,7 @@
             <q-item-label class="text-subtitle1">Ocorrências graves</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="permissions" val="Serious occurrences" />
+            <q-toggle color="secondary" v-model="permissions" val="Serious occurrences" />
           </q-item-section>
         </q-item>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>
@@ -17,7 +17,7 @@
             <q-item-label class="text-subtitle1">Ocorrências leves</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="permissions" val="Mild Occurrences" />
+            <q-toggle color="secondary" v-model="permissions" val="Mild Occurrences" />
           </q-item-section>
         </q-item>
       </q-list>
@@ -30,7 +30,7 @@
             <q-item-label class="text-subtitle1">Ceilândia</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Ceilândia" />
+            <q-toggle color="secondary" v-model="campus" val="Ceilândia" />
           </q-item-section>
         </q-item>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>
@@ -38,7 +38,7 @@
             <q-item-label class="text-subtitle1">Darcy Ribeiro A</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Darcy Ribeiro A" />
+            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro A" />
           </q-item-section>
         </q-item>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>
@@ -46,7 +46,7 @@
             <q-item-label class="text-subtitle1">Darcy Ribeiro B</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Darcy Ribeiro B" />
+            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro B" />
           </q-item-section>
         </q-item>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>
@@ -54,7 +54,7 @@
             <q-item-label class="text-subtitle1">Darcy Ribeiro C</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Darcy Ribeiro C" />
+            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro C" />
           </q-item-section>
         </q-item>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>
@@ -62,7 +62,7 @@
             <q-item-label class="text-subtitle1">Darcy Ribeiro D</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Darcy Ribeiro D" />
+            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro D" />
           </q-item-section>
         </q-item>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>
@@ -70,7 +70,7 @@
             <q-item-label class="text-subtitle1">Gama</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Gama" />
+            <q-toggle color="secondary" v-model="campus" val="Gama" />
           </q-item-section>
         </q-item>
 
@@ -79,7 +79,7 @@
             <q-item-label class="text-subtitle1">Planaltina</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="green" v-model="campus" val="Planaltina" />
+            <q-toggle color="secondary" v-model="campus" val="Planaltina" />
           </q-item-section>
         </q-item>
       </q-list>
