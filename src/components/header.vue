@@ -1,6 +1,7 @@
 <template>
   <q-header class="shadow-3 q-mb-xl">
     <q-toolbar class="title">
+      <q-icon v-go-back=" '/' " v-if="lastHours" size="lg" name="keyboard_backspace" />
       <q-toolbar-title>
         {{!this.isDropdown? this.title : null}}
         <q-btn-dropdown class="drop" flat no-caps v-if="this.isDropdown" :label="selected">
@@ -13,7 +14,7 @@
           </q-list>
         </q-btn-dropdown>
       </q-toolbar-title>
-      <q-btn class="float-right" flat v-if="this.last72h" icon="history" />
+      <q-btn to="/lastHours" exact class="float-right" flat v-if="this.last72h" icon="history" />
     </q-toolbar>
   </q-header>
 </template>
@@ -30,6 +31,10 @@ export default {
       default: false
     },
     isDropdown: {
+      type: Boolean,
+      default: false
+    },
+    lastHours: {
       type: Boolean,
       default: false
     }

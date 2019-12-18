@@ -1,23 +1,23 @@
 <template>
-  <div class="q-mt-lg">
+  <div>
     <page-header :isDropdown="true" />
-    <div v-if="title" class="ListTitle h1">PERTO DE VOCÊ</div>
-    <occurences-list :list="true" :items="nearby" />
-    <q-separator spaced inset />
-    <div v-if="title" class="ListTitle h1">TODOS</div>
-    <occurences-list :list="true" :items="nearby" />
+    <div class="q-gutter-md">
+      <simple-list :title="'PERTO DE VOCÊ'" :items="nearby" :list="true" />
+      <q-separator spaced inset style="height: 2px;" />
+      <simple-list :title="'TODOS'" :items="nearby" :list="true" />
+    </div>
   </div>
 </template>
 
 <script>
 import pageHeader from "../components/header.vue";
-import occurencesList from "../components/occurencesList.vue";
+import simpleList from "../components/simpleList.vue";
 
 export default {
   name: "TransducerList",
   components: {
     pageHeader: pageHeader,
-    occurencesList: occurencesList
+    simpleList: simpleList
   },
   props: {
     title: {
@@ -51,6 +51,5 @@ export default {
 <style lang="scss">
 .ListTitle {
   color: #777777;
-  margin-bottom: -10%;
 }
 </style>

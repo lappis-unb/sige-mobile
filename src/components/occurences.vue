@@ -1,24 +1,23 @@
 <template>
   <div>
-    <page-header :title= "'Ocorrências em andamento'" :last72h="true"/>
-    <occurences-list  :title="'Tensão crítica'" :items="critical_tension"/>
-    <occurences-list  :title="'Queda de fase'" :items="phase_drop"/>
-    <occurences-list  :title="'Falha de comunicação'" :items="comunication_fail"/>
-    
+    <page-header :title="'Ocorrências em andamento'" :last72h="true" />
+    <occurences-list :title="'Tensão crítica'" :items="critical_tension" />
+    <occurences-list :title="'Queda de fase'" :items="phase_drop" />
+    <occurences-list :title="'Falha de comunicação'" :items="comunication_fail" />
   </div>
 </template>
 <script>
-import pageHeader from '../components/header.vue';
-import occurencesList from '../components/occurencesList.vue';
+import pageHeader from "../components/header.vue";
+import occurencesList from "../components/occurencesList.vue";
 
 export default {
-    name: 'Occurences',
-    components: {
+  name: "Occurences",
+  components: {
     pageHeader: pageHeader,
     occurencesList: occurencesList
   },
-  data(){
-    return{
+  data() {
+    return {
       critical_tension: [
         {
           name: "ICC Norte m1",
@@ -35,7 +34,7 @@ export default {
           id: 2
         }
       ],
-      phase_drop:[
+      phase_drop: [
         {
           name: "BSA m1",
           sigla: "DRA",
@@ -44,7 +43,7 @@ export default {
           id: 1
         }
       ],
-      comunication_fail:[
+      comunication_fail: [
         {
           name: "Prédio A m1",
           sigla: "FGA",
@@ -86,10 +85,9 @@ export default {
           obs: "Possível queda de energia",
           time: "10 min",
           id: 6
-        },
-        
+        }
       ]
-    }
+    };
   }
-}
+};
 </script>

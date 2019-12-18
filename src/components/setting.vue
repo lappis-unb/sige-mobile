@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header :title="'Configurações'" />
-    <div class="ntitle q-mt-lg h1">NOTIFICAÇÔES</div>
+    <div class="ntitle q-mt-xs h1">NOTIFICAÇÔES</div>
     <div class="q-gutter-sm">
       <q-list>
         <q-item tag="label" class="q-gutter-x-xs" v-ripple>

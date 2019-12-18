@@ -53,9 +53,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.content {
-  margin-top: 10%;
-}
+
 .card-title {
   font-size: 150%;
   background: #e8e8e8;
