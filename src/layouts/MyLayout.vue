@@ -8,18 +8,37 @@
         </q-tab-panel>
 
         <q-tab-panel name="meters">
-          <page-header :isDropdown="true" />
+          <transducer-list :title="'PERTO DE VOCÊ'" />
         </q-tab-panel>
 
         <q-tab-panel name="settings">
-          <page-header :title="'Configurações'" />.
+          <setting />
         </q-tab-panel>
       </q-tab-panels>
 
-      <div class="q-pa-xs toolbar">
-        <q-tabs v-model="tab" indicator-color="transparent" active-color="black" class="text-teal row">
-          <q-tab clickable name="occurences" icon="warning" class="text col" href="/" exact>Ocorrências</q-tab>
-          <q-tab clickable name="meters" icon="list" class="text col" href="/medidores" exact>Medidores</q-tab>
+      <q-footer class="q-pa-xs toolbar">
+        <q-tabs
+          v-model="tab"
+          indicator-color="transparent"
+          active-color="black"
+          class="text-teal row"
+        >
+          <q-tab
+            clickable
+            name="occurences"
+            icon="warning"
+            class="text col"
+            href="/"
+            exact
+          >Ocorrências</q-tab>
+          <q-tab
+            clickable
+            name="meters"
+            icon="list"
+            class="text col"
+            href="/medidores"
+            exact
+          >Medidores</q-tab>
           <q-tab
             clickable
             name="settings"
@@ -29,11 +48,12 @@
             exact
           >Configurações</q-tab>
         </q-tabs>
-      </div>
+      </q-footer>
     </div>
-    <q-page-container>
+    <!--     <q-page-container>
       <router-view />
     </q-page-container>
+    -->
   </q-layout>
 </template>
 
@@ -41,6 +61,8 @@
 import { colors } from "quasar";
 import pageHeader from "../components/header.vue";
 import occurences from "../components/occurences.vue";
+import transducerList from "../components/transducerList.vue";
+import setting from "../components/setting.vue";
 
 colors.setBrand("black", "#000000");
 colors.setBrand("red", "#4B4B4B");
@@ -50,7 +72,9 @@ export default {
 
   components: {
     pageHeader: pageHeader,
-    occurences: occurences
+    occurences: occurences,
+    transducerList: transducerList,
+    setting: setting
   },
 
   data() {
