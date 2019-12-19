@@ -50,18 +50,11 @@ export default {
     components:{
         pageHeader: pageHeader
     },
-    props:{
-        name: {
-            type: String,
-            default: 'Meu transdutor s2'
-        },
-        lastReading: {
-            type: String,
-            default: '2 min'
-        }
-    },
+
     data(){
         return{
+            name: "Transdutor",
+            lastReading: "2 min",
             tension: {
                 a: 128,
                 b: 220,

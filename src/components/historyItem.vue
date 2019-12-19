@@ -1,7 +1,7 @@
 <template>
   <q-list>
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item>
+      <q-item to="/transducer">
         <q-item-section>
           <q-item-label>{{item.occurence}}</q-item-label>
           <q-item-label caption>{{item.name}} ({{item.sigla}})</q-item-label>
