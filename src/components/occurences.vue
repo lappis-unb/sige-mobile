@@ -7,7 +7,7 @@
   </div>
 </template>
 <script>
-import pageHeader from "../components/header.vue";
+import pageHeader from "../components/pageHeader.vue";
 import mainList from "../components/mainList.vue";
 
 export default {

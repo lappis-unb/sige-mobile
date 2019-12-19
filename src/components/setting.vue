@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import pageHeader from "../components/header.vue";
+import pageHeader from "../components/pageHeader.vue";
 
 export default {
   name: "Setting",

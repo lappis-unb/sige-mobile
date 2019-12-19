@@ -52,7 +52,7 @@
 
 <script>
 import { colors } from "quasar";
-import pageHeader from "../components/header.vue";
+import pageHeader from "../components/pageHeader.vue";
 import occurences from "../components/occurences.vue";
 import transducerList from "../components/transducerList.vue";
 import setting from "../components/setting.vue";
@@ -74,8 +74,7 @@ export default {
     return {
       tab: "occurences"
     };
-  },
-  methods: {}
+  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-header :lastHours="true" :title="'Ocorrências nas últimas 72h'" />
+    <page-header :backButton="true" :title="'Ocorrências nas últimas 72h'" />
     <div class="q-ma-md">
       <simple-list :title="'HOJE'" :items="today" :type="'history'" />
       <q-separator spaced inset style="height: 1px;" />
@@ -12,12 +12,12 @@
 </template>
 
 <script>
-import header from "../components/header.vue";
+import pageHeader from "../components/pageHeader.vue";
 import simpleList from "../components/simpleList.vue";
 
 export default {
   components: {
-    pageHeader: header,
+    pageHeader: pageHeader,
     simpleList: simpleList
   },
   data() {

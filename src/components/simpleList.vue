@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import pageHeader from "../components/header.vue";
+import pageHeader from "../components/pageHeader.vue";
 import mainList from "../components/mainList.vue";
 
 export default {
@@ -20,7 +20,8 @@ export default {
       type: String
     },
     items: {
-      type: []
+      type: Array,
+      default: []
     },
     type: {
       type: String,

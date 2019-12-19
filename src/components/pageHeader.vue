@@ -1,10 +1,10 @@
 <template>
   <q-header class="shadow-3 q-mb-xl">
-    <q-toolbar class="title" :class="{ 'bg-grey-4' : lastHours}">
-      <q-icon v-go-back=" '/' " v-if="lastHours" size="lg" name="keyboard_backspace" />
+    <q-toolbar class="title" :class="{ 'bg-grey-4' : backButton}">
+      <q-icon v-go-back=" '/' " v-if="backButton" size="lg" name="keyboard_backspace" />
       <q-toolbar-title class="text-h6">
         {{!this.isDropdown? this.title : null}}
-        <q-btn-dropdown class="drop" flat no-caps v-if="this.isDropdown" :label="selected">
+        <q-btn-dropdown class="drop" flat no-caps v-if="isDropdown" :label="selected">
           <q-list>
             <q-item clickable v-close-popup @click="onItemClick">
               <q-item-section>
@@ -14,13 +14,13 @@
           </q-list>
         </q-btn-dropdown>
       </q-toolbar-title>
-      <q-btn to="/lastHours" exact class="float-right" flat v-if="this.last72h" icon="history" />
+      <q-btn to="/lastHours" exact class="float-right" flat v-if="last72h" icon="history" />
     </q-toolbar>
   </q-header>
 </template>
 <script>
 export default {
-  name: "header",
+  name: "pageHeader",
   props: {
     title: {
       type: String,
@@ -34,7 +34,7 @@ export default {
       type: Boolean,
       default: false
     },
-    lastHours: {
+    backButton: {
       type: Boolean,
       default: false
     }

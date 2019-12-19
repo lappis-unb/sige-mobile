@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import pageHeader from "../components/header.vue";
+import pageHeader from "../components/pageHeader.vue";
 import simpleList from "../components/simpleList.vue";
 
 export default {
