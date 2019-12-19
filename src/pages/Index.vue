@@ -87,6 +87,7 @@ export default {
   bottom: 0;
   width: 100%;
   text-align: center;
+  justify-content: center;
 }
 
 .text {
@@ -94,4 +95,5 @@ export default {
   font-size: 90%;
   color: #4b4b4b;
 }
+
 </style>
