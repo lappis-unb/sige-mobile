@@ -1,8 +1,8 @@
 <template>
   <q-header class="shadow-3 q-mb-xl">
-    <q-toolbar class="title">
+    <q-toolbar class="title" :class="{ 'bg-grey-4' : lastHours}">
       <q-icon v-go-back=" '/' " v-if="lastHours" size="lg" name="keyboard_backspace" />
-      <q-toolbar-title>
+      <q-toolbar-title class="text-h6">
         {{!this.isDropdown? this.title : null}}
         <q-btn-dropdown class="drop" flat no-caps v-if="this.isDropdown" :label="selected">
           <q-list>

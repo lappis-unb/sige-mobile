@@ -2,11 +2,11 @@
   <div>
     <page-header :lastHours="true" :title="'Ocorrências nas últimas 72h'" />
     <div class="q-ma-md">
-      <simple-list :title="'HOJE'" :items="today" :list="true" />
-      <q-separator spaced inset style="height: 2px;" />
-      <simple-list :title="'ONTEM'" :items="yesterday" :list="true" />
-      <q-separator spaced inset style="height: 2px;" />
-      <simple-list :title="'ANTEONTEM'" :items="beforeYesterday" :list="true" />
+      <simple-list :title="'HOJE'" :items="today" :type="'history'" />
+      <q-separator spaced inset style="height: 1px;" />
+      <simple-list :title="'ONTEM'" :items="yesterday" :type="'history'" />
+      <q-separator spaced inset style="height: 1px;" />
+      <simple-list :title="'ANTEONTEM'" :items="beforeYesterday" :type="'history'" />
     </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 1
@@ -34,7 +34,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 2
@@ -44,7 +44,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 1
@@ -52,7 +52,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 2
@@ -60,7 +60,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 3
@@ -68,7 +68,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 4
@@ -76,7 +76,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 5
@@ -84,7 +84,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 6
@@ -94,7 +94,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 1
@@ -102,7 +102,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 2
@@ -110,7 +110,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 3
@@ -118,7 +118,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 4
@@ -126,7 +126,7 @@ export default {
         {
           initialHour: "11h40",
           finalHour: "11h49",
-          occurrence: "Pico de consumo",
+          occurence: "Pico de consumo",
           name: "ICC Norte m2",
           sigla: "FCE",
           id: 5
@@ -134,7 +134,7 @@ export default {
         {
           initialHour: "09h35",
           finalHour: "09h47",
-          occurrence: "Queda de fase",
+          occurence: "Queda de fase",
           name: "ICC Norte m1",
           sigla: "DRA",
           id: 6

@@ -1,20 +1,20 @@
 <template>
   <div>
     <page-header :title="'Ocorrências em andamento'" :last72h="true" />
-    <occurences-list :title="'Tensão crítica'" :items="critical_tension" />
-    <occurences-list :title="'Queda de fase'" :items="phase_drop" />
-    <occurences-list :title="'Falha de comunicação'" :items="comunication_fail" />
+    <main-list :title="'Tensão crítica'" :items="critical_tension" :type="'occurence'" />
+    <main-list :title="'Queda de fase'" :items="phase_drop" :type="'occurence'" />
+    <main-list :title="'Falha de comunicação'" :items="comunication_fail" :type="'occurence'" />
   </div>
 </template>
 <script>
 import pageHeader from "../components/header.vue";
-import occurencesList from "../components/occurencesList.vue";
+import mainList from "../components/mainList.vue";
 
 export default {
   name: "Occurences",
   components: {
     pageHeader: pageHeader,
-    occurencesList: occurencesList
+    mainList: mainList
   },
   data() {
     return {

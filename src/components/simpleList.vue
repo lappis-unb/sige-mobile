@@ -1,19 +1,19 @@
 <template>
   <div class="q-mt-lg">
     <div v-if="title" class="ListTitle h1">{{title}}</div>
-    <occurences-list :list="true" :items="items" />
+    <main-list :list="true" :items="items" :type="type" />
   </div>
 </template>
 
 <script>
 import pageHeader from "../components/header.vue";
-import occurencesList from "../components/occurencesList.vue";
+import mainList from "../components/mainList.vue";
 
 export default {
   name: "SimpleList",
   components: {
     pageHeader: pageHeader,
-    occurencesList: occurencesList
+    mainList: mainList
   },
   props: {
     title: {
@@ -21,6 +21,10 @@ export default {
     },
     items: {
       type: []
+    },
+    type: {
+      type: String,
+      default: "list"
     }
   },
   data() {

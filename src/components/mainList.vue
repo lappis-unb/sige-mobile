@@ -5,29 +5,24 @@
         <q-icon :name="getIcon()" />
         {{this.title}}
       </q-card>
-      <q-list>
-        <div v-for="item in items" v-bind:key="item.id">
-          <q-item>
-            <q-item-section>
-              <q-item-label>{{item.name}} ({{item.sigla}})</q-item-label>
-              <q-item-label v-if="!list" caption>{{item.obs}}</q-item-label>
-            </q-item-section>
-
-            <q-item-section side top>
-              <q-item-label v-if="!list" caption>{{item.time}}</q-item-label>
-              <q-icon v-else-if="item.icon" size="xs" :name="item.icon" />
-            </q-item-section>
-          </q-item>
-          <q-separator v-if="!list" spaced inset />
-        </div>
-        
-      </q-list>
+      <occurence-item v-if="type == 'occurence'" :items="items" />
+      <history-item v-else-if="type == 'history'" :items="items" />
+      <list-item v-else :items="items" />
     </div>
   </div>
 </template>
 <script>
+import historyItem from "./historyItem.vue";
+import occurenceItem from "./occurenceItem.vue";
+import listItem from "./listItem.vue";
+
 export default {
-  name: "OccurencesList",
+  name: "MainList",
+  components: {
+    historyItem: historyItem,
+    occurenceItem: occurenceItem,
+    listItem: listItem
+  },
   props: {
     icon: {
       type: String,
@@ -43,6 +38,10 @@ export default {
     list: {
       type: Boolean,
       default: false
+    },
+    type: {
+      type: String,
+      default: "list"
     }
   },
   methods: {
@@ -53,7 +52,6 @@ export default {
 };
 </script>
 <style lang="scss">
-
 .card-title {
   font-size: 150%;
   background: #e8e8e8;
