@@ -6,7 +6,7 @@
       </q-tab-panel>
 
       <q-tab-panel name="meters">
-        <transducer-list :title="'PERTO DE VOCÊ'" />
+        <transducer-list />
       </q-tab-panel>
 
       <q-tab-panel name="settings">
