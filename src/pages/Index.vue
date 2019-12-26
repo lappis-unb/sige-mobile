@@ -51,14 +51,15 @@
 </template>
 
 <script>
-import { colors } from "quasar";
+// import { colors } from "quasar"; THIS BREAKS SSR 
 import pageHeader from "../components/pageHeader.vue";
 import occurences from "../components/occurences.vue";
 import transducerList from "../components/transducerList.vue";
 import setting from "../components/setting.vue";
 
-colors.setBrand("black", "#000000");
-colors.setBrand("red", "#4B4B4B");
+// THIS BREAKS SSR 
+// colors.setBrand("black", "#000000");
+// colors.setBrand("red", "#4B4B4B");
 
 export default {
   name: "PageIndex",

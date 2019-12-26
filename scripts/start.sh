@@ -2,4 +2,4 @@
 
 yarn install 
 
-quasar dev -m pwa
+yarn start

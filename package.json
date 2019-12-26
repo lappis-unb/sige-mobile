@@ -4,19 +4,19 @@
   "description": "A Quasar Framework app",
   "productName": "SMI",
   "cordovaId": "org.cordova.quasar.app",
-  "capacitorId": "",
   "author": "Ezequiel <ezequiel1de1oliveira@gmail.com>",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "start": "quasar dev -m ssr",
+    "build": "quasar build"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "quasar": "^1.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0",
-    "strip-ansi": "=3.0.1"
+    "@quasar/app": "^1.0.0"
   },
   "engines": {
     "node": ">= 8.9.0",
