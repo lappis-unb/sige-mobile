@@ -7,12 +7,14 @@
       </q-card>
       <occurence-item v-if="type == 'occurence'" :items="items" />
       <history-item v-else-if="type == 'history'" :items="items" />
+      <transducer-item v-else-if="type == 'transducer'" :items="items" />
       <list-item v-else :items="items" />
     </div>
   </div>
 </template>
 <script>
 import historyItem from "./historyItem.vue";
+import transducerItem from "./transducerItem.vue";
 import occurenceItem from "./occurenceItem.vue";
 import listItem from "./listItem.vue";
 
@@ -20,6 +22,7 @@ export default {
   name: "MainList",
   components: {
     historyItem: historyItem,
+    transducerItem: transducerItem,
     occurenceItem: occurenceItem,
     listItem: listItem
   },
