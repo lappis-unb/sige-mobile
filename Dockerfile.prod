@@ -1,8 +1,8 @@
 FROM node:10
 
-WORKDIR /smi-front
+WORKDIR /smi-mobile
 
-COPY . /smi-front
+COPY . /smi-mobile
 
 RUN mv src/services/masterApi/http-common-homolog-deploy.js src/services/masterApi/http-common.js && \
     yarn install && \
