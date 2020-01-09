@@ -46,7 +46,7 @@
             <div class="map">
                 <b>MAPA</b>
             </div>
-            
+
             <q-separator spaced inset style="height: 1px;" />
 
             <p>Outras ocorrências nas últimas 72h:</p>
@@ -54,87 +54,85 @@
             <simple-list :title="'ONTEM'" :items="this.yesterday" :type="'transducer'" />
             <simple-list :title="'ANTEONTEM'" :items="this.beforeYesterday" :type="'transducer'" />
 
-           
-
         </div>
 
     </div>
 </template>
 <script>
-import pageHeader from '../components/pageHeader.vue';
-import simpleList from "../components/simpleList.vue";
+import pageHeader from '../components/pageHeader.vue'
+import simpleList from '../components/simpleList.vue'
 
 export default {
-    components: {
+  components: {
     pageHeader: pageHeader,
     simpleList: simpleList
   },
 
-    data(){
-        return{
-            name: "Transdutor",
-            lastReading: "2 min",
-            tension: {
-                a: 128,
-                b: 220,
-                c: 219
-            },
-            current:{
-                a: 77,
-                b: 78,
-                c: 76
-            },
-            power:{
-                a: 180,
-                r: 36,
-                t:36
-            },
-            today: [
-                {
-                    id:1,
-                    type: 'Queda de fase',
-                    info: 'Fase A',
-                    startTime: '9h35',
-                    endTime: '9h47'
-                }
-            ],
-            yesterday: [
-                {
-                    id: 1,
-                    type: 'Queda de fase',
-                    info: 'Fase A',
-                    startTime: '17h03',
-                    endTime: '17h10'
-                },
-                {
-                    id: 2,
-                    type: 'Queda de fase',
-                    info: 'Fase A',
-                    startTime: '10h22',
-                    endTime: '10h28'
-                }
-            ],
-            beforeYesterday: [
-                {
-                    id: 1,
-                    type: 'Tensão crítica',
-                    info: 'A - 115V',
-                    startTime: '10h51',
-                    endTime: '10h55'
-                }
-            ],
-            occurrence: {
-                type: 'Tensão crítica',
-                info: 'A - 198 V',
-                startTime: '16h47'
-            }
+  data () {
+    return {
+      name: 'Transdutor',
+      lastReading: '2 min',
+      tension: {
+        a: 128,
+        b: 220,
+        c: 219
+      },
+      current: {
+        a: 77,
+        b: 78,
+        c: 76
+      },
+      power: {
+        a: 180,
+        r: 36,
+        t: 36
+      },
+      today: [
+        {
+          id: 1,
+          type: 'Queda de fase',
+          info: 'Fase A',
+          startTime: '9h35',
+          endTime: '9h47'
         }
-    },
-    methods: {
-        hasOcurrence() {
-            return true
+      ],
+      yesterday: [
+        {
+          id: 1,
+          type: 'Queda de fase',
+          info: 'Fase A',
+          startTime: '17h03',
+          endTime: '17h10'
+        },
+        {
+          id: 2,
+          type: 'Queda de fase',
+          info: 'Fase A',
+          startTime: '10h22',
+          endTime: '10h28'
         }
+      ],
+      beforeYesterday: [
+        {
+          id: 1,
+          type: 'Tensão crítica',
+          info: 'A - 115V',
+          startTime: '10h51',
+          endTime: '10h55'
+        }
+      ],
+      occurrence: {
+        type: 'Tensão crítica',
+        info: 'A - 198 V',
+        startTime: '16h47'
+      }
     }
+  },
+  methods: {
+    hasOcurrence () {
+      return true
+    }
+  }
 }
 </script>
 <style lang= "scss">
@@ -168,7 +166,5 @@ export default {
 .occurence-time{
     font-weight: 100px;
 }
-
-
 
 </style>

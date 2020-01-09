@@ -87,21 +87,19 @@
 </template>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
 
 export default {
-  name: "Setting",
+  name: 'Setting',
   components: {
-    pageHeader: pageHeader,
   },
   props: {},
-  data() {
+  data () {
     return {
       permissions: [],
       campus: []
-    };
+    }
   }
-};
+}
 </script>
 
 <style lang="scss">
