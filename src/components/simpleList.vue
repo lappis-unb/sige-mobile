@@ -6,23 +6,18 @@
 </template>
 
 <script>
-import pageHeader from '../components/pageHeader.vue'
 import mainList from '../components/mainList.vue'
 
 export default {
   name: 'SimpleList',
   components: {
-    pageHeader: pageHeader,
     mainList: mainList
   },
   props: {
     title: {
       type: String
     },
-    items: {
-      type: Array,
-      default: []
-    },
+    items: [],
     type: {
       type: String,
       default: 'list'

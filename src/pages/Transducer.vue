@@ -1,12 +1,11 @@
 <template>
-    <div>
+    <div class="q-mt-xl q-pt-xs">
         <page-header :backButton="true" :title="name" />
             <div v-if="hasOcurrence()" class="occurence">
                 <div class="occurence-warning">
                     <b>Ocorrência em andamento</b>
                 </div>
                 <div class="q-ma-md">
-                    <!-- <q-icon class="occurence-icon" name="warning" /> -->
                     <div class="occurence-title">
                         <q-icon name="warning"/>
                         {{this.occurrence.type}}

@@ -19,10 +19,7 @@
 export default {
   name: 'HistoryItem',
   props: {
-    items: {
-      type: Array,
-      default: []
-    }
+    items: []
   }
 }
 </script>

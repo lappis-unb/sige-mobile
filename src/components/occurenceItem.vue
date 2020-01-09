@@ -20,10 +20,7 @@
 export default {
   name: 'OccurenceItem',
   props: {
-    items: {
-      type: Array,
-      default: []
-    }
+    items: []
   }
 }
 </script>

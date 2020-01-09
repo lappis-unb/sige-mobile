@@ -34,10 +34,7 @@ export default {
     title: {
       type: String
     },
-    items: {
-      type: Array,
-      default: []
-    },
+    items: [],
     list: {
       type: Boolean,
       default: false

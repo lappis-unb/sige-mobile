@@ -1,10 +1,13 @@
 <template>
   <q-header class="shadow-3 q-mb-xl">
-    <q-toolbar class="title" :class="{ 'bg-grey-4' : backButton}">
-      <q-icon v-go-back=" '/' " v-if="backButton" size="lg" name="keyboard_backspace" />
+    <q-toolbar v-if="type == 'occurences'" class="title">
+      <q-toolbar-title class="text-h6">Ocorrências em andamento</q-toolbar-title>
+      <q-btn to="/lastHours" exact class="float-right" flat icon="history" />
+    </q-toolbar>
+
+    <q-toolbar v-if="type == 'meters'" class="title">
       <q-toolbar-title class="text-h6">
-        {{!this.isDropdown? this.title : null}}
-        <q-btn-dropdown class="drop" flat no-caps v-if="isDropdown" :label="selected">
+        <q-btn-dropdown class="drop" flat no-caps :label="selected">
           <q-list>
             <q-item clickable v-close-popup @click="onItemClick">
               <q-item-section>
@@ -14,7 +17,15 @@
           </q-list>
         </q-btn-dropdown>
       </q-toolbar-title>
-      <q-btn to="/lastHours" exact class="float-right" flat v-if="last72h" icon="history" />
+    </q-toolbar>
+
+    <q-toolbar v-if="type == 'settings'" class="title">
+      <q-toolbar-title class="text-h6">Configurações</q-toolbar-title>
+    </q-toolbar>
+
+    <q-toolbar v-if="backButton" class="title bg-grey-4">
+      <q-icon v-go-back=" '/' " size="lg" name="keyboard_backspace" />
+      <q-toolbar-title class="text-h6">{{title}}</q-toolbar-title>
     </q-toolbar>
   </q-header>
 </template>
@@ -22,17 +33,13 @@
 export default {
   name: 'pageHeader',
   props: {
-    title: {
+    type: {
       type: String,
       default: ''
     },
-    last72h: {
-      type: Boolean,
-      default: false
-    },
-    isDropdown: {
-      type: Boolean,
-      default: false
+    title: {
+      type: String,
+      default: ''
     },
     backButton: {
       type: Boolean,

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <page-header :title="'Configurações'" />
     <div class="ntitle q-mt-xs h1">NOTIFICAÇÔES</div>
     <div class="q-gutter-sm">
       <q-list>
@@ -88,12 +87,10 @@
 </template>
 
 <script>
-import pageHeader from '../components/pageHeader.vue'
 
 export default {
   name: 'Setting',
   components: {
-    pageHeader: pageHeader
   },
   props: {},
   data () {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <page-header :isDropdown="true" />
     <div class="q-gutter-md">
       <simple-list :title="'PERTO DE VOCÊ'" :items="nearby" :list="true" />
       <q-separator spaced inset style="height: 2px;" />
@@ -10,13 +9,11 @@
 </template>
 
 <script>
-import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
 
 export default {
   name: 'TransducerList',
   components: {
-    pageHeader: pageHeader,
     simpleList: simpleList
   },
   props: {

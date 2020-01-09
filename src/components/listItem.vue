@@ -18,10 +18,7 @@
 export default {
   name: 'ItemList',
   props: {
-    items: {
-      type: Array,
-      default: []
-    }
+    items: []
   }
 }
 </script>
