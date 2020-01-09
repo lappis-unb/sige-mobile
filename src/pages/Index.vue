@@ -1,8 +1,9 @@
 <template>
-  <div class>
-    <q-tab-panels v-model="tab">
+  <div>
+    <page-header :type="tab" />
+    <q-tab-panels v-model="tab" class="q-mt-xl">
       <q-tab-panel name="occurences">
-        <occurences />
+        <occurences class="q-mb-xl"/>
       </q-tab-panel>
 
       <q-tab-panel name="meters">
@@ -10,7 +11,7 @@
       </q-tab-panel>
 
       <q-tab-panel name="settings">
-        <setting />
+        <setting class="q-mb-xl"/>
       </q-tab-panel>
     </q-tab-panels>
 
@@ -91,5 +92,4 @@ export default {
   font-size: 90%;
   color: #4b4b4b;
 }
-
 </style>

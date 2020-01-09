@@ -1,6 +1,5 @@
 <template>
   <div>
-    <page-header :title="'Ocorrências em andamento'" :last72h="true" />
     <main-list :title="'Tensão crítica'" :items="critical_tension" :type="'occurence'" />
     <main-list :title="'Queda de fase'" :items="phase_drop" :type="'occurence'" />
     <main-list :title="'Falha de comunicação'" :items="comunication_fail" :type="'occurence'" />

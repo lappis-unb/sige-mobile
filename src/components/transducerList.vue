@@ -1,6 +1,5 @@
 <template>
   <div>
-    <page-header :isDropdown="true" />
     <div class="q-gutter-md">
       <simple-list :title="'PERTO DE VOCÊ'" :items="nearby" :list="true" />
       <q-separator spaced inset style="height: 2px;" />

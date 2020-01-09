@@ -1,6 +1,5 @@
 <template>
   <div>
-    <page-header :title="'Configurações'" />
     <div class="ntitle q-mt-xs h1">NOTIFICAÇÔES</div>
     <div class="q-gutter-sm">
       <q-list>
