@@ -13,13 +13,13 @@
   </div>
 </template>
 <script>
-import historyItem from "./historyItem.vue";
-import transducerItem from "./transducerItem.vue";
-import occurenceItem from "./occurenceItem.vue";
-import listItem from "./listItem.vue";
+import historyItem from './historyItem.vue'
+import transducerItem from './transducerItem.vue'
+import occurenceItem from './occurenceItem.vue'
+import listItem from './listItem.vue'
 
 export default {
-  name: "MainList",
+  name: 'MainList',
   components: {
     historyItem: historyItem,
     transducerItem: transducerItem,
@@ -29,30 +29,27 @@ export default {
   props: {
     icon: {
       type: String,
-      default: "warning"
+      default: 'warning'
     },
     title: {
       type: String
     },
-    items: {
-      type: Array,
-      default: []
-    },
+    items: [],
     list: {
       type: Boolean,
       default: false
     },
     type: {
       type: String,
-      default: "list"
+      default: 'list'
     }
   },
   methods: {
-    getIcon() {
-      return this.icon;
+    getIcon () {
+      return this.icon
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .card-title {
