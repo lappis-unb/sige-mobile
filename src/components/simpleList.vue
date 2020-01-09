@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import mainList from "../components/mainList.vue";
+import pageHeader from '../components/pageHeader.vue'
+import mainList from '../components/mainList.vue'
 
 export default {
-  name: "SimpleList",
+  name: 'SimpleList',
   components: {
     pageHeader: pageHeader,
     mainList: mainList
@@ -25,13 +25,13 @@ export default {
     },
     type: {
       type: String,
-      default: "list"
+      default: 'list'
     }
   },
-  data() {
-    return {};
+  data () {
+    return {}
   }
-};
+}
 </script>
 
 <style lang="scss">

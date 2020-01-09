@@ -20,11 +20,11 @@
 </template>
 <script>
 export default {
-  name: "pageHeader",
+  name: 'pageHeader',
   props: {
     title: {
       type: String,
-      default: ""
+      default: ''
     },
     last72h: {
       type: Boolean,
@@ -39,17 +39,17 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
-      selected: "Todos os campi"
-    };
+      selected: 'Todos os campi'
+    }
   },
   methods: {
-    onItemClick() {
-      console.log("Clicked on an Item");
+    onItemClick () {
+      console.log('Clicked on an Item')
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

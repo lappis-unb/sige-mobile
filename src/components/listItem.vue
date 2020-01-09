@@ -16,12 +16,12 @@
 
 <script>
 export default {
-  name: "ItemList",
+  name: 'ItemList',
   props: {
     items: {
       type: Array,
       default: []
     }
   }
-};
+}
 </script>

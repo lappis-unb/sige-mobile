@@ -51,13 +51,13 @@
 </template>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import occurences from "../components/occurences.vue";
-import transducerList from "../components/transducerList.vue";
-import setting from "../components/setting.vue";
+import pageHeader from '../components/pageHeader.vue'
+import occurences from '../components/occurences.vue'
+import transducerList from '../components/transducerList.vue'
+import setting from '../components/setting.vue'
 
 export default {
-  name: "PageIndex",
+  name: 'PageIndex',
 
   components: {
     pageHeader: pageHeader,
@@ -66,12 +66,12 @@ export default {
     setting: setting
   },
 
-  data() {
+  data () {
     return {
-      tab: "occurences"
-    };
+      tab: 'occurences'
+    }
   }
-};
+}
 </script>
 
 <style lang = "scss">

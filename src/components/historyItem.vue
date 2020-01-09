@@ -17,12 +17,12 @@
 
 <script>
 export default {
-  name: "HistoryItem",
+  name: 'HistoryItem',
   props: {
     items: {
       type: Array,
       default: []
     }
   }
-};
+}
 </script>
