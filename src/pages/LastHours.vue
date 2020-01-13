@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header :backButton="true" :title="'Ocorrências nas últimas 72h'"/>
-    <div class="q-ma-xl" style="margin-top: 5%">
+    <div class="q-ma-xl" style="margin-top: 20%">
       <simple-list :title="'HOJE'" :items="today" :type="'history'" />
       <q-separator spaced inset style="height: 1px;" />
       <simple-list :title="'ONTEM'" :items="yesterday" :type="'history'" />
