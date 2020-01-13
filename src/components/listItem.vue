@@ -18,7 +18,12 @@
 export default {
   name: 'ItemList',
   props: {
-    items: []
+    /* eslint-disable */
+    items: {
+      type: Array,
+      default: []
+    }
+    /* eslint-enable */
   }
 }
 </script>

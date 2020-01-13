@@ -20,7 +20,12 @@
 export default {
   name: 'OccurenceItem',
   props: {
-    items: []
+    /* eslint-disable */
+    items: {
+      type: Array,
+      default: []
+    }
+    /* eslint-enable */
   }
 }
 </script>

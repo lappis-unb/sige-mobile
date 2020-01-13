@@ -16,13 +16,18 @@
 export default {
   name: 'HistoryItem',
   props: {
-    items: []
+    /* eslint-disable */
+    items: {
+      type: Array,
+      default: []
+    }
+    /* eslint-enable */
   }
 }
 </script>
 
 <style lang="scss">
-.text{
-    color: black;
+.text {
+  color: black;
 }
 </style>
