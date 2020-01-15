@@ -89,8 +89,7 @@ export default {
     'l-map': Vue2Leaflet.LMap,
     'l-tile-layer': Vue2Leaflet.LTileLayer,
     'l-circle': Vue2Leaflet.LCircle,
-    'l-popup': Vue2Leaflet.LPopup,
-    'l-marker': Vue2Leaflet.LMarker,
+    'l-popup': Vue2Leaflet.LPopup
   },
 
   data () {
@@ -165,7 +164,7 @@ export default {
 
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:
-        '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+        '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }
   },
   methods: {
