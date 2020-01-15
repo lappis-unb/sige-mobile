@@ -18,12 +18,9 @@
 
 <script>
 export default {
-  name: "OccurenceItem",
+  name: 'OccurenceItem',
   props: {
-    items: {
-      type: Array,
-      default: []
-    }
+    items: []
   }
-};
+}
 </script>
