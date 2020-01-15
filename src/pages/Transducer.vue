@@ -43,9 +43,27 @@
 
                 </tr>
             </table>
-            <div class="map">
-                <b>MAPA</b>
-            </div>
+            <l-map
+              class="map"
+              style="height: 50vh!important"
+              :zoom="20"
+              :center="center"
+              :options="mapOptions"
+              id="idDoLeo">
+              <l-tile-layer
+                :url="url"
+                :attribution="attribution"
+              />
+              <l-circle
+                :lat-lng="markerLatLng"
+                :radius="3"
+                :fill-opacity="1"
+              >
+              <l-popup
+                :content="'Transdutor'"
+              />
+              </l-circle>
+            </l-map>
 
             <q-separator spaced inset style="height: 1px;" />
 
@@ -61,11 +79,17 @@
 <script>
 import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
+import 'leaflet/dist/leaflet.css'
+import Vue2Leaflet from '../services/ssr-import/leaflet'
 
 export default {
   components: {
     pageHeader: pageHeader,
-    simpleList: simpleList
+    simpleList: simpleList,
+    'l-map': Vue2Leaflet.LMap,
+    'l-tile-layer': Vue2Leaflet.LTileLayer,
+    'l-circle': Vue2Leaflet.LCircle,
+    'l-popup': Vue2Leaflet.LPopup
   },
 
   data () {
@@ -125,7 +149,22 @@ export default {
         type: 'Tensão crítica',
         info: 'A - 198 V',
         startTime: '16h47'
-      }
+      },
+
+      // MAP info
+      markerLatLng: [-15.9897, -48.0454],
+
+      center: [-15.9897, -48.0454],
+      // center: [-15.7650, -47.8665],
+
+      mapOptions: {
+        zoomControl: false,
+        maxbounds: this.center
+      },
+
+      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      attribution:
+        '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }
   },
   methods: {
@@ -144,11 +183,8 @@ export default {
     text-align: center;
 }
 .map{
-    background-color: red;
-    text-align: center;
-    padding: 10vh 0 10vh 0;
-    border-radius: 5px;
-    margin: 5vh 0 5vh 0;
+  border-radius: 5px;
+  margin: 5vh 0 5vh 0;
 }
 .occurence{
     text-align: center;
