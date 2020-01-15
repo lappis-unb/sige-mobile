@@ -19,7 +19,12 @@
 export default {
   name: 'HistoryItem',
   props: {
-    items: []
+    /* eslint-disable */
+    items: {
+      type: Array,
+      default: []
+    }
+    /* eslint-enable */
   }
 }
 </script>

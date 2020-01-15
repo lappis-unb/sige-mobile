@@ -34,7 +34,12 @@ export default {
     title: {
       type: String
     },
-    items: [],
+    /* eslint-disable */
+    items: {
+      type: Array,
+      default: []
+    },
+    /* eslint-enable */
     list: {
       type: Boolean,
       default: false

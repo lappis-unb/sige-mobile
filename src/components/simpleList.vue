@@ -17,7 +17,12 @@ export default {
     title: {
       type: String
     },
-    items: [],
+    /* eslint-disable */
+    items: {
+      type: Array,
+      default: []
+    },
+    /* eslint-enable */
     type: {
       type: String,
       default: 'list'
