@@ -6,10 +6,10 @@
 </template>
 
 <script>
-import popup from'./components/popup.vue'
+import popup from './components/popup.vue'
 export default {
   name: 'App',
-  components:{
+  components: {
     popup: popup
   }
 }

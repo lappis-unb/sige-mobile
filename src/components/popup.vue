@@ -17,19 +17,19 @@
 </template>
 
 <script>
-import { openURL } from 'quasar';
+import { openURL } from 'quasar'
 
 export default {
   name: 'popup',
-  data(){
-    return{
-      open: this.$q.platform.is.platform === 'iphone' || this.$q.platform.is.platform === 'ipad' 
+  data () {
+    return {
+      open: this.$q.platform.is.platform === 'iphone' || this.$q.platform.is.platform === 'ipad'
     }
   },
-  methods:{
-    link(){
+  methods: {
+    link () {
       // The link has to be changed when we published the app on App Store
-      openURL('https://apps.apple.com/br/app/instagram/id389801252');
+      openURL('https://apps.apple.com/br/app/instagram/id389801252')
     }
   }
 }
