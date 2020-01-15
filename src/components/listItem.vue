@@ -16,12 +16,14 @@
 
 <script>
 export default {
-  name: "ItemList",
+  name: 'ItemList',
   props: {
+    /* eslint-disable */
     items: {
       type: Array,
       default: []
     }
+    /* eslint-enable */
   }
-};
+}
 </script>
