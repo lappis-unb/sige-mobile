@@ -9,8 +9,10 @@
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0",
-    "start": "quasar dev -m ssr",
-    "build": "quasar build"
+    "build": "quasar build",
+    "start": "quasar dev",
+    "build:ssr": "quasar build -m ssr",
+    "start:ssr": "quasar dev -m ssr"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
