@@ -10,6 +10,12 @@ services:
       - .:/smi-mobile
       - yarn_cache:/smi-mobile/node_modules
     entrypoint: ["sh", "./scripts/start.sh"]
-        
+    networks:
+      - smi-network
+
+networks:
+  smi-network:
+    external: true
+
 volumes:
   yarn_cache:
