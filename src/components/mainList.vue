@@ -5,7 +5,7 @@
         <q-icon :name="getIcon()" />
         {{this.title}}
       </q-card>
-      <occurence-item v-if="type == 'occurence'" :items="items" />
+      <occurence-item v-if="type == 'occurence'" :items="items" :info="info"/>
       <history-item v-else-if="type == 'history'" :items="items" />
       <transducer-item v-else-if="type == 'transducer'" :items="items" />
       <list-item v-else :items="items" />
@@ -33,6 +33,10 @@ export default {
     },
     title: {
       type: String
+    },
+    info: {
+      type: String,
+      default: ""
     },
     /* eslint-disable */
     items: {
