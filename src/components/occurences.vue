@@ -33,7 +33,7 @@
 </template>
 <script>
 import mainList from '../components/mainList.vue'
-import axios from 'axios'
+import MASTER from '../services/masterApi/http-common'
 
 export default {
   name: 'Occurences',
@@ -48,14 +48,17 @@ export default {
       phase_drop: [],
     }
   },
-  created(){
-    axios.get('http://192.168.100.212:8001/occurences/')
+  created(){    
+    MASTER.get('occurences/')
     .then((res) => {
       this.transductor_connection_fail = res.data.transductor_connection_fail
       this.critical_tension = res.data.critical_tension
       this.precarious_tension = res.data.precarious_tension
       this.phase_drop = res.data.phase_drop
-    })    
+    })  
+    .catch((err) => {
+      console.log('ERRO: ',err);
+    })  
   }
 }
 </script>
