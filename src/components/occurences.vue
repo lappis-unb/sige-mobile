@@ -48,17 +48,22 @@ export default {
       phase_drop: [],
     }
   },
-  created(){    
-    MASTER.get('occurences/')
-    .then((res) => {
-      this.transductor_connection_fail = res.data.transductor_connection_fail
-      this.critical_tension = res.data.critical_tension
-      this.precarious_tension = res.data.precarious_tension
-      this.phase_drop = res.data.phase_drop
-    })  
-    .catch((err) => {
-      console.log('ERRO: ',err);
-    })  
+  methods: {
+    fetchData() {
+      MASTER.get('occurences/')
+      .then((res) => {
+        this.transductor_connection_fail = res.data.transductor_connection_fail
+        this.critical_tension = res.data.critical_tension
+        this.precarious_tension = res.data.precarious_tension
+        this.phase_drop = res.data.phase_drop
+      })  
+      .catch((err) => {
+        console.log('ERRO: ',err);
+      })
+    }
+  },
+  created(){
+    this.fetchData()
   }
 }
 </script>
