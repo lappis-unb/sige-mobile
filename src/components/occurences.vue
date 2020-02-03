@@ -2,25 +2,12 @@
   <div>
     <q-spinner v-if="isLoading" size="3em" class="spinner"/>
     <main-list
-      v-if="transductor_connection_fail.length > 0"
-      :title="'Falha de comunicação'"
-      :items="transductor_connection_fail"
-      :type="'occurence'"
-      :info="'conection_fail'"
-    />
-    <main-list
       v-if="critical_tension.length > 0"
       :title="'Tensão crítica'"
       :items="critical_tension"
       :type="'occurence'"
       :info="'critical_tension'"
-    />
-    <main-list
-      v-if="precarious_tension.length > 0"
-      :title="'Tensão precária'"
-      :items="precarious_tension"
-      :type="'occurence'"
-      :info="'precarious_tension'"
+      icon="error"
     />
     <main-list
       v-if="phase_drop.length > 0"
@@ -28,7 +15,26 @@
       :items="phase_drop"
       :type="'occurence'"
       :info="'phase_drop'"
+      icon="error"
     />
+    <main-list
+      v-if="transductor_connection_fail.length > 0"
+      :title="'Falha de comunicação'"
+      :items="transductor_connection_fail"
+      :type="'occurence'"
+      :info="'conection_fail'"
+      icon="warning"
+    />
+    <main-list
+      v-if="precarious_tension.length > 0"
+      :title="'Tensão precária'"
+      :items="precarious_tension"
+      :type="'occurence'"
+      :info="'precarious_tension'"
+      icon="warning"
+
+    />
+
     <div v-if="!isLoading &&
                 transductor_connection_fail.length === 0 &&
                 critical_tension.length === 0 &&
