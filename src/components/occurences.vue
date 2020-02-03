@@ -63,19 +63,19 @@ export default {
       isLoading: true
     }
   },
-  created(){
-    console.log('fetching data...');
+  created () {
+    console.log('fetching data...')
     MASTER.get('occurences/')
-    .then((res) => {
-      this.transductor_connection_fail = res.data.transductor_connection_fail
-      this.critical_tension = res.data.critical_tension
-      this.precarious_tension = res.data.precarious_tension
-      this.phase_drop = res.data.phase_drop
-      this.isLoading = false
-    })  
-    .catch((err) => {
-      console.log('ERROR: ',err);
-    })
+      .then((res) => {
+        this.transductor_connection_fail = res.data.transductor_connection_fail
+        this.critical_tension = res.data.critical_tension
+        this.precarious_tension = res.data.precarious_tension
+        this.phase_drop = res.data.phase_drop
+        this.isLoading = false
+      })
+      .catch((err) => {
+        console.log('ERROR: ', err)
+      })
   }
 }
 </script>

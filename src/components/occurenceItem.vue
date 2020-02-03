@@ -27,78 +27,78 @@ export default {
     /* eslint-enable */
     info: {
       type: String,
-      default: ""
-    },
+      default: ''
+    }
   },
   methods: {
-    writenTime(min){
-      if(min < 60){
-        return min + " min";
-      }else{
-        let h = Math.floor(min / 60);
-        let m = min % 60;
-        if(m == 0){
-          return h + " horas";
-        }else{
-          return h + "h " + m + "min";
+    writenTime (min) {
+      if (min < 60) {
+        return min + ' min'
+      } else {
+        let h = Math.floor(min / 60)
+        let m = min % 60
+        if (m === 0) {
+          return h + ' horas'
+        } else {
+          return h + 'h ' + m + 'min'
         }
       }
     },
-    getInfo(item){
-      if(this.info == 'conection_fail'){
+    getInfo (item) {
+      if (this.info === 'conection_fail') {
         return 'Possível queda de energia'
-      }else if (this.info == 'critical_tension' || 
-                this.info == 'precarious_tension'){
-        return this.getPhaseVoltage(item);
-      }else if(this.info == 'phase_drop'){
-        return this.getPhase(item);
+      } else if (this.info === 'critical_tension' ||
+                this.info === 'precarious_tension') {
+        return this.getPhaseVoltage(item)
+      } else if (this.info === 'phase_drop') {
+        return this.getPhase(item)
       }
     },
-    getPhaseVoltage(item){
-      let res = "";
-      let isFirst = true;
+    getPhaseVoltage (item) {
+      let res = ''
+      let isFirst = true
 
-      if(item.data.voltage_a){
-        res += 'A - ' +  Math.round(item.data.voltage_a) + 'V ';
-        isFirst = false;
+      if (item.data.voltage_a) {
+        res += 'A - ' + Math.round(item.data.voltage_a) + 'V '
+        isFirst = false
       }
-      if(item.data.voltage_b){
-        if(!isFirst){
+      if (item.data.voltage_b) {
+        if (!isFirst) {
           res += ' / '
         }
-        res += 'B - ' + Math.round(item.data.voltage_b) + 'V ';
-        isFirst = false;
+        res += 'B - ' + Math.round(item.data.voltage_b) + 'V '
+        isFirst = false
       }
-      if(item.data.voltage_c){
-        if(!isFirst){
+      if (item.data.voltage_c) {
+        if (!isFirst) {
           res += ' / '
         }
-        res += 'C - ' + Math.round(item.data.voltage_c) + 'V ';
-        isFirst = false;
+        res += 'C - ' + Math.round(item.data.voltage_c) + 'V '
+        isFirst = false
       }
       return res
     },
-    getPhase(item){
-      let res = "";
-      let isFirst = true;
+    getPhase (item) {
+      let res = ''
+      let isFirst = true
 
-      if(item.data.voltage_a){
-        res += 'Fase A ';
-        isFirst = false;
+      if (item.data.voltage_a) {
+        res += 'Fase A '
+        isFirst = false
       }
-      if(item.data.voltage_b){
-        if(!isFirst){
+      if (item.data.voltage_b) {
+        if (!isFirst) {
           res += ' / '
         }
-        res += 'Fase B ';
-        isFirst = false;
+        res += 'Fase B '
+        isFirst = false
       }
-      if(item.data.voltage_c){
-        if(!isFirst){
+      if (item.data.voltage_c) {
+        if (!isFirst) {
           res += ' / '
         }
-        res += 'Fase C ';
-        isFirst = false;
+        res += 'Fase C '
+        isFirst = false
       }
       return res
     }

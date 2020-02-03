@@ -36,7 +36,7 @@ export default {
     },
     info: {
       type: String,
-      default: ""
+      default: ''
     },
     /* eslint-disable */
     items: {
