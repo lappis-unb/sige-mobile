@@ -1,0 +1,64 @@
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: mobile-ingress
+  namespace: smi-mobile-staging
+  labels:
+    app: smi-mobile-staging
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+spec:
+  rules:
+  - host: smi-mobile.dev.lappis.rocks
+    http:
+      paths:
+      - backend:
+          serviceName: mobile-svc
+          servicePort: 80
+  tls:
+  - hosts:
+    - smi-mobile.dev.lappis.rocks
+    secretName: smi-mobile-staging-letsencrypt-prod-crt
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mobile-svc
+  namespace: smi-mobile-staging
+  labels:
+    app: smi-mobile-staging
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+    name: http
+  selector:
+    app: smi-mobile-staging
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: mobile-deployment
+  namespace: smi-mobile-staging
+  labels:
+    app: smi-mobile-staging
+spec:
+  selector:
+    matchLabels:
+      app: smi-mobile-staging
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: smi-mobile-staging
+    spec:
+      containers:
+      - name: smi-mobile-staging
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        command: ["yarn", "start:ssr"]
+        ports:
+        - containerPort: 8080
+          protocol: TCP

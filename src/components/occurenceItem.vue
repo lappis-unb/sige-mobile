@@ -18,12 +18,14 @@
 
 <script>
 export default {
-  name: "OccurenceItem",
+  name: 'OccurenceItem',
   props: {
+    /* eslint-disable */
     items: {
       type: Array,
       default: []
     }
+    /* eslint-enable */
   }
-};
+}
 </script>

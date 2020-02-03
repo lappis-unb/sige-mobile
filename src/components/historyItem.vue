@@ -17,12 +17,14 @@
 
 <script>
 export default {
-  name: "HistoryItem",
+  name: 'HistoryItem',
   props: {
+    /* eslint-disable */
     items: {
       type: Array,
       default: []
     }
+    /* eslint-enable */
   }
-};
+}
 </script>
