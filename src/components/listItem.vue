@@ -3,7 +3,7 @@
     <div v-for="item in items" v-bind:key="item.id">
       <q-item to="/transducer">
         <q-item-section>
-          <q-item-label>{{item.name}} ({{item.sigla}})</q-item-label>
+          <q-item-label>{{item.name}} ({{item.campus_acronym}})</q-item-label>
         </q-item-section>
 
         <q-item-section side top>
