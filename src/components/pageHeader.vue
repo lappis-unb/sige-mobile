@@ -52,7 +52,7 @@ export default {
       selected: 0,
       options: [{
         acronym: 'Todos os campi',
-        id: 0
+        id: null
       }]
     }
   },
@@ -67,6 +67,8 @@ export default {
   methods: {
     onItemClick (id) {
       this.selected = this.options.findIndex(x => x.id === id)
+      this.$store.commit('change', this.options[this.selected])
+      console.log('--->> ', this.$store.state.campus)
     }
   }
 }

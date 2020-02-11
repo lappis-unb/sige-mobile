@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="q-gutter-md">
+    <div class="q-gutter-md" v-if="!loading">
       <!-- <simple-list :title="'PERTO DE VOCÊ'" :items="nearby" :list="true" />
       <q-separator spaced inset style="height: 2px;" /> -->
-      <simple-list :title="'TODOS'" :items="transducers" :list="true" />
+      <simple-list :title="'TODOS'" :items="filterTransducers()" :list="true" />
     </div>
   </div>
 </template>
@@ -24,28 +24,14 @@ export default {
   },
   data () {
     return {
-      transducers: [
-        // {
-        //   name: 'ICC Norte m1',
-        //   sigla: 'DRA',
-
-        //   icon: 'warning',
-        //   id: 1
-        // },
-        // {
-        //   name: 'ICC Norte m2',
-        //   sigla: 'DRA',
-
-        //   id: 2
-        // }
-      ],
-      campi: []
+      transducers: [],
+      campi: [],
+      loading: true
     }
   },
   async created () {
     await MASTER.get('/campi/')
       .then((res) => {
-        console.log('Campi list:', res.data)
         this.campi = res.data
       })
       .catch((err) => {
@@ -56,21 +42,35 @@ export default {
       .then((res) => {
         console.log('Transducer list:', res.data)
         res.data.forEach((i) => {
-          this.transducers.push(this.mountTransducer(i))
+          this.transducers.push(this.addCampus(i))
         })
       })
       .catch((err) => {
         console.log('ERROR: ', err)
       })
+    this.loading = false
   },
   methods: {
-    mountTransducer (item) {
+    addCampus (item, campi) {
       let id = parseInt(item.campus.split('/')[4], 10)
       return {
         ...item,
         campus_id: id,
         campus_acronym: this.campi.find((x) => x.id === id).acronym
       }
+    },
+
+    filterTransducers () {
+      let arr = this.transducers
+      let campus = this.$store.state.campus
+      let transducers = []
+      console.log('AKI ==>', arr)
+      arr.forEach((elem) => {
+        if (campus.id === null || elem.campus_id === campus.id) {
+          transducers.push(elem)
+        }
+      })
+      return transducers
     }
   }
 }
