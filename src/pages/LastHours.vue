@@ -14,6 +14,7 @@
 <script>
 import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
+import MASTER from '../services/masterApi/http-common'
 
 export default {
   components: {
@@ -23,123 +24,57 @@ export default {
   data () {
     return {
       today: [
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 1
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 2
-        }
+        // {
+        //   initialHour: '11h40',
+        //   finalHour: '11h49',
+        //   occurence: 'Pico de consumo',
+        //   name: 'ICC Norte m2',
+        //   sigla: 'FCE',
+        //   id: 1
+        // },
       ],
-      yesterday: [
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 1
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 2
-        },
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 3
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 4
-        },
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 5
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 6
+      yesterday: [],
+      beforeYesterday: []
+    }
+  },
+  created () {
+    MASTER.get('/occurences/?type=period')
+      .then((res) => {
+        this.separateInDays(res.data.transductor_connection_fail, 'Falha de comunicação')
+        this.separateInDays(res.data.slave_connection_fail, 'Falha de comunicação')
+        this.separateInDays(res.data.critical_tension, 'Tensão crítica')
+        this.separateInDays(res.data.precarious_tension, 'Tensão precária')
+        this.separateInDays(res.data.phase_drop, 'Queda de fase')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  },
+  methods: {
+    separateInDays (arr, type) {
+      let today = new Date()
+      arr.forEach((elem) => {
+        let d = new Date(elem.time)
+        let item = {
+          ...elem,
+          occurence: type,
+          writtenTime: this.getTime(d)
         }
-      ],
-      beforeYesterday: [
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 1
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 2
-        },
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 3
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 4
-        },
-        {
-          initialHour: '11h40',
-          finalHour: '11h49',
-          occurence: 'Pico de consumo',
-          name: 'ICC Norte m2',
-          sigla: 'FCE',
-          id: 5
-        },
-        {
-          initialHour: '09h35',
-          finalHour: '09h47',
-          occurence: 'Queda de fase',
-          name: 'ICC Norte m1',
-          sigla: 'DRA',
-          id: 6
+
+        if (today.getDate() === d.getDate()) {
+          this.today.push(item)
+        } else if (today.getDate() - 1 === d.getDate()) {
+          this.yesterday.push(item)
+        } else if (today.getDate() - 2 === d.getDate()) {
+          this.yesterday.push(item)
         }
-      ]
+      })
+    },
+    getTime (date) {
+      let h = date.getHours()
+      let m = date.getMinutes()
+      let res = h.toString() + 'h ' + m.toString() + 'min'
+      return res
     }
   }
 }
