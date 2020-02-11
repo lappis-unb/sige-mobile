@@ -31,7 +31,11 @@ export default {
     }
   },
   methods: {
-    writenTime (min) {
+    writenTime (time) {
+      let d = new Date(time)
+      let now = new Date()
+      let min = Math.floor((now - d) / (1000 * 60))
+
       if (min < 60) {
         return min + ' min'
       } else {
