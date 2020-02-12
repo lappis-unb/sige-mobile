@@ -26,23 +26,16 @@ export default {
   },
   data () {
     return {
-      today: [
-        // {
-        //   initialHour: '11h40',
-        //   finalHour: '11h49',
-        //   occurence: 'Pico de consumo',
-        //   name: 'ICC Norte m2',
-        //   sigla: 'FCE',
-        //   id: 1
-        // },
-      ],
+      today: [],
       yesterday: [],
-      beforeYesterday: []
+      beforeYesterday: [],
+      key: 0
     }
   },
   created () {
     MASTER.get('/occurences/?type=period')
       .then((res) => {
+        console.log(res.data)
         this.separateInDays(res.data.transductor_connection_fail, 'Falha de comunicação')
         this.separateInDays(res.data.slave_connection_fail, 'Falha de comunicação')
         this.separateInDays(res.data.critical_tension, 'Tensão crítica')
@@ -57,26 +50,38 @@ export default {
     separateInDays (arr, type) {
       let today = new Date()
       arr.forEach((elem) => {
-        let d = new Date(elem.time)
+        let endTime = elem.end_time !== null ? new Date(elem.end_time) : today
+        let startTime = new Date(elem.start_time)
+
         let item = {
           ...elem,
           occurence: type,
-          writtenTime: this.getTime(d)
+          writtenStartTime: this.getTime(startTime, endTime, true),
+          writtenEndTime: this.getTime(endTime, today, false),
+          key: this.key
         }
+        this.key++
 
-        if (today.getDate() === d.getDate()) {
+        if (today.getDate() === endTime.getDate()) {
           this.today.push(item)
-        } else if (today.getDate() - 1 === d.getDate()) {
+        } else if (today.getDate() - 1 === endTime.getDate()) {
           this.yesterday.push(item)
-        } else if (today.getDate() - 2 === d.getDate()) {
-          this.yesterday.push(item)
+        } else if (today.getDate() - 2 === endTime.getDate()) {
+          this.beforeYesterday.push(item)
         }
       })
     },
-    getTime (date) {
-      let h = date.getHours()
-      let m = date.getMinutes()
-      let res = h.toString() + 'h ' + m.toString() + 'min'
+    getTime (date, compareDate, isStartTime) {
+      let days = Math.floor((compareDate - date) / (1000 * 60 * 60 * 24))
+      let res = ''
+
+      if (isStartTime && days > 0) {
+        res += days.toString() + ' dia '
+      } else {
+        let h = date.getHours()
+        let min = date.getMinutes()
+        res += h.toString() + 'h' + min.toString().padStart(2, 0)
+      }
       return res
     }
   }
