@@ -2,11 +2,14 @@
   <div>
     <page-header :backButton="true" :title="'Ocorrências nas últimas 72h'"/>
     <div class="q-ma-xl q-pt-sm">
-      <simple-list :title="'HOJE'" :items="today" :type="'history'" />
-      <q-separator spaced inset style="height: 1px;" />
-      <simple-list :title="'ONTEM'" :items="yesterday" :type="'history'" />
-      <q-separator spaced inset style="height: 1px;" />
-      <simple-list :title="'ANTEONTEM'" :items="beforeYesterday" :type="'history'" />
+      <p v-if="today.length === 0 && yesterday.length === 0 && beforeYesterday.length === 0">
+        Não houve ocorrências nas últimas 72 horas
+      </p>
+      <simple-list v-if="today.length > 0" :title="'HOJE'" :items="today" :type="'history'" />
+      <q-separator v-if="today.length > 0 && yesterday.length > 0" spaced inset style="height: 1px;" />
+      <simple-list v-if="yesterday.length > 0" :title="'ONTEM'" :items="yesterday" :type="'history'" />
+      <q-separator v-if="yesterday.length > 0 && beforeYesterday.length > 0" spaced inset style="height: 1px;" />
+      <simple-list v-if="beforeYesterday.length > 0" :title="'ANTEONTEM'" :items="beforeYesterday" :type="'history'" />
     </div>
   </div>
 </template>
