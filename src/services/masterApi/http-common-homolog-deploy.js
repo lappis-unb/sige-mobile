@@ -5,4 +5,3 @@ const MASTER = axios.create({
 })
 
 export default MASTER
-

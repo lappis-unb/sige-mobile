@@ -7,7 +7,7 @@
           <q-item-label caption>{{getInfo(item)}}</q-item-label>
         </q-item-section>
         <q-item-section side top>
-          <q-item-label caption>{{writenTime(item.time)}}</q-item-label>
+          <q-item-label caption>{{writenTime(item.start_time)}}</q-item-label>
         </q-item-section>
       </q-item>
       <q-separator spaced inset />
