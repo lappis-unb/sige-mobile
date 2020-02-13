@@ -5,7 +5,7 @@
         <q-icon :name="getIcon()" />
         {{this.title}}
       </q-card>
-      <occurence-item v-if="type == 'occurence'" :items="items" />
+      <occurence-item v-if="type == 'occurence'" :items="items" :info="info"/>
       <history-item v-else-if="type == 'history'" :items="items" />
       <transducer-item v-else-if="type == 'transducer'" :items="items" />
       <list-item v-else :items="items" />
@@ -13,13 +13,13 @@
   </div>
 </template>
 <script>
-import historyItem from "./historyItem.vue";
-import transducerItem from "./transducerItem.vue";
-import occurenceItem from "./occurenceItem.vue";
-import listItem from "./listItem.vue";
+import historyItem from './historyItem.vue'
+import transducerItem from './transducerItem.vue'
+import occurenceItem from './occurenceItem.vue'
+import listItem from './listItem.vue'
 
 export default {
-  name: "MainList",
+  name: 'MainList',
   components: {
     historyItem: historyItem,
     transducerItem: transducerItem,
@@ -29,30 +29,36 @@ export default {
   props: {
     icon: {
       type: String,
-      default: "warning"
+      default: 'warning'
     },
     title: {
       type: String
     },
+    info: {
+      type: String,
+      default: ''
+    },
+    /* eslint-disable */
     items: {
       type: Array,
       default: []
     },
+    /* eslint-enable */
     list: {
       type: Boolean,
       default: false
     },
     type: {
       type: String,
-      default: "list"
+      default: 'list'
     }
   },
   methods: {
-    getIcon() {
-      return this.icon;
+    getIcon () {
+      return this.icon
     }
   }
-};
+}
 </script>
 <style lang="scss">
 .card-title {
