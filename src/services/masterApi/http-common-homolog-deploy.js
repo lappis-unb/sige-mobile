@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const HTTP = axios.create({
-  baseURL: 'https://smi-master.dev.lappis.rocks/'
+const MASTER = axios.create({
+  baseURL: 'http://10.0.0.221/'
 })
 
-export default HTTP
+export default MASTER

@@ -10,7 +10,7 @@
       </q-card-section>
 
       <q-card-actions align="right">
-        <q-btn flat label="Ir para App Store" color="primary"  @click.native="link" />
+        <q-btn flat label="Ir para App Store" color="primary" @click.native="link" />
       </q-card-actions>
     </q-card>
   </q-dialog>
