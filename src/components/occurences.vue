@@ -56,6 +56,7 @@ export default {
   },
   data () {
     return {
+      critical_tension_icon: 'img:statics/header_ocorrencia_critica_horizontal@4x.png',
       transductor_connection_fail: [],
       critical_tension: [],
       precarious_tension: [],
