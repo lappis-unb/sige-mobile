@@ -31,91 +31,95 @@ export default {
     /* eslint-enable */
     info: {
       type: String,
-      default: ''
-    }
+      default: ""
+    },
   },
   methods: {
-    writenTime (time) {
-      let d = new Date(time)
-      let now = new Date()
-      let min = Math.floor((now - d) / (1000 * 60))
+    writenTime(time) {
+      let d = new Date(time);
+      let now = new Date();
+      let min = Math.floor((now - d) / (1000 * 60));
 
       if (min < 60) {
-        return min + ' min'
+        return min + " min";
       } else {
-        let h = Math.floor(min / 60)
-        let m = min % 60
+        let h = Math.floor(min / 60);
+        let m = min % 60;
         if (m === 0) {
-          return h + ' horas'
+          return h + " horas";
         } else {
-          return h + 'h ' + m + 'min'
+          return h + "h " + m + "min";
         }
       }
     },
-    getInfo (item) {
-      if (this.info === 'conection_fail') {
-        return 'Possível queda de energia'
-      } else if (this.info === 'critical_tension' ||
-                this.info === 'precarious_tension') {
-        return this.getPhaseVoltage(item)
-      } else if (this.info === 'phase_drop') {
-        return this.getPhase(item)
+    getInfo(item) {
+      if (this.info === "conection_fail") {
+        return "Possível queda de energia";
+      } else if (
+        this.info === "critical_tension" ||
+        this.info === "precarious_tension"
+      ) {
+        return this.getPhaseVoltage(item);
+        console.log("aaaaaa");
+        
+      } else if (this.info === "phase_drop") {
+        return this.getPhase(item);
       }
     },
-    getPhaseVoltage (item) {
-      let res = ''
-      let isFirst = true
+    getPhaseVoltage(item) {
+      let res = "";
+      let isFirst = true;
 
       if (item.data.voltage_a) {
-        res += 'A - ' + Math.round(item.data.voltage_a) + 'V '
-        isFirst = false
+        res += "A - " + Math.round(item.data.voltage_a) + "V ";
+        isFirst = false;
       }
       if (item.data.voltage_b) {
         if (!isFirst) {
-          res += ' / '
+          res += " / ";
         }
-        res += 'B - ' + Math.round(item.data.voltage_b) + 'V '
-        isFirst = false
+        res += "B - " + Math.round(item.data.voltage_b) + "V ";
+        isFirst = false;
       }
       if (item.data.voltage_c) {
         if (!isFirst) {
-          res += ' / '
+          res += " / ";
         }
-        res += 'C - ' + Math.round(item.data.voltage_c) + 'V '
-        isFirst = false
+        res += "C - " + Math.round(item.data.voltage_c) + "V ";
+        isFirst = false;
       }
-      return res
+      return res;
     },
-    getPhase (item) {
-      let res = ''
-      let isFirst = true
+    getPhase(item) {
+      let res = "";
+      let isFirst = true;
 
       if (item.data.voltage_a) {
-        res += 'Fase A '
-        isFirst = false
+        res += "Fase A ";
+        isFirst = false;
       }
       if (item.data.voltage_b) {
         if (!isFirst) {
-          res += ' / '
+          res += " / ";
         }
-        res += 'Fase B '
-        isFirst = false
+        res += "Fase B ";
+        isFirst = false;
       }
       if (item.data.voltage_c) {
         if (!isFirst) {
-          res += ' / '
+          res += " / ";
         }
-        res += 'Fase C '
-        isFirst = false
+        res += "Fase C ";
+        isFirst = false;
       }
-      return res
+      return res;
     }
   }
 };
 </script>
 
  <style lang="scss" scoped>
- .title-1 {
+.title-1 {
   width: 205px;
   height: 24px;
   font-family: Roboto;
@@ -123,6 +127,7 @@ export default {
   line-height: 1.5;
   letter-spacing: 0.15px;
   color: rgba(0, 0, 0, 0.87);
+  margin-bottom: 10%;
 }
 
 .subtitle-1 {
@@ -145,4 +150,4 @@ export default {
   text-align: right;
   color: rgba(0, 0, 0, 0.87);
 }
- </style>
+</style>

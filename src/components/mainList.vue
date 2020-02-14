@@ -1,16 +1,16 @@
 <template>
-  <div v-if="items" class="q-mt-md">
-      <div class="container" v-if="!list">
-        <q-icon class="icon" :name="getIcon()" />
-        <div class="title_container">{{this.title}}</div>
-      </div>
-      <div class="content q-mb-xs">
-        <occurence-item v-if="type == 'occurence'" :items="items" :type="type"/>
-        <history-item v-else-if="type == 'history'" :items="items" />
-        <transducer-item v-else-if="type == 'transducer'" :items="items" />
-        <list-item v-else :items="items" />
-      </div>
+  <div v-if="items" class="q-mt-md" >
+    <div class="container" v-if="!list"> 
+      <q-icon class="icon" :name="getIcon()" />
+      <div class="title_container" :class="{'light' : !this.serious}">{{this.title}}</div>
     </div>
+    <div class="content q-mb-xs">
+      <occurence-item v-if="type == 'occurence'" :items="items" :type="type" :info="info"/>
+      <history-item v-else-if="type == 'history'" :items="items" />
+      <transducer-item v-else-if="type == 'transducer'" :items="items" />
+      <list-item v-else :items="items" />
+    </div>
+  </div>
 </template>
 <script>
 import historyItem from "./historyItem.vue";
@@ -36,7 +36,7 @@ export default {
     },
     info: {
       type: String,
-      default: ''
+      default: ""
     },
     /* eslint-disable */
     items: {
@@ -51,6 +51,10 @@ export default {
     type: {
       type: String,
       default: "list"
+    },
+    serious: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
@@ -90,4 +94,7 @@ export default {
   color: #ffffff;
 }
 
+.light {
+  background-color: #f1c809;
+}
 </style>
