@@ -7,15 +7,17 @@
       :items="critical_tension"
       :type="'occurence'"
       :info="'critical_tension'"
-      icon="error"
+      :icon="serious_icon"
+      :serious="true"
     />
     <main-list
       v-if="phase_drop.length > 0"
-      :title="'Queda de tensão'"
+      :title="'Queda de fase'"
       :items="phase_drop"
       :type="'occurence'"
       :info="'phase_drop'"
-      icon="error"
+      :icon="serious_icon"
+      :serious="true"
     />
     <main-list
       v-if="transductor_connection_fail.length > 0"
@@ -23,7 +25,8 @@
       :items="transductor_connection_fail"
       :type="'occurence'"
       :info="'conection_fail'"
-      icon="warning"
+      :icon="light_icon"
+      :serious="false"
     />
     <main-list
       v-if="precarious_tension.length > 0"
@@ -31,8 +34,8 @@
       :items="precarious_tension"
       :type="'occurence'"
       :info="'precarious_tension'"
-      icon="warning"
-
+      :icon="light_icon"
+      :serious="false"
     />
 
     <div v-if="!isLoading &&
@@ -56,7 +59,8 @@ export default {
   },
   data () {
     return {
-      critical_tension_icon: 'img:statics/header_ocorrencia_critica_horizontal@4x.png',
+      serious_icon: 'img:statics/header_ocorrencia_critica_horizontal@4x.png',
+      light_icon: 'img:statics/header_ocorrencia_precaria_horizontal@4x.png',
       transductor_connection_fail: [],
       critical_tension: [],
       precarious_tension: [],
