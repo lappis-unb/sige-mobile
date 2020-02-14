@@ -1,7 +1,7 @@
 <template>
   <q-list>
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item to="/transducer">
+      <q-item to="/transducer" class="container">
         <q-item-section>
           <q-item-label>{{item.occurence}}</q-item-label>
           <q-item-label caption>{{item.name}} ({{item.sigla}})</q-item-label>
@@ -28,3 +28,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 0;
+  }
+</style>

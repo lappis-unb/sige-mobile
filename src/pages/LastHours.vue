@@ -1,7 +1,7 @@
 <template>
   <div>
-    <page-header :backButton="true" :title="'Ocorrências nas últimas 72h'"/>
-    <div class="q-ma-xl q-pt-sm">
+    <page-header :backButton="true" :title="'Últimas 72h'"/>
+    <div class="q-ma-md q-pt-xs history-container">
       <simple-list :title="'HOJE'" :items="today" :type="'history'" />
       <q-separator spaced inset style="height: 1px;" />
       <simple-list :title="'ONTEM'" :items="yesterday" :type="'history'" />
@@ -144,3 +144,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.history-container {
+  background-color: #fafafa;
+  margin-top: 10%;
+}
+</style>
