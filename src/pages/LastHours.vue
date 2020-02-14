@@ -1,7 +1,6 @@
 <template>
   <div>
-    <page-header :backButton="true" :title="'Ocorrências nas últimas 72h'"/>
-    <div class="q-ma-xl q-pt-sm">
+    <div class="q-ma-md q-pt-xs history-container">
       <p v-if="today.length === 0 && yesterday.length === 0 && beforeYesterday.length === 0">
         Não houve ocorrências nas últimas 72 horas
       </p>
@@ -11,15 +10,6 @@
       <q-separator v-if="yesterday.length > 0 && beforeYesterday.length > 0" spaced inset style="height: 1px;" />
       <simple-list v-if="beforeYesterday.length > 0" :title="'ANTEONTEM'" :items="beforeYesterday" :type="'history'" />
     </div>
-  </div>
-</template>
-
-<script>
-import pageHeader from '../components/pageHeader.vue'
-import simpleList from '../components/simpleList.vue'
-import MASTER from '../services/masterApi/http-common'
-
-export default {
   components: {
     pageHeader: pageHeader,
     simpleList: simpleList
@@ -87,3 +77,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.history-container {
+  background-color: #fafafa;
+  margin-top: 10%;
+}
+</style>

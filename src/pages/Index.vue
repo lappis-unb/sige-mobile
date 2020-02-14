@@ -1,7 +1,7 @@
 <template>
   <div>
     <page-header :type="tab" />
-    <q-tab-panels v-model="tab" class="q-mt-xl">
+    <q-tab-panels v-model="tab" class="main-panel">
       <q-tab-panel name="occurences" class="q-pl-none">
         <occurences class="q-mb-xl"/>
       </q-tab-panel>
@@ -99,4 +99,8 @@ export default {
   opacity: 50%;
 }
 
+.main-panel {
+  margin-top: 8%;
+  background-color: #fafafa;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="items" class="q-mt-md" >
+  <div v-if="items" :class="{'q-mt-md' : type != 'history'}" >
     <div class="container" v-if="!list"> 
       <q-icon class="icon" :name="getIcon()" />
       <div class="title_container" :class="{'light' : !this.serious}">{{this.title}}</div>

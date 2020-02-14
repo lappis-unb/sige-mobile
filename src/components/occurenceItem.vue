@@ -6,7 +6,7 @@
           <q-item-label class="title-1">{{item.location}} ({{item.campus}})</q-item-label>
           <q-item-label caption class="subtitle-1">{{getInfo(item)}}</q-item-label>
         </q-item-section>
-        <q-item-section side top>
+        <q-item-section side top class="label-container">
           <q-item-label caption class="label-1">{{writenTime(item.start_time)}}</q-item-label>
         </q-item-section>
       </q-item>
@@ -127,7 +127,7 @@ export default {
   line-height: 1.5;
   letter-spacing: 0.15px;
   color: rgba(0, 0, 0, 0.87);
-  margin-bottom: 10%;
+  margin-bottom: 5%;
 }
 
 .subtitle-1 {
@@ -149,5 +149,9 @@ export default {
   letter-spacing: 0.4px;
   text-align: right;
   color: rgba(0, 0, 0, 0.87);
+}
+
+.label-container {
+  padding-left: 0px;
 }
 </style>
