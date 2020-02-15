@@ -1,9 +1,9 @@
 <template>
   <q-list>
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item to="/transducer">
+      <q-item to="/transducer" class="container">
         <q-item-section>
-          <q-item-label>{{item.name}} ({{item.campus_acronym}})</q-item-label>
+          <q-item-label class="text">{{item.name}} ({{item.campus_acronym}})</q-item-label>
         </q-item-section>
 
         <q-item-section side top class="icons">
@@ -28,10 +28,28 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+
+<style lang="scss" scoped>
 .icons{
     display: flex;
     flex-direction: row;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 0;
+}
+
+.text {
+  width: 288px;
+  height: 28px;
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+  color: rgba(0, 0, 0, 0.87);
+}
 </style>

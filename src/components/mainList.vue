@@ -1,6 +1,6 @@
 <template>
-  <div v-if="items" :class="{'q-mt-md' : type != 'history'}" >
-    <div class="container" v-if="!list"> 
+  <div v-if="items" :class="{'q-mt-md' : type == 'occurence'}" >
+    <div class="container" v-if="!list">
       <q-icon class="icon" :name="getIcon()" />
       <div class="title_container" :class="{'light' : !this.serious}">{{this.title}}</div>
     </div>
@@ -13,13 +13,13 @@
   </div>
 </template>
 <script>
-import historyItem from "./historyItem.vue";
-import transducerItem from "./transducerItem.vue";
-import occurenceItem from "./occurenceItem.vue";
-import listItem from "./listItem.vue";
+import historyItem from './historyItem.vue'
+import transducerItem from './transducerItem.vue'
+import occurenceItem from './occurenceItem.vue'
+import listItem from './listItem.vue'
 
 export default {
-  name: "MainList",
+  name: 'MainList',
   components: {
     historyItem: historyItem,
     transducerItem: transducerItem,
@@ -29,14 +29,14 @@ export default {
   props: {
     icon: {
       type: String,
-      default: "warning"
+      default: 'warning'
     },
     title: {
       type: String
     },
     info: {
       type: String,
-      default: ""
+      default: ''
     },
     /* eslint-disable */
     items: {
@@ -50,7 +50,7 @@ export default {
     },
     type: {
       type: String,
-      default: "list"
+      default: 'list'
     },
     serious: {
       type: Boolean,
@@ -58,11 +58,11 @@ export default {
     }
   },
   methods: {
-    getIcon() {
-      return this.icon;
+    getIcon () {
+      return this.icon
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
