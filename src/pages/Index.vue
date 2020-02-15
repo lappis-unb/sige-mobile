@@ -11,7 +11,7 @@
       </q-tab-panel>
 
       <q-tab-panel name="settings">
-        <setting class="q-mb-xl"/>
+        <setting/>
       </q-tab-panel>
     </q-tab-panels>
 
