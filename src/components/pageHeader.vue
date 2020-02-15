@@ -23,7 +23,7 @@
       <q-toolbar-title class="text-h6">Configurações</q-toolbar-title>
     </q-toolbar>
 
-    <q-toolbar v-if="backButton" class="title" :class="{'is-blue' : backButton}"> 
+    <q-toolbar v-if="backButton" class="title" :class="{'is-blue' : backButton}">
       <q-icon v-go-back=" '/' " size="sm" name="arrow_back" class="q-mr-md"/>
       <q-toolbar-title class="text-h6">{{title}}</q-toolbar-title>
     </q-toolbar>
@@ -80,5 +80,5 @@ export default {
   font-weight: 500;
   letter-spacing: 0.25px;
   color: #ffffff;
-} 
+}
 </style>

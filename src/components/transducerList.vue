@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="q-gutter-md">
+    <div>
       <simple-list :title="'PERTO DE VOCÊ'" :items="nearby" :list="true" />
-      <q-separator spaced inset style="height: 2px;" />
+      <q-separator spaced inset class="bar" />
       <simple-list :title="'TODOS'" :items="nearby" :list="true" />
     </div>
   </div>
@@ -45,8 +45,13 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ListTitle {
   color: #777777;
+}
+.bar {
+  height: 2px;
+  margin: 0 0;
+  width: 100%;
 }
 </style>

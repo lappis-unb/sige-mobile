@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'HistoryItem',
+  name: 'TrasnducerItem',
   props: {
     /* eslint-disable */
     items: {
