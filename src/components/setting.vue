@@ -9,7 +9,7 @@
           </q-item-section>
         </q-item>
       <q-separator spaced inset class="bar" />
-        <q-item tag="label" class="container" to="/" v-ripple>
+        <q-item tag="label" class="container" to="/about" v-ripple>
           <q-item-section >
             <q-item-label class="text">Sobre o app</q-item-label>
           </q-item-section>
