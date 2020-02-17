@@ -18,12 +18,12 @@
                 <q-separator spaced inset style="height: 1px;" />
             </div>
         <div class="q-ma-md">
-            <p class="lastReading">Última leitura - há {{lastReading}}.</p>
+            <p class="lastReading">Última leitura: há {{lastReading}}.</p>
             <table align="center" class="readings">
                 <tr>
-                    <th>Tensão</th>
-                    <th>Corrente</th>
-                    <th>Potência</th>
+                    <th>TENSÃO</th>
+                    <th>CORRENTE</th>
+                    <th>POTÊNCIA</th>
                 </tr>
                 <tr>
                     <td>A - {{tension.a}}V</td>
@@ -65,11 +65,11 @@
               </l-circle>
             </l-map>
 
-            <q-separator spaced inset style="height: 1px;" />
-
-            <p>Outras ocorrências nas últimas 72h:</p>
+            <p class="history">Outras ocorrências nas últimas 72h:</p>
             <simple-list :title="'HOJE'" :items="this.today" :type="'transducer'" />
+            <q-separator spaced inset class="bar" />
             <simple-list :title="'ONTEM'" :items="this.yesterday" :type="'transducer'" />
+            <q-separator spaced inset class="bar" />
             <simple-list :title="'ANTEONTEM'" :items="this.beforeYesterday" :type="'transducer'" />
 
         </div>
@@ -169,18 +169,41 @@ export default {
   },
   methods: {
     hasOcurrence () {
-      return true
+      return false
     }
   }
 }
 </script>
-<style lang= "scss">
+<style lang= "scss" scoped>
 .lastReading{
+    font-family: Roboto;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.15px;
     text-align: center;
+    color: rgba(0, 0, 0, 0.87);
 }
 .readings{
-    width: 100%;
-    text-align: center;
+  width: 100%;
+  text-align: start;
+}
+.readings th {
+  text-align: start;
+  height: 16px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 2px;
+  color: $primary;
+}
+.readings td {
+  padding-left: 3%;
+  font-family: Roboto;
+  font-size: 14px;
+  line-height: 1.43;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.87);
 }
 .map{
   border-radius: 5px;
@@ -202,5 +225,18 @@ export default {
 .occurence-time{
     font-weight: 100px;
 }
-
+.history {
+  margin-top: 3%;
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.15px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.87);
+}
+.bar {
+  height: 2px;
+  margin: 0 0;
+  width: 100%;
+}
 </style>
