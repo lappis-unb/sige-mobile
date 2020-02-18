@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: "TrasnducerItem",
+  name: 'TrasnducerItem',
   props: {
     /* eslint-disable */
     items: {
@@ -37,11 +37,11 @@ export default {
   },
 
   methods: {
-    getIcon() {
-      return this.icon;
+    getIcon () {
+      return this.icon
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

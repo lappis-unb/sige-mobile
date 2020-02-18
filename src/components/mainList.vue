@@ -83,7 +83,7 @@ export default {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #f13209;
+  background-color: $color_tertiary;
   margin-left: -1px;
   padding-left: 2%;
   width: 100%;
@@ -95,6 +95,6 @@ export default {
 }
 
 .light {
-  background-color: #f1c809;
+  background-color: $color_secondary-accent;
 }
 </style>
