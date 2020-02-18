@@ -1,24 +1,24 @@
 <template>
-    <div class="q-mt-xl q-pt-xs">
+    <div v-if="!isLoading" class="q-mt-xl q-pt-xs">
         <page-header :backButton="true" :title="name" />
-            <div v-if="hasOcurrence()" class="occurence">
-                <div class="occurence-warning">
-                    <b>Ocorrência em andamento</b>
-                </div>
+            <div v-if="occurrences.length > 0" class="occurence-warning">
+                <b>Ocorrência{{occurrences.length > 1? 's' : ''}} em andamento</b>
+            </div>
+            <div v-for="occ in occurrences" v-bind:key="occ.id" class="occurence">
                 <div class="q-ma-md">
                     <div class="occurence-title">
                         <q-icon name="warning"/>
-                        {{this.occurrence.type}}
+                        {{occ.type}}
                     </div>
                     <div class="occurence-title">
-                        {{this.occurrence.info}}
+                        {{occ.info}}
                     </div>
-                    <i class="occurence-time">Desde {{this.occurrence.startTime}}</i>
+                    <i class="occurence-time">Desde {{occ.writtenStartTime}}</i>
                 </div>
                 <q-separator spaced inset style="height: 1px;" />
             </div>
         <div class="q-ma-md">
-            <p class="lastReading">Última leitura - há {{lastReading}}.</p>
+            <p class="lastReading">Última leitura - {{lastReading}}.</p>
             <table align="center" class="readings">
                 <tr>
                     <th>Tensão</th>
@@ -55,7 +55,7 @@
                 :attribution="attribution"
               />
               <l-circle
-                :lat-lng="markerLatLng"
+                :lat-lng="center"
                 :radius="3"
                 :fill-opacity="1"
               >
@@ -68,12 +68,11 @@
             <q-separator spaced inset style="height: 1px;" />
 
             <p>Outras ocorrências nas últimas 72h:</p>
-            <simple-list :title="'HOJE'" :items="this.today" :type="'transducer'" />
-            <simple-list :title="'ONTEM'" :items="this.yesterday" :type="'transducer'" />
-            <simple-list :title="'ANTEONTEM'" :items="this.beforeYesterday" :type="'transducer'" />
-
+            <simple-list v-if="today.length > 0" :title="'HOJE'" :items="this.today" :type="'transducer'" />
+            <simple-list v-if="yesterday.length > 0" :title="'ONTEM'" :items="this.yesterday" :type="'transducer'" />
+            <simple-list v-if="beforeYesterday.length > 0" :title="'ANTEONTEM'" :items="this.beforeYesterday" :type="'transducer'" />
+            <p v-if="today.length === 0 && yesterday.length === 0 && beforeYesterday.length === 0">Não houve ocorrências</p>
         </div>
-
     </div>
 </template>
 <script>
@@ -81,6 +80,9 @@ import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
 import 'leaflet/dist/leaflet.css'
 import Vue2Leaflet from '../services/ssr-import/leaflet'
+import MASTER from '../services/masterApi/http-common'
+import getInfo from '../utils/info'
+import timePassed from '../utils/timePassed'
 
 export default {
   components: {
@@ -94,68 +96,20 @@ export default {
 
   data () {
     return {
-      name: 'Transdutor',
-      lastReading: '2 min',
-      tension: {
-        a: 128,
-        b: 220,
-        c: 219
-      },
-      current: {
-        a: 77,
-        b: 78,
-        c: 76
-      },
-      power: {
-        a: 180,
-        r: 36,
-        t: 36
-      },
-      today: [
-        {
-          id: 1,
-          type: 'Queda de fase',
-          info: 'Fase A',
-          startTime: '9h35',
-          endTime: '9h47'
-        }
-      ],
-      yesterday: [
-        {
-          id: 1,
-          type: 'Queda de fase',
-          info: 'Fase A',
-          startTime: '17h03',
-          endTime: '17h10'
-        },
-        {
-          id: 2,
-          type: 'Queda de fase',
-          info: 'Fase A',
-          startTime: '10h22',
-          endTime: '10h28'
-        }
-      ],
-      beforeYesterday: [
-        {
-          id: 1,
-          type: 'Tensão crítica',
-          info: 'A - 115V',
-          startTime: '10h51',
-          endTime: '10h55'
-        }
-      ],
-      occurrence: {
-        type: 'Tensão crítica',
-        info: 'A - 198 V',
-        startTime: '16h47'
-      },
+      key: 0,
+      isLoading: true,
+      name: '',
+      lastReading: '',
+      tension: {},
+      current: {},
+      power: {},
+      today: [],
+      yesterday: [],
+      beforeYesterday: [],
+      occurrences: [],
 
       // MAP info
-      markerLatLng: [-15.9897, -48.0454],
-
-      center: [-15.9897, -48.0454],
-      // center: [-15.7650, -47.8665],
+      center: [0, 0],
 
       mapOptions: {
         zoomControl: false,
@@ -167,10 +121,120 @@ export default {
         '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }
   },
+
+  async created () {
+    let id = this.$router.currentRoute.params.id
+    await MASTER.get('/energy-transductors/' + id)
+      .then((res) => {
+        this.name = res.data.name
+        this.name = res.data.name
+        this.center[0] = res.data.geolocation_latitude
+        this.center[1] = res.data.geolocation_longitude
+      })
+    await MASTER.get('/realtime-measurements/' + id)
+      .then((res) => {
+        this.tension = {
+          a: this.round(res.data.voltage_a),
+          b: this.round(res.data.voltage_b),
+          c: this.round(res.data.voltage_c)
+        }
+        this.current = {
+          a: this.round(res.data.current_a),
+          b: this.round(res.data.current_b),
+          c: this.round(res.data.current_c)
+        }
+        this.power = {
+          a: this.round(res.data.total_active_power),
+          r: this.round(res.data.total_reactive_power),
+          t: this.round(res.data.total_power_factor)
+        }
+        this.lastReading = this.getTime(res.data.collection_time)
+      })
+    await MASTER.get('/occurences/?type=period&serial_number=' + id)
+      .then((res) => {
+        console.log(this.today)
+        this.separateInDays(res.data.critical_tension, 'critical_tension', 'Tensão Crítica')
+        this.separateInDays(res.data.precarious_tension, 'precarious_tension', 'Tensão Precária')
+        this.separateInDays(res.data.phase_drop, 'phase_drop', 'Queda de Fase')
+        this.separateInDays(res.data.transductor_connection_fail, 'conection_fail', 'Falha de comunicação')
+        this.separateInDays(res.data.slave_connection_fail, 'conection_fail', 'Falha de comunicação')
+      })
+    this.isLoading = false
+  },
   methods: {
-    hasOcurrence () {
-      return true
+    round (num) {
+      return Math.round(num * 100) / 100
+    },
+    getTime (d) {
+      let ans = timePassed(d)
+      if (ans !== 'agora') {
+        ans = 'há ' + ans
+      }
+      return ans
+    },
+    separateInDays (arr, type, typeName) {
+      let now = new Date()
+      arr.forEach((elem) => {
+        let startTime = new Date(elem.start_time)
+        let endTime = elem.end_time === null ? new Date() : new Date(elem.end_time)
+
+        let item = {
+          ...elem,
+          type: typeName,
+          writtenStartTime: this.writtenTime(startTime, endTime, true),
+          writtenEndTime: this.writtenTime(endTime, now, false),
+          info: getInfo(elem, type),
+          key: this.key
+        }
+
+        if (item.end_time === null) {
+          this.occurrences.push(item)
+        }
+
+        this.key++
+        endTime.setHours(0, 0, 0, 0)
+        now.setHours(0, 0, 0, 0)
+
+        let diff = Math.floor((now - endTime) / (1000 * 60 * 60 * 24))
+
+        if (diff === 0) {
+          this.today.push(item)
+        } else if (diff === 1) {
+          this.yesterday.push(item)
+        } else if (diff === 2) {
+          this.beforeYesterday.push(item)
+        }
+      })
+    },
+    // timePassedOcc(time) {
+
+    // },
+    writtenTime (date, compareDate, isStartTime) {
+      let res = ''
+      let day = new Date(date)
+      let compareDay = new Date(compareDate)
+
+      day.setHours(0, 0, 0, 0)
+      compareDay.setHours(0, 0, 0, 0)
+      let days = Math.floor((compareDay - day) / (1000 * 60 * 60 * 24))
+      if (isStartTime) {
+        console.log('cd: ', compareDate)
+        console.log('date ', date)
+        console.log('days ', days)
+      }
+
+      if (isStartTime && days > 0) {
+        let plural = days > 0 ? 's ' : ' '
+
+        res += days.toString() + ' dia' + plural
+      } else {
+        let h = date.getHours()
+        let min = date.getMinutes()
+        res += h.toString() + 'h' + min.toString().padStart(2, 0)
+      }
+      return res
     }
+
   }
 }
 </script>

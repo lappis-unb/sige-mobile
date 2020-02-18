@@ -64,11 +64,8 @@ export default {
     }
   },
   created () {
-    console.log('fetching data...')
     MASTER.get('occurences/')
       .then((res) => {
-        console.log(res)
-        
         this.transductor_connection_fail = res.data.transductor_connection_fail
         this.critical_tension = res.data.critical_tension
         this.precarious_tension = res.data.precarious_tension
