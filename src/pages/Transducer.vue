@@ -18,8 +18,9 @@
                 <q-separator spaced inset style="height: 1px;" />
             </div>
         <div class="q-ma-md">
-            <p class="lastReading">Última leitura - {{lastReading}}.</p>
-            <table align="center" class="readings">
+            <p v-if="hasMeasurements" class="lastReading">Última leitura - {{lastReading}}.</p>
+            <p v-if="!hasMeasurements" class="lastReading">Não há leituras salvas </p>
+            <table v-if="hasMeasurements" align="center" class="readings">
                 <tr>
                     <th>Tensão</th>
                     <th>Corrente</th>
@@ -107,6 +108,7 @@ export default {
       yesterday: [],
       beforeYesterday: [],
       occurrences: [],
+      hasMeasurements: false,
 
       // MAP info
       center: [0, 0],
@@ -131,6 +133,9 @@ export default {
         this.center[0] = res.data.geolocation_latitude
         this.center[1] = res.data.geolocation_longitude
       })
+      .catch((err) => {
+        console.log(err)
+      })
     await MASTER.get('/realtime-measurements/' + id)
       .then((res) => {
         this.tension = {
@@ -149,6 +154,10 @@ export default {
           t: this.round(res.data.total_power_factor)
         }
         this.lastReading = this.getTime(res.data.collection_time)
+        this.hasMeasurements = true
+      })
+      .catch((err) => {
+        console.log(err)
       })
     await MASTER.get('/occurences/?type=period&serial_number=' + id)
       .then((res) => {
@@ -158,6 +167,9 @@ export default {
         this.separateInDays(res.data.phase_drop, 'phase_drop', 'Queda de Fase')
         this.separateInDays(res.data.transductor_connection_fail, 'conection_fail', 'Falha de comunicação')
         this.separateInDays(res.data.slave_connection_fail, 'conection_fail', 'Falha de comunicação')
+      })
+      .catch((err) => {
+        console.log(err)
       })
     this.isLoading = false
   },
@@ -206,9 +218,6 @@ export default {
         }
       })
     },
-    // timePassedOcc(time) {
-
-    // },
     writtenTime (date, compareDate, isStartTime) {
       let res = ''
       let day = new Date(date)
@@ -217,11 +226,6 @@ export default {
       day.setHours(0, 0, 0, 0)
       compareDay.setHours(0, 0, 0, 0)
       let days = Math.floor((compareDay - day) / (1000 * 60 * 60 * 24))
-      if (isStartTime) {
-        console.log('cd: ', compareDate)
-        console.log('date ', date)
-        console.log('days ', days)
-      }
 
       if (isStartTime && days > 0) {
         let plural = days > 0 ? 's ' : ' '
