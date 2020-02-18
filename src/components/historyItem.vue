@@ -1,14 +1,14 @@
 <template>
   <q-list>
-    <div v-for="item in items" v-bind:key="item.id">
+    <div v-for="item in items" v-bind:key="item.key">
       <q-item to="/transducer">
         <q-item-section>
           <q-item-label>{{item.occurence}}</q-item-label>
-          <q-item-label caption>{{item.name}} ({{item.sigla}})</q-item-label>
+          <q-item-label caption>{{item.location}} ({{item.campus}})</q-item-label>
         </q-item-section>
 
         <q-item-section side top>
-          <q-item-label caption>{{item.initialHour}} - {{item.finalHour}}</q-item-label>
+          <q-item-label caption>{{item.writtenStartTime}} - {{item.writtenEndTime}}</q-item-label>
         </q-item-section>
       </q-item>
     </div>
