@@ -2,6 +2,7 @@ version: '3.5'
 services:
   app:
     container_name: mobile
+    restart: always
     build: .
     ports:
       - 8081:8081
