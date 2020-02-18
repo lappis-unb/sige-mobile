@@ -7,11 +7,11 @@
 
     <q-toolbar v-if="type == 'meters'" class="title">
       <q-toolbar-title class="text-h6">
-        <q-btn-dropdown class="drop" flat no-caps :label="selected">
-          <q-list>
-            <q-item clickable v-close-popup @click="onItemClick">
+        <q-btn-dropdown class="drop" flat no-caps :label="options[selected].acronym">
+          <q-list v-for="item in options" :key="item.id">
+            <q-item clickable v-close-popup @click="onItemClick(item.id)" >
               <q-item-section>
-                <q-item-label>item</q-item-label>
+                <q-item-label>{{item.acronym}}</q-item-label>
               </q-item-section>
             </q-item>
           </q-list>
@@ -30,6 +30,7 @@
   </q-header>
 </template>
 <script>
+import MASTER from '../services/masterApi/http-common'
 export default {
   name: 'pageHeader',
   props: {
@@ -48,12 +49,26 @@ export default {
   },
   data () {
     return {
-      selected: 'Todos os campi'
+      selected: 0,
+      options: [{
+        acronym: 'Todos os campi',
+        id: null
+      }]
     }
   },
+  created () {
+    MASTER.get('campi/')
+      .then((res) => {
+        res.data.forEach(i => {
+          this.options.push(i)
+        })
+      })
+  },
   methods: {
-    onItemClick () {
-      console.log('Clicked on an Item')
+    onItemClick (id) {
+      this.selected = this.options.findIndex(x => x.id === id)
+      this.$store.commit('change', this.options[this.selected])
+      console.log('--->> ', this.$store.state.campus)
     }
   }
 }
