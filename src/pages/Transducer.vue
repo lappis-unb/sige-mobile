@@ -1,21 +1,9 @@
 <template>
     <div class="q-mt-xl q-pt-xs">
         <page-header :backButton="true" :title="name" />
-            <div v-if="hasOcurrence()" class="occurence">
-                <div class="occurence-warning">
-                    <b>Ocorrência em andamento</b>
-                </div>
-                <div class="q-ma-md">
-                    <div class="occurence-title">
-                        <q-icon name="warning"/>
-                        {{this.occurrence.type}}
-                    </div>
-                    <div class="occurence-title">
-                        {{this.occurrence.info}}
-                    </div>
-                    <i class="occurence-time">Desde {{this.occurrence.startTime}}</i>
-                </div>
-                <q-separator spaced inset style="height: 1px;" />
+            <div v-if="hasOcurrence()">
+              <transducer-alert :occurrence="occurrence" :serious="true"/>
+              <transducer-alert :occurrence="occurrence" :serious="false"/>
             </div>
         <div class="q-ma-md">
             <p class="lastReading">Última leitura: há {{lastReading}}.</p>
@@ -81,6 +69,7 @@ import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
 import 'leaflet/dist/leaflet.css'
 import Vue2Leaflet from '../services/ssr-import/leaflet'
+import transducerAlert from '../components/transducerAlert'
 
 export default {
   components: {
@@ -89,7 +78,8 @@ export default {
     'l-map': Vue2Leaflet.LMap,
     'l-tile-layer': Vue2Leaflet.LTileLayer,
     'l-circle': Vue2Leaflet.LCircle,
-    'l-popup': Vue2Leaflet.LPopup
+    'l-popup': Vue2Leaflet.LPopup,
+    transducerAlert: transducerAlert
   },
 
   data () {
@@ -146,9 +136,10 @@ export default {
         }
       ],
       occurrence: {
-        type: 'Tensão crítica',
+        type: 'Queda de fase',
         info: 'A - 198 V',
-        startTime: '16h47'
+        startTime: '16h47',
+        endTime: '19h00'
       },
 
       // MAP info
@@ -169,7 +160,7 @@ export default {
   },
   methods: {
     hasOcurrence () {
-      return false
+      return true
     }
   }
 }
@@ -208,19 +199,6 @@ export default {
 .map{
   border-radius: 5px;
   margin: 5vh 0 5vh 0;
-}
-.occurence{
-    text-align: center;
-}
-.occurence-warning{
-    background-color: #333333;
-    color: white;
-    text-align: center;
-    margin-top: 10px;
-}
-.occurence-title{
-    font-size: 25px;
-    font-weight: 300;
 }
 .occurence-time{
     font-weight: 100px;
