@@ -1,25 +1,26 @@
 <template>
-    <div class="q-mt-xl q-pt-xs">
+    <div v-if="!isLoading" class="q-mt-xl q-pt-xs">
         <page-header :backButton="true" :title="name" />
-            <div v-if="hasOcurrence()" class="occurence">
-                <div class="occurence-warning">
-                    <b>Ocorrência em andamento</b>
-                </div>
+            <div v-if="occurrences.length > 0" class="occurence-warning">
+                <b>Ocorrência{{occurrences.length > 1? 's' : ''}} em andamento</b>
+            </div>
+            <div v-for="occ in occurrences" v-bind:key="occ.id" class="occurence">
                 <div class="q-ma-md">
                     <div class="occurence-title">
                         <q-icon name="warning"/>
-                        {{this.occurrence.type}}
+                        {{occ.type}}
                     </div>
                     <div class="occurence-title">
-                        {{this.occurrence.info}}
+                        {{occ.info}}
                     </div>
-                    <i class="occurence-time">Desde {{this.occurrence.startTime}}</i>
+                    <i class="occurence-time">Desde {{occ.writtenStartTime}}</i>
                 </div>
                 <q-separator spaced inset style="height: 1px;" />
             </div>
         <div class="q-ma-md">
-            <p class="lastReading">Última leitura - há {{lastReading}}.</p>
-            <table align="center" class="readings">
+            <p v-if="hasMeasurements" class="lastReading">Última leitura - {{lastReading}}.</p>
+            <p v-if="!hasMeasurements" class="lastReading">Não há leituras salvas </p>
+            <table v-if="hasMeasurements" align="center" class="readings">
                 <tr>
                     <th>Tensão</th>
                     <th>Corrente</th>
@@ -55,7 +56,7 @@
                 :attribution="attribution"
               />
               <l-circle
-                :lat-lng="markerLatLng"
+                :lat-lng="center"
                 :radius="3"
                 :fill-opacity="1"
               >
@@ -68,12 +69,11 @@
             <q-separator spaced inset style="height: 1px;" />
 
             <p>Outras ocorrências nas últimas 72h:</p>
-            <simple-list :title="'HOJE'" :items="this.today" :type="'transducer'" />
-            <simple-list :title="'ONTEM'" :items="this.yesterday" :type="'transducer'" />
-            <simple-list :title="'ANTEONTEM'" :items="this.beforeYesterday" :type="'transducer'" />
-
+            <simple-list v-if="today.length > 0" :title="'HOJE'" :items="this.today" :type="'transducer'" />
+            <simple-list v-if="yesterday.length > 0" :title="'ONTEM'" :items="this.yesterday" :type="'transducer'" />
+            <simple-list v-if="beforeYesterday.length > 0" :title="'ANTEONTEM'" :items="this.beforeYesterday" :type="'transducer'" />
+            <p v-if="today.length === 0 && yesterday.length === 0 && beforeYesterday.length === 0">Não houve ocorrências</p>
         </div>
-
     </div>
 </template>
 <script>
@@ -81,6 +81,9 @@ import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
 import 'leaflet/dist/leaflet.css'
 import Vue2Leaflet from '../services/ssr-import/leaflet'
+import MASTER from '../services/masterApi/http-common'
+import timePassed from '../utils/timePassed'
+import separateInDays from '../utils/separateInDays'
 
 export default {
   components: {
@@ -94,68 +97,21 @@ export default {
 
   data () {
     return {
-      name: 'Transdutor',
-      lastReading: '2 min',
-      tension: {
-        a: 128,
-        b: 220,
-        c: 219
-      },
-      current: {
-        a: 77,
-        b: 78,
-        c: 76
-      },
-      power: {
-        a: 180,
-        r: 36,
-        t: 36
-      },
-      today: [
-        {
-          id: 1,
-          type: 'Queda de fase',
-          info: 'Fase A',
-          startTime: '9h35',
-          endTime: '9h47'
-        }
-      ],
-      yesterday: [
-        {
-          id: 1,
-          type: 'Queda de fase',
-          info: 'Fase A',
-          startTime: '17h03',
-          endTime: '17h10'
-        },
-        {
-          id: 2,
-          type: 'Queda de fase',
-          info: 'Fase A',
-          startTime: '10h22',
-          endTime: '10h28'
-        }
-      ],
-      beforeYesterday: [
-        {
-          id: 1,
-          type: 'Tensão crítica',
-          info: 'A - 115V',
-          startTime: '10h51',
-          endTime: '10h55'
-        }
-      ],
-      occurrence: {
-        type: 'Tensão crítica',
-        info: 'A - 198 V',
-        startTime: '16h47'
-      },
+      key: 0,
+      isLoading: true,
+      name: '',
+      lastReading: '',
+      tension: {},
+      current: {},
+      power: {},
+      today: [],
+      yesterday: [],
+      beforeYesterday: [],
+      occurrences: [],
+      hasMeasurements: false,
 
       // MAP info
-      markerLatLng: [-15.9897, -48.0454],
-
-      center: [-15.9897, -48.0454],
-      // center: [-15.7650, -47.8665],
+      center: [0, 0],
 
       mapOptions: {
         zoomControl: false,
@@ -167,9 +123,65 @@ export default {
         '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }
   },
+
+  async created () {
+    let id = this.$router.currentRoute.params.id
+    await MASTER.get('/energy-transductors/' + id)
+      .then((res) => {
+        this.name = res.data.name
+        this.name = res.data.name
+        this.center[0] = res.data.geolocation_latitude
+        this.center[1] = res.data.geolocation_longitude
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    await MASTER.get('/realtime-measurements/' + id)
+      .then((res) => {
+        this.tension = {
+          a: Math.round(res.data.voltage_a),
+          b: Math.round(res.data.voltage_b),
+          c: Math.round(res.data.voltage_c)
+        }
+        this.current = {
+          a: Math.round(res.data.current_a),
+          b: Math.round(res.data.current_b),
+          c: Math.round(res.data.current_c)
+        }
+        this.power = {
+          a: Math.round(res.data.total_active_power),
+          r: this.round(res.data.total_reactive_power),
+          t: this.round(res.data.total_power_factor)
+        }
+        this.lastReading = this.getTime(res.data.collection_time)
+        this.hasMeasurements = true
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    await MASTER.get('/occurences/?type=period&serial_number=' + id)
+      .then(async (res) => {
+        await separateInDays(res.data.critical_tension, 'critical_tension', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.precarious_tension, 'precarious_tension', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.phase_drop, 'phase_drop', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.transductor_connection_fail, 'conection_fail', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.slave_connection_fail, 'conection_fail', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    this.isLoading = false
+  },
   methods: {
-    hasOcurrence () {
-      return true
+    round (num) {
+      return Math.round(num * 100) / 100
+    },
+    getTime (d) {
+      let ans = timePassed(d)
+      if (ans !== 'agora') {
+        ans = 'há ' + ans
+      }
+      return ans
     }
   }
 }
