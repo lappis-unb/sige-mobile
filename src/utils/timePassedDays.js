@@ -8,7 +8,7 @@ export default function timePassedDays (date, compareDate, isStartTime) {
   let days = Math.floor((compareDay - day) / (1000 * 60 * 60 * 24))
 
   if (isStartTime && days > 0) {
-    let plural = days > 0 ? 's ' : ' '
+    let plural = days > 1 ? 's ' : ' '
 
     res += days.toString() + ' dia' + plural
   } else {
