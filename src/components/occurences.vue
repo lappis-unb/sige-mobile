@@ -1,51 +1,52 @@
 <template>
-  <div>
-    <q-spinner v-if="isLoading" size="3em" class="spinner"/>
-    <main-list
-      v-if="critical_tension.length > 0"
-      :title="'Tensão crítica'"
-      :items="critical_tension"
-      :type="'occurence'"
-      :info="'critical_tension'"
-      :icon="serious_icon"
-      :serious="true"
-    />
-    <main-list
-      v-if="phase_drop.length > 0"
-      :title="'Queda de fase'"
-      :items="phase_drop"
-      :type="'occurence'"
-      :info="'phase_drop'"
-      :icon="serious_icon"
-      :serious="true"
-    />
-    <main-list
-      v-if="transductor_connection_fail.length > 0"
-      :title="'Falha de comunicação'"
-      :items="transductor_connection_fail"
-      :type="'occurence'"
-      :info="'conection_fail'"
-      :icon="light_icon"
-      :serious="false"
-    />
-    <main-list
-      v-if="precarious_tension.length > 0"
-      :title="'Tensão precária'"
-      :items="precarious_tension"
-      :type="'occurence'"
-      :info="'precarious_tension'"
-      :icon="light_icon"
-      :serious="false"
-    />
-
-    <div v-if="!isLoading &&
-                transductor_connection_fail.length === 0 &&
+  <div class="container">
+    <q-spinner v-if="isLoading" size="3em" class="spinner" />
+    <div
+      v-else-if="transductor_connection_fail.length === 0 &&
                 critical_tension.length === 0 &&
                 precarious_tension.length === 0 &&
-                phase_drop.length === 0">
-      <p>Não há nenhuma ocorrência em andamento</p>
+                phase_drop.length === 0"
+    >
+      <p >Não há nenhuma ocorrência em andamento</p>
     </div>
-
+    <div v-else>
+      <main-list
+        v-if="critical_tension.length > 0"
+        :title="'Tensão crítica'"
+        :items="critical_tension"
+        :type="'occurence'"
+        :info="'critical_tension'"
+        :icon="serious_icon"
+        :serious="true"
+      />
+      <main-list
+        v-if="phase_drop.length > 0"
+        :title="'Queda de fase'"
+        :items="phase_drop"
+        :type="'occurence'"
+        :info="'phase_drop'"
+        :icon="serious_icon"
+        :serious="true"
+      />
+      <main-list
+        v-if="transductor_connection_fail.length > 0"
+        :title="'Falha de comunicação'"
+        :items="transductor_connection_fail"
+        :type="'occurence'"
+        :info="'conection_fail'"
+        :icon="light_icon"
+        :serious="false"
+      />
+      <main-list
+        v-if="precarious_tension.length > 0"
+        :title="'Tensão precária'"
+        :items="precarious_tension"
+        :type="'occurence'"
+        :info="'precarious_tension'"
+        :icon="light_icon"
+        :serious="false"
+      />
+    </div>
   </div>
 </template>
 <script>
@@ -71,25 +72,31 @@ export default {
   created () {
     console.log('fetching data...')
     MASTER.get('occurences/')
-      .then((res) => {
+      .then(res => {
         this.transductor_connection_fail = res.data.transductor_connection_fail
         this.critical_tension = res.data.critical_tension
         this.precarious_tension = res.data.precarious_tension
         this.phase_drop = res.data.phase_drop
         this.isLoading = false
       })
-      .catch((err) => {
+      .catch(err => {
         console.log('ERROR: ', err)
       })
   }
 }
 </script>
 
-<style lang="scss">
-.spinner{
+<style lang="scss" scoped>
+.spinner {
   display: flex;
   flex: center;
   margin: 0 auto;
 }
-
+.container {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="q-gutter-md" v-if="!loading">
+    <div v-if="!loading">
       <!-- <simple-list :title="'PERTO DE VOCÊ'" :items="nearby" :list="true" />
       <q-separator spaced inset class="bar" /> -->
       <simple-list :title="'TODOS'" :items="filterTransducers()" :list="true" />
