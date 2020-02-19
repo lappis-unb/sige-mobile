@@ -68,7 +68,6 @@ export default {
     onItemClick (id) {
       this.selected = this.options.findIndex(x => x.id === id)
       this.$store.commit('change', this.options[this.selected])
-      console.log('--->> ', this.$store.state.campus)
     }
   }
 }

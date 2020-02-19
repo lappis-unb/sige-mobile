@@ -82,8 +82,8 @@ import simpleList from '../components/simpleList.vue'
 import 'leaflet/dist/leaflet.css'
 import Vue2Leaflet from '../services/ssr-import/leaflet'
 import MASTER from '../services/masterApi/http-common'
-import getInfo from '../utils/info'
 import timePassed from '../utils/timePassed'
+import separateInDays from '../utils/separateInDays'
 
 export default {
   components: {
@@ -160,13 +160,12 @@ export default {
         console.log(err)
       })
     await MASTER.get('/occurences/?type=period&serial_number=' + id)
-      .then((res) => {
-        console.log(this.today)
-        this.separateInDays(res.data.critical_tension, 'critical_tension', 'Tensão Crítica')
-        this.separateInDays(res.data.precarious_tension, 'precarious_tension', 'Tensão Precária')
-        this.separateInDays(res.data.phase_drop, 'phase_drop', 'Queda de Fase')
-        this.separateInDays(res.data.transductor_connection_fail, 'conection_fail', 'Falha de comunicação')
-        this.separateInDays(res.data.slave_connection_fail, 'conection_fail', 'Falha de comunicação')
+      .then(async (res) => {
+        await separateInDays(res.data.critical_tension, 'critical_tension', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.precarious_tension, 'precarious_tension', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.phase_drop, 'phase_drop', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.transductor_connection_fail, 'conection_fail', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
+        await separateInDays(res.data.slave_connection_fail, 'conection_fail', this.today, this.yesterday, this.beforeYesterday, this.occurrences)
       })
       .catch((err) => {
         console.log(err)
@@ -183,62 +182,7 @@ export default {
         ans = 'há ' + ans
       }
       return ans
-    },
-    separateInDays (arr, type, typeName) {
-      let now = new Date()
-      arr.forEach((elem) => {
-        let startTime = new Date(elem.start_time)
-        let endTime = elem.end_time === null ? new Date() : new Date(elem.end_time)
-
-        let item = {
-          ...elem,
-          type: typeName,
-          writtenStartTime: this.writtenTime(startTime, endTime, true),
-          writtenEndTime: this.writtenTime(endTime, now, false),
-          info: getInfo(elem, type),
-          key: this.key
-        }
-
-        if (item.end_time === null) {
-          this.occurrences.push(item)
-        }
-
-        this.key++
-        endTime.setHours(0, 0, 0, 0)
-        now.setHours(0, 0, 0, 0)
-
-        let diff = Math.floor((now - endTime) / (1000 * 60 * 60 * 24))
-
-        if (diff === 0) {
-          this.today.push(item)
-        } else if (diff === 1) {
-          this.yesterday.push(item)
-        } else if (diff === 2) {
-          this.beforeYesterday.push(item)
-        }
-      })
-    },
-    writtenTime (date, compareDate, isStartTime) {
-      let res = ''
-      let day = new Date(date)
-      let compareDay = new Date(compareDate)
-
-      day.setHours(0, 0, 0, 0)
-      compareDay.setHours(0, 0, 0, 0)
-      let days = Math.floor((compareDay - day) / (1000 * 60 * 60 * 24))
-
-      if (isStartTime && days > 0) {
-        let plural = days > 0 ? 's ' : ' '
-
-        res += days.toString() + ' dia' + plural
-      } else {
-        let h = date.getHours()
-        let min = date.getMinutes()
-        res += h.toString() + 'h' + min.toString().padStart(2, 0)
-      }
-      return res
     }
-
   }
 }
 </script>
