@@ -1,11 +1,11 @@
 <template>
   <q-list>
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item to="/transducer">
+      <q-item :to="'/transducer/' + item.transductor">
         <q-item-section>
           <q-item-label class="text">{{item.type}}</q-item-label>
           <q-item-label class="text">{{item.info}}</q-item-label>
-          <q-item-label caption>De {{item.startTime}} às {{item.endTime}}</q-item-label>
+          <q-item-label caption>De {{item.writtenStartTime}} às {{item.writtenEndTime}}</q-item-label>
         </q-item-section>
       </q-item>
     </div>

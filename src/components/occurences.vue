@@ -64,13 +64,17 @@ export default {
     }
   },
   created () {
-    console.log('fetching data...')
     MASTER.get('occurences/')
       .then((res) => {
         this.transductor_connection_fail = res.data.transductor_connection_fail
         this.critical_tension = res.data.critical_tension
         this.precarious_tension = res.data.precarious_tension
         this.phase_drop = res.data.phase_drop
+        res.data.slave_connection_fail.forEach((elem) => {
+          if (this.transductor_connection_fail.find(x => x.transductor === elem.transductor) === undefined) {
+            this.transductor_connection_fail.push(elem)
+          }
+        })
         this.isLoading = false
       })
       .catch((err) => {
