@@ -13,7 +13,7 @@ export default function separateInDays (arr, type, today, yesterday, beforeYeste
       type: getOccurenceName(type),
       writtenStartTime: timePassedDays(startTime, endTime, true),
       writtenEndTime: timePassedDays(endTime, now, false),
-      info: getInfo(elem, type),
+      info: getInfo(elem, type)
     }
     if (item.end_time === null) {
       occurrences.push(item)
