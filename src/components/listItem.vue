@@ -1,7 +1,7 @@
 <template>
   <q-list>
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item :to="'/transducer/' + item.transductor">
+      <q-item :to="'/transducer/' + item.serial_number">
         <q-item-section>
           <q-item-label>{{item.name}} ({{item.campus_acronym}})</q-item-label>
         </q-item-section>
