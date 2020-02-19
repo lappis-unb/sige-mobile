@@ -139,17 +139,17 @@ export default {
     await MASTER.get('/realtime-measurements/' + id)
       .then((res) => {
         this.tension = {
-          a: this.round(res.data.voltage_a),
-          b: this.round(res.data.voltage_b),
-          c: this.round(res.data.voltage_c)
+          a: Math.round(res.data.voltage_a),
+          b: Math.round(res.data.voltage_b),
+          c: Math.round(res.data.voltage_c)
         }
         this.current = {
-          a: this.round(res.data.current_a),
-          b: this.round(res.data.current_b),
-          c: this.round(res.data.current_c)
+          a: Math.round(res.data.current_a),
+          b: Math.round(res.data.current_b),
+          c: Math.round(res.data.current_c)
         }
         this.power = {
-          a: this.round(res.data.total_active_power),
+          a: Math.round(res.data.total_active_power),
           r: this.round(res.data.total_reactive_power),
           t: this.round(res.data.total_power_factor)
         }
