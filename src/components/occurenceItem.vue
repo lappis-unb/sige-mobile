@@ -1,13 +1,13 @@
 <template>
   <q-list :class="{ 'q-ml-lg': type == 'occurence'}">
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item to="/transducer" class="q-my-sm">
+      <q-item :to="'/transducer/' + item.transductor" class="q-my-sm">
         <q-item-section>
           <q-item-label class="title-1">{{item.location}} ({{item.campus}})</q-item-label>
-          <q-item-label caption class="subtitle-1">{{getInfo(item)}}</q-item-label>
+          <q-item-label caption class="subtitle-1">{{showInfo(item)}}</q-item-label>
         </q-item-section>
         <q-item-section side top class="label-container">
-          <q-item-label caption class="label-1">{{writenTime(item.start_time)}}</q-item-label>
+          <q-item-label caption class="label-1">{{showTime(item)}}</q-item-label>
         </q-item-section>
       </q-item>
       <q-separator spaced inset />
@@ -16,6 +16,9 @@
 </template>
 
 <script>
+import getInfo from '../utils/info'
+import timePassed from '../utils/timePassed'
+
 export default {
   name: 'OccurenceItem',
   props: {
@@ -35,82 +38,11 @@ export default {
     }
   },
   methods: {
-    writenTime (time) {
-      let d = new Date(time)
-      let now = new Date()
-      let min = Math.floor((now - d) / (1000 * 60))
-
-      if (min < 60) {
-        return min + ' min'
-      } else {
-        let h = Math.floor(min / 60)
-        let m = min % 60
-        if (m === 0) {
-          return h + ' horas'
-        } else {
-          return h + 'h ' + m + 'min'
-        }
-      }
+    showTime (item) {
+      return timePassed(item.start_time)
     },
-    getInfo (item) {
-      if (this.info === 'conection_fail') {
-        return 'Possível queda de energia'
-      } else if (
-        this.info === 'critical_tension' ||
-        this.info === 'precarious_tension'
-      ) {
-        return this.getPhaseVoltage(item)
-      } else if (this.info === 'phase_drop') {
-        return this.getPhase(item)
-      }
-    },
-    getPhaseVoltage (item) {
-      let res = ''
-      let isFirst = true
-
-      if (item.data.voltage_a) {
-        res += 'A - ' + Math.round(item.data.voltage_a) + 'V '
-        isFirst = false
-      }
-      if (item.data.voltage_b) {
-        if (!isFirst) {
-          res += ' / '
-        }
-        res += 'B - ' + Math.round(item.data.voltage_b) + 'V '
-        isFirst = false
-      }
-      if (item.data.voltage_c) {
-        if (!isFirst) {
-          res += ' / '
-        }
-        res += 'C - ' + Math.round(item.data.voltage_c) + 'V '
-        isFirst = false
-      }
-      return res
-    },
-    getPhase (item) {
-      let res = ''
-      let isFirst = true
-
-      if (item.data.voltage_a) {
-        res += 'Fase A '
-        isFirst = false
-      }
-      if (item.data.voltage_b) {
-        if (!isFirst) {
-          res += ' / '
-        }
-        res += 'Fase B '
-        isFirst = false
-      }
-      if (item.data.voltage_c) {
-        if (!isFirst) {
-          res += ' / '
-        }
-        res += 'Fase C '
-        isFirst = false
-      }
-      return res
+    showInfo (item) {
+      return getInfo(item, this.info)
     }
   }
 }

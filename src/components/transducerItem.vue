@@ -1,7 +1,7 @@
 <template>
   <q-list>
     <div v-for="item in items" v-bind:key="item.id">
-      <q-item to="/transducer">
+      <q-item :to="'/transducer/' + item.transductor">
         <q-item-section side>
           <q-icon size="xs" class="text-grey" :name="getIcon()" />
         </q-item-section>

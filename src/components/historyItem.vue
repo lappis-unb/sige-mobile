@@ -1,9 +1,9 @@
 <template>
   <q-list>
-    <div v-for="item in items" v-bind:key="item.key">
-      <q-item to="/transducer" class="container">
+    <div v-for="item in items" v-bind:key="item.id">
+      <q-item :to="'/transducer/' + item.transductor" class="container">
         <q-item-section>
-          <q-item-label>{{item.occurence}}</q-item-label>
+          <q-item-label>{{item.type}}</q-item-label>
           <q-item-label caption>{{item.location}} ({{item.campus}})</q-item-label>
         </q-item-section>
 

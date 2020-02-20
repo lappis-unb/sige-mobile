@@ -21,6 +21,7 @@
 import pageHeader from '../components/pageHeader.vue'
 import simpleList from '../components/simpleList.vue'
 import MASTER from '../services/masterApi/http-common'
+import separateInDays from '../utils/separateInDays'
 
 export default {
   components: {
@@ -36,59 +37,18 @@ export default {
       isLoading: true
     }
   },
-  created () {
-    MASTER.get('/occurences/?type=period')
-      .then((res) => {
-        console.log(res.data)
-        this.separateInDays(res.data.transductor_connection_fail, 'Falha de comunicação')
-        this.separateInDays(res.data.slave_connection_fail, 'Falha de comunicação')
-        this.separateInDays(res.data.critical_tension, 'Tensão crítica')
-        this.separateInDays(res.data.precarious_tension, 'Tensão precária')
-        this.separateInDays(res.data.phase_drop, 'Queda de fase')
-        this.isLoading = false
+  async created () {
+    await MASTER.get('/occurences/?type=period')
+      .then(async (res) => {
+        await separateInDays(res.data.transductor_connection_fail, 'transductor_connection_fail', this.today, this.yesterday, this.beforeYesterday)
+        await separateInDays(res.data.slave_connection_fail, 'slave_connection_fail', this.today, this.yesterday, this.beforeYesterday)
+        await separateInDays(res.data.critical_tension, 'critical_tension', this.today, this.yesterday, this.beforeYesterday)
+        await separateInDays(res.data.precarious_tension, 'precarious_tension', this.today, this.yesterday, this.beforeYesterday)
+        await separateInDays(res.data.phase_drop, 'phase_drop', this.today, this.yesterday, this.beforeYesterday)
       })
       .catch((err) => {
         console.log(err)
       })
-  },
-  methods: {
-    separateInDays (arr, type) {
-      let today = new Date()
-      arr.forEach((elem) => {
-        let endTime = elem.end_time !== null ? new Date(elem.end_time) : today
-        let startTime = new Date(elem.start_time)
-
-        let item = {
-          ...elem,
-          occurence: type,
-          writtenStartTime: this.getTime(startTime, endTime, true),
-          writtenEndTime: this.getTime(endTime, today, false),
-          key: this.key
-        }
-        this.key++
-
-        if (today.getDate() === endTime.getDate()) {
-          this.today.push(item)
-        } else if (today.getDate() - 1 === endTime.getDate()) {
-          this.yesterday.push(item)
-        } else if (today.getDate() - 2 === endTime.getDate()) {
-          this.beforeYesterday.push(item)
-        }
-      })
-    },
-    getTime (date, compareDate, isStartTime) {
-      let days = Math.floor((compareDate - date) / (1000 * 60 * 60 * 24))
-      let res = ''
-
-      if (isStartTime && days > 0) {
-        res += days.toString() + ' dia '
-      } else {
-        let h = date.getHours()
-        let min = date.getMinutes()
-        res += h.toString() + 'h' + min.toString().padStart(2, 0)
-      }
-      return res
-    }
   }
 }
 </script>
