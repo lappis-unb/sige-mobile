@@ -9,7 +9,7 @@
       <q-card-section class="text-type" :class="{'text-type-light': !serious}">{{ occurrence.type }}</q-card-section>
       <div class="occurrence-content">
         <div class="caption" :class="{'caption-light': !serious}">{{occurrence.info}}</div>
-        <div class="caption" :class="{'caption-light': !serious}">Desde {{occurrence.startTime}}</div>
+        <div class="caption" :class="{'caption-light': !serious}">Desde {{occurrence.writtenStartTime}}</div>
       </div>
     </q-card>
   </div>
@@ -77,6 +77,8 @@ export default {
   letter-spacing: 0.4px;
   text-align: right;
   color: #ffffff;
+  padding-top: 2%;
+  padding-bottom: 7%;
 }
 .text-type {
   font-family: Roboto;
@@ -89,7 +91,9 @@ export default {
   text-align: center;
   color: #ffffff;
   padding-bottom: 5%;
-  padding-top: 5%;
+  padding-top: 6%;
+  padding-left: 0;
+  padding-right: 0;
 }
 .text-type-light {
   font-family: Roboto;

@@ -1,5 +1,8 @@
 <template>
-  <div class="container">
+  <div :class="{'container': isLoading || transductor_connection_fail.length === 0 &&
+                critical_tension.length === 0 &&
+                precarious_tension.length === 0 &&
+                phase_drop.length === 0 }">
     <q-spinner v-if="isLoading" size="3em" class="spinner" />
     <div
       v-else-if="transductor_connection_fail.length === 0 &&
@@ -85,6 +88,7 @@ export default {
       })
       .catch(err => {
         console.log('ERROR: ', err)
+        this.isLoading = false
       })
   }
 }

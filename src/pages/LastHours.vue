@@ -45,9 +45,11 @@ export default {
         await separateInDays(res.data.critical_tension, 'critical_tension', this.today, this.yesterday, this.beforeYesterday)
         await separateInDays(res.data.precarious_tension, 'precarious_tension', this.today, this.yesterday, this.beforeYesterday)
         await separateInDays(res.data.phase_drop, 'phase_drop', this.today, this.yesterday, this.beforeYesterday)
+        this.isLoading = false;
       })
       .catch((err) => {
         console.log(err)
+        this.isLoading = false;
       })
   }
 }

@@ -6,9 +6,9 @@
           <q-item-label class="text">{{item.name}} ({{item.campus_acronym}})</q-item-label>
         </q-item-section>
 
-        <q-item-section side top class="icons">
-          <q-icon v-if="item.serious_occurence" size="xs" name="error" />
-          <q-icon v-if="item.light_occurence" size="xs" name="warning" />
+        <q-item-section avatar>
+          <q-icon v-if="item.serious_occurence" size="sm" name="img:statics/ic_ocorrencia_critica_mono _grey.svg" />
+          <q-icon v-if="item.light_occurence" size="sm" name="img:statics/ic_ocorrencia_precaria_mono.svg" />
         </q-item-section>
       </q-item>
     </div>
@@ -30,11 +30,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icons{
-    display: flex;
-    flex-direction: row;
-}
-
 .container {
   display: flex;
   justify-content: center;
