@@ -1,7 +1,7 @@
 <template>
   <div v-if="!isLoading" class="q-mt-xl q-pt-xs">
     <page-header :backButton="true" :title="name" />
-    <div v-for="occ in occurrences" v-bind:key="occ.id" class="occurence">
+    <div v-for="occ in occurrences" v-bind:key="occ.id + occ.transductor + occ.start_time" class="occurence">
       <transducer-alert :occurrence="occ" :serious="seriousOccurrences.includes(occ.originalType)" />
     </div>
     <q-separator spaced inset class="bar" />
@@ -51,14 +51,14 @@
         :items="this.today"
         :type="'transducer'"
       />
-      <q-separator spaced inset class="bar" />
+      <q-separator spaced inset class="bar"  v-if="yesterday.length > 0"/>
       <simple-list
         v-if="yesterday.length > 0"
         :title="'ONTEM'"
         :items="this.yesterday"
         :type="'transducer'"
       />
-      <q-separator spaced inset class="bar" />
+      <q-separator spaced inset class="bar" v-if="beforeYesterday.length > 0"/>
       <simple-list
         v-if="beforeYesterday.length > 0"
         :title="'ANTEONTEM'"
@@ -134,22 +134,22 @@ export default {
       .catch(err => {
         console.log(err);
       });
-    await MASTER.get("/realtime-measurements/" + id)
-      .then(res => {
+    await MASTER.get("/realtime-measurements/?serial_number=" + id)
+      .then(res => {   
         this.tension = {
-          a: Math.round(res.data.voltage_a),
-          b: Math.round(res.data.voltage_b),
-          c: Math.round(res.data.voltage_c)
+          a: Math.round(res.data[0].voltage_a),
+          b: Math.round(res.data[0].voltage_b),
+          c: Math.round(res.data[0].voltage_c)
         };
         this.current = {
-          a: Math.round(res.data.current_a),
-          b: Math.round(res.data.current_b),
-          c: Math.round(res.data.current_c)
+          a: Math.round(res.data[0].current_a),
+          b: Math.round(res.data[0].current_b),
+          c: Math.round(res.data[0].current_c)
         };
         this.power = {
-          a: Math.round(res.data.total_active_power),
-          r: this.round(res.data.total_reactive_power),
-          t: this.round(res.data.total_power_factor)
+          a: Math.round(res.data[0].total_active_power),
+          r: Math.round(res.data[0].total_reactive_power),
+          t: Math.round(res.data[0].total_power_factor)
         };
         this.lastReading = this.getTime(res.data.collection_time);
         this.hasMeasurements = true;
@@ -261,14 +261,14 @@ export default {
 .history {
   margin-top: 3%;
   font-family: Roboto;
-  font-size: 16px;
+  font-size: 2.3vh;
   line-height: 1.5;
   letter-spacing: 0.15px;
   text-align: center;
   color: rgba(0, 0, 0, 0.87);
 }
 .bar {
-  height: 2px;
+  height: 1px;
   margin: 0 0;
   width: 100%;
 }
