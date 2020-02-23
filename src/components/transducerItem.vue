@@ -1,9 +1,9 @@
 <template>
   <q-list>
-    <div v-for="item in items" v-bind:key="item.id">
+    <div v-for="item in items" v-bind:key="item.id + item.transductor + item.start_time">
       <q-item :to="'/transducer/' + item.transductor">
         <q-item-section side>
-          <q-icon size="xs" class="text-grey" :name="getIcon()" />
+          <q-icon size="sm" class="text-grey" :name="getIcon(item.originalType)" />
         </q-item-section>
 
         <q-item-section>
@@ -12,7 +12,7 @@
         </q-item-section>
 
         <q-item-section side top>
-          <q-item-label caption class="caption-top">{{item.startTime}} - {{item.endTime}}</q-item-label>
+          <q-item-label caption class="caption-top">{{item.writtenStartTime}} - {{item.writtenEndTime}}</q-item-label>
         </q-item-section>
 
       </q-item>
@@ -23,6 +23,13 @@
 <script>
 export default {
   name: 'TrasnducerItem',
+  data () {
+    return {
+      seriousOccurrences: ["phase_drop",  "critical_tension"],
+      seriousIcon: 'img:statics/ic_ocorrencia_critica_color.svg',
+      lightIcon: 'img:statics/ic_ocorrencia_precaria_mono.svg'
+    }
+  },
   props: {
     /* eslint-disable */
     items: {
@@ -37,31 +44,36 @@ export default {
   },
 
   methods: {
-    getIcon () {
-      return this.icon
+    getIcon (type) {
+      if(this.seriousOccurrences.includes(type)) {
+        return this.seriousIcon
+      } else {
+        return this.lightIcon
+      }
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .text {
+  width: 100%;
   font-family: Roboto;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 2.7vh;
+  line-height: 3.5vh !important;
   letter-spacing: 0.15px;
   color: rgba(0, 0, 0, 0.87);
 }
 .caption {
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 2.1vh;
   line-height: 1.43;
   letter-spacing: 0.25px;
   color: rgba(0, 0, 0, 0.6);
 }
 .caption-top {
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 1.8vh;
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: right;
