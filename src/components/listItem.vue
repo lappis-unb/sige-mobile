@@ -6,8 +6,8 @@
           <q-item-label class="text">{{item.name}} ({{item.campus_acronym}})</q-item-label>
         </q-item-section>
 
-        <q-item-section avatar>
-          <q-icon v-if="item.serious_occurence" size="sm" name="img:statics/ic_ocorrencia_critica_mono _grey.svg" />
+        <q-item-section avatar class="icons">
+          <q-icon v-if="item.serious_occurence" size="sm" name="img:statics/ic_ocorrencia_critica_mono_grey.svg" />
           <q-icon v-if="item.light_occurence" size="sm" name="img:statics/ic_ocorrencia_precaria_mono.svg" />
         </q-item-section>
       </q-item>
@@ -46,5 +46,9 @@ export default {
   line-height: 1.75;
   letter-spacing: 0.5px;
   color: rgba(0, 0, 0, 0.87);
+}
+
+.icons {
+  flex-direction: row;
 }
 </style>

@@ -199,7 +199,6 @@ export default {
           this.beforeYesterday,
           this.occurrences
         );
-        console.log(this.occurrences);
       })
       .catch(err => {
         console.log(err);
@@ -261,7 +260,7 @@ export default {
 .history {
   margin-top: 3%;
   font-family: Roboto;
-  font-size: 2.3vh;
+  font-size: 2.7vh;
   line-height: 1.5;
   letter-spacing: 0.15px;
   text-align: center;
