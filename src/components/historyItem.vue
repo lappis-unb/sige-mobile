@@ -1,6 +1,6 @@
 <template>
   <q-list>
-    <div v-for="item in items" v-bind:key="item.id">
+    <div v-for="item in items" v-bind:key="item.id + item.transductor + item.start_time">
       <q-item :to="'/transducer/' + item.transductor" class="container">
         <q-item-section>
           <q-item-label>{{item.type}}</q-item-label>

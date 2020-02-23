@@ -1,6 +1,6 @@
 <template>
   <q-list :class="{ 'q-ml-lg': type == 'occurence'}">
-    <div v-for="item in items" v-bind:key="item.id">
+    <div v-for="item in items" v-bind:key="item.id + item.transductor + item.start_time">
       <q-item :to="'/transducer/' + item.transductor" class="q-my-sm">
         <q-item-section>
           <q-item-label class="title-1">{{item.location}} ({{item.campus}})</q-item-label>
