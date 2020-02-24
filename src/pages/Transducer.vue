@@ -72,32 +72,32 @@
   </div>
 </template>
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import simpleList from "../components/simpleList.vue";
-import "leaflet/dist/leaflet.css";
-import Vue2Leaflet from "../services/ssr-import/leaflet";
-import transducerAlert from "../components/transducerAlert";
-import MASTER from "../services/masterApi/http-common";
-import timePassed from "../utils/timePassed";
-import separateInDays from "../utils/separateInDays";
+import pageHeader from '../components/pageHeader.vue'
+import simpleList from '../components/simpleList.vue'
+import 'leaflet/dist/leaflet.css'
+import Vue2Leaflet from '../services/ssr-import/leaflet'
+import transducerAlert from '../components/transducerAlert'
+import MASTER from '../services/masterApi/http-common'
+import timePassed from '../utils/timePassed'
+import separateInDays from '../utils/separateInDays'
 
 export default {
   components: {
     pageHeader: pageHeader,
     simpleList: simpleList,
-    "l-map": Vue2Leaflet.LMap,
-    "l-tile-layer": Vue2Leaflet.LTileLayer,
-    "l-circle": Vue2Leaflet.LCircle,
-    "l-popup": Vue2Leaflet.LPopup,
+    'l-map': Vue2Leaflet.LMap,
+    'l-tile-layer': Vue2Leaflet.LTileLayer,
+    'l-circle': Vue2Leaflet.LCircle,
+    'l-popup': Vue2Leaflet.LPopup,
     transducerAlert: transducerAlert
   },
 
-  data() {
+  data () {
     return {
       key: 0,
       isLoading: true,
-      name: "",
-      lastReading: "",
+      name: '',
+      lastReading: '',
       tension: {},
       current: {},
       power: {},
@@ -106,7 +106,7 @@ export default {
       beforeYesterday: [],
       occurrences: [],
       hasMeasurements: false,
-      seriousOccurrences: ["phase_drop",  "critical_tension"],
+      seriousOccurrences: ['phase_drop', 'critical_tension'],
       // MAP info
       center: [0, 0],
 
@@ -115,109 +115,109 @@ export default {
         maxbounds: this.center
       },
 
-      url: "http://{s}.tile.osm.org/{z}/{x}/{y}.png",
+      url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution:
         '© <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    };
+    }
   },
 
-  async created() {
-    let id = this.$router.currentRoute.params.id;
-    await MASTER.get("/energy-transductors/" + id)
+  async created () {
+    let id = this.$router.currentRoute.params.id
+    await MASTER.get('/energy-transductors/' + id)
       .then(res => {
         console.log(res.data)
-        this.name = res.data.name;
-        this.name = res.data.name;
-        this.center[0] = res.data.geolocation_latitude ? res.data.geolocation_latitude: '1';
-        this.center[1] = res.data.geolocation_longitude ? res.data.geolocation_longitude: '1';
+        this.name = res.data.name
+        this.name = res.data.name
+        this.center[0] = res.data.geolocation_latitude ? res.data.geolocation_latitude : '1'
+        this.center[1] = res.data.geolocation_longitude ? res.data.geolocation_longitude : '1'
       })
       .catch(err => {
-        console.log(err);
-      });
-    await MASTER.get("/realtime-measurements/?serial_number=" + id)
-      .then(res => {   
+        console.log(err)
+      })
+    await MASTER.get('/realtime-measurements/?serial_number=' + id)
+      .then(res => {
         this.tension = {
           a: Math.round(res.data[0].voltage_a),
           b: Math.round(res.data[0].voltage_b),
           c: Math.round(res.data[0].voltage_c)
-        };
+        }
         this.current = {
           a: Math.round(res.data[0].current_a),
           b: Math.round(res.data[0].current_b),
           c: Math.round(res.data[0].current_c)
-        };
+        }
         this.power = {
           a: Math.round(res.data[0].total_active_power),
           r: Math.round(res.data[0].total_reactive_power),
           t: Math.round(res.data[0].total_power_factor)
-        };
-        this.lastReading = this.getTime(res.data.collection_time);
-        this.hasMeasurements = true;
+        }
+        this.lastReading = this.getTime(res.data.collection_time)
+        this.hasMeasurements = true
       })
       .catch(err => {
-        console.log(err);
-      });
-    await MASTER.get("/occurences/?type=period&serial_number=" + id)
+        console.log(err)
+      })
+    await MASTER.get('/occurences/?type=period&serial_number=' + id)
       .then(async res => {
         await separateInDays(
           res.data.critical_tension,
-          "critical_tension",
+          'critical_tension',
           this.today,
           this.yesterday,
           this.beforeYesterday,
           this.occurrences
-        );
+        )
         await separateInDays(
           res.data.precarious_tension,
-          "precarious_tension",
+          'precarious_tension',
           this.today,
           this.yesterday,
           this.beforeYesterday,
           this.occurrences
-        );
+        )
         await separateInDays(
           res.data.phase_drop,
-          "phase_drop",
+          'phase_drop',
           this.today,
           this.yesterday,
           this.beforeYesterday,
           this.occurrences
-        );
+        )
         await separateInDays(
           res.data.transductor_connection_fail,
-          "conection_fail",
+          'conection_fail',
           this.today,
           this.yesterday,
           this.beforeYesterday,
           this.occurrences
-        );
+        )
         await separateInDays(
           res.data.slave_connection_fail,
-          "conection_fail",
+          'conection_fail',
           this.today,
           this.yesterday,
           this.beforeYesterday,
           this.occurrences
-        );
+        )
       })
       .catch(err => {
-        console.log(err);
-      });
-    this.isLoading = false;
+        console.log(err)
+      })
+    this.isLoading = false
   },
   methods: {
-    round(num) {
-      return Math.round(num * 100) / 100;
+    round (num) {
+      return Math.round(num * 100) / 100
     },
-    getTime(d) {
-      let ans = timePassed(d);
-      if (ans !== "agora") {
-        ans = "há " + ans;
+    getTime (d) {
+      let ans = timePassed(d)
+      if (ans !== 'agora') {
+        ans = 'há ' + ans
       }
-      return ans;
+      return ans
     }
   }
-};
+}
 </script>
 <style lang= "scss" scoped>
 .lastReading {

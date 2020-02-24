@@ -25,7 +25,7 @@ export default {
   name: 'TrasnducerItem',
   data () {
     return {
-      seriousOccurrences: ["phase_drop",  "critical_tension"],
+      seriousOccurrences: ['phase_drop', 'critical_tension'],
       seriousIcon: 'img:statics/ic_ocorrencia_critica_color.svg',
       lightIcon: 'img:statics/ic_ocorrencia_precaria_mono.svg'
     }
@@ -45,7 +45,7 @@ export default {
 
   methods: {
     getIcon (type) {
-      if(this.seriousOccurrences.includes(type)) {
+      if (this.seriousOccurrences.includes(type)) {
         return this.seriousIcon
       } else {
         return this.lightIcon

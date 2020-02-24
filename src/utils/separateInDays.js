@@ -21,7 +21,7 @@ export default function separateInDays (arr, type, today, yesterday, beforeYeste
     }
     endTime.setHours(0, 0, 0, 0)
     now.setHours(0, 0, 0, 0)
-    
+
     let diff = Math.floor((now - endTime) / (1000 * 60 * 60 * 24))
 
     if (diff === 0) {
