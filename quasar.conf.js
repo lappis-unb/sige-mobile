@@ -100,9 +100,9 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'SMI',
-        // short_name: 'SMI',
-        // description: 'A Quasar Framework app',
+        name: 'SMI',
+        short_name: 'SMI',
+        description: 'Sistema de Monitoramento de Insumos - Universidade de Brasília.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -133,7 +133,8 @@ module.exports = function (ctx) {
             'sizes': '512x512',
             'type': 'image/png'
           }
-        ]
+        ],
+        gcm_sender_id: "103953800507" 
       }
     },
 
