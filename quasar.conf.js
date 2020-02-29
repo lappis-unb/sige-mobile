@@ -14,6 +14,10 @@ module.exports = function (ctx) {
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
       {
+        path: 'vuex_persist',
+        server: false
+      },
+      {
         path: 'firebase',
         server: false
       }
@@ -58,6 +62,7 @@ module.exports = function (ctx) {
 
       // Quasar plugins
       plugins: [
+        'Cookies',
         'Notify'
       ]
     },
