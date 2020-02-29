@@ -58,7 +58,7 @@ import pageHeader from '../components/pageHeader.vue'
 import occurences from '../components/occurences.vue'
 import transducerList from '../components/transducerList.vue'
 import setting from '../components/setting.vue'
-// import { mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'PageIndex',
@@ -77,7 +77,7 @@ export default {
   },
 
   methods: {
-    // ...mapActions('storedData', ['togglePermission', 'saveToken'])
+    ...mapActions('storedData', ['togglePermission', 'saveToken'])
   },
 
   mounted () {
@@ -94,13 +94,13 @@ export default {
           console.log('Notification permission granted.')
           messaging.getToken().then(token => {
             console.log('New token created: ', token)
-            // this.saveToken(token)
-            // this.togglePermission(true)
+            this.saveToken(token)
+            this.togglePermission(true)
           })
         })
         .catch(err => {
           console.log('Unable to get permission to notify.', err)
-          // this.togglePermission(false)
+          this.togglePermission(false)
         })
 
       messaging.onTokenRefresh(function () {
@@ -108,16 +108,16 @@ export default {
           .getToken()
           .then(function (newToken) {
             console.log('Token refreshed: ', newToken)
-            // this.saveToken(newToken)
-            // this.togglePermission(true)
+            this.saveToken(newToken)
+            this.togglePermission(true)
           })
           .catch(function (err) {
             console.log('Unable to retrieve refreshed token ', err)
-            // this.togglePermission(false)
+            this.togglePermission(false)
           })
       })
     } else {
-      // this.saveToken(this.$route.query.token)
+      this.saveToken(this.$route.query.token)
       console.log('token was saved from query')
     }
   }
