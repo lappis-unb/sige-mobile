@@ -1,6 +1,6 @@
 importScripts('https://www.gstatic.com/firebasejs/7.7.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/7.7.0/firebase-messaging.js');
-//importScripts('env-sw.js');
+importScripts('env-sw.js');
 
 var firebaseConfig = {
   apiKey: process.env.API_KEY,
