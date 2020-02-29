@@ -3,6 +3,9 @@
 node_modules
 yarn.lock
 package-lock.json
+src-pwa/pwa-flag.d.ts
+src-ssr/ssr-flag.d.ts
+src/store/store-flag.d.ts
 
 # Quasar core related directories
 .quasar
