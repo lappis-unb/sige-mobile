@@ -2,7 +2,6 @@ import FIREBASEAPI from '../../services/firebaseAPI/http-common'
 let TOPICNAME = 'ALL'
 
 const TOGGLEPERMISSION = async (state, order) => {
-  console.log(order, 'order2')
   if (order === false) {
     state.notifyEnabled = order
     state.pushBlocked = !order

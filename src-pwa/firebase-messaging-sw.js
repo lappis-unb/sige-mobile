@@ -22,8 +22,8 @@ if (firebase.messaging.isSupported()) {
 
 // if event listener receive a notification object in background it show more than one push
 self.addEventListener('push', function(event) {
-  console.log('[Service Worker] Push Received.');
-  console.log('[Service Worker] Push had this data:', event.data.json().data['title']);
+  //console.log('[Service Worker] Push Received.');
+  //console.log('[Service Worker] Push had this data:', event.data.json());
 
   const title = event.data.json().data['title'];
   const options = {

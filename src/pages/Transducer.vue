@@ -125,7 +125,7 @@ export default {
     let id = this.$router.currentRoute.params.id
     await MASTER.get('/energy-transductors/' + id)
       .then(res => {
-        console.log(res.data)
+        //console.log(res.data)
         this.name = res.data.name
         this.name = res.data.name
         this.center[0] = res.data.geolocation_latitude ? res.data.geolocation_latitude : '1'
