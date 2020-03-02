@@ -1,7 +1,7 @@
 <template>
   <q-list>
-    <div v-for="item in items" v-bind:key="item.id">
-      <q-item :to="'/transducer/' + item.transductor">
+    <div v-for="item in items" v-bind:key="item.id + item.transductor + item.start_time">
+      <q-item :to="'/transducer/' + item.transductor" class="container">
         <q-item-section>
           <q-item-label>{{item.type}}</q-item-label>
           <q-item-label caption>{{item.location}} ({{item.campus}})</q-item-label>
@@ -28,3 +28,13 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 0;
+  }
+</style>

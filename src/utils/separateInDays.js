@@ -10,6 +10,7 @@ export default function separateInDays (arr, type, today, yesterday, beforeYeste
 
     let item = {
       ...elem,
+      originalType: type,
       type: getOccurenceName(type),
       writtenStartTime: timePassedDays(startTime, endTime, true),
       writtenEndTime: timePassedDays(endTime, now, false),

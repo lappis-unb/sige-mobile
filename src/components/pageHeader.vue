@@ -1,5 +1,5 @@
 <template>
-  <q-header class="shadow-3 q-mb-xl">
+  <q-header class="shadow-3 q-mb-xl" >
     <q-toolbar v-if="type == 'occurences'" class="title">
       <q-toolbar-title class="text-h6">Ocorrências em andamento</q-toolbar-title>
       <q-btn to="/lastHours" exact class="float-right" flat icon="history" />
@@ -23,8 +23,8 @@
       <q-toolbar-title class="text-h6">Configurações</q-toolbar-title>
     </q-toolbar>
 
-    <q-toolbar v-if="backButton" class="title bg-grey-4">
-      <q-icon v-go-back=" '/' " size="lg" name="keyboard_backspace" />
+    <q-toolbar v-if="backButton" class="title" :class="{'is-blue' : backButton}">
+      <q-icon v-go-back=" '/' " size="sm" name="arrow_back" class="q-mr-md"/>
       <q-toolbar-title class="text-h6">{{title}}</q-toolbar-title>
     </q-toolbar>
   </q-header>
@@ -77,8 +77,22 @@ export default {
 .title {
   background: white;
   color: #000000;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
 }
 .drop {
   font-size: 90%;
+}
+.is-blue {
+  background-color: $primary !important;
+  width: 216px;
+  height: 24px;
+  font-family: Roboto;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.25px;
+  color: #ffffff;
 }
 </style>
