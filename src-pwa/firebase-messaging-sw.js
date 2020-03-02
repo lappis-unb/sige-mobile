@@ -39,6 +39,6 @@ self.addEventListener('push', function(event) {
 
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
-  clients.openWindow("https://smi-mobile.firebaseapp.com");
+  clients.openWindow("/");
   //handle click event onClick on Web Push Notification
 });
