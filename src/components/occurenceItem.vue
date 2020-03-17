@@ -50,10 +50,8 @@ export default {
 
  <style lang="scss" scoped>
 .title-1 {
-  width: 205px;
-  height: 24px;
   font-family: Roboto;
-  font-size: 16px;
+  font-size: 3vh;
   line-height: 1.5;
   letter-spacing: 0.15px;
   color: rgba(0, 0, 0, 0.87);
@@ -61,20 +59,16 @@ export default {
 }
 
 .subtitle-1 {
-  width: 290px;
-  height: 20px;
   font-family: Roboto;
-  font-size: 14px;
+  font-size: 2.5vh;
   line-height: 1.43;
   letter-spacing: 0.25px;
   color: rgba(0, 0, 0, 0.6);
 }
 
 .label-1 {
-  width: 78px;
-  height: 16px;
   font-family: Roboto;
-  font-size: 12px;
+  font-size: 2vh;
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: right;
