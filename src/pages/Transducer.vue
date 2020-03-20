@@ -212,7 +212,7 @@ export default {
     },
     getTime (d) {
       let ans = timePassed(d)
-      if (ans !== 'agora') {
+      if (ans !== 'agora' && ans !== 'indeterminado') {
         ans = 'há ' + ans
       }
       return ans
