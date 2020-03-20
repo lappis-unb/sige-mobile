@@ -151,7 +151,8 @@ export default {
           r: Math.round(res.data[0].total_reactive_power),
           t: Math.round(res.data[0].total_power_factor)
         }
-        this.lastReading = this.getTime(res.data.collection_time)
+
+        this.lastReading = this.getTime(res.data[0].collection_date)
         this.hasMeasurements = true
       })
       .catch(err => {
