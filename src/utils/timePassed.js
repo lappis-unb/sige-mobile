@@ -14,7 +14,9 @@ export default function timePassed (time) {
         return h + 'h ' + m + 'min'
       }
     }
-  } else {
+  } else if (time !== undefined && time !== null) {
     return 'agora'
+  } else {
+    return 'indeterminado'
   }
 }
