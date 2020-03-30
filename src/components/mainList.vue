@@ -1,11 +1,11 @@
 <template>
-  <div v-if="items">
+  <div v-if="items" :class="{'q-mt-md' : type == 'occurence'}" >
+    <div class="container" v-if="!list">
+      <q-icon class="icon" :name="getIcon()" />
+      <div class="title_container" :class="{'light' : !this.serious}">{{this.title}}</div>
+    </div>
     <div class="content q-mb-xs">
-      <q-card class="card-title q-mb-sm" v-if="!list">
-        <q-icon :name="getIcon()" />
-        {{this.title}}
-      </q-card>
-      <occurence-item v-if="type == 'occurence'" :items="items" />
+      <occurence-item v-if="type == 'occurence'" :items="items" :type="type" :info="info"/>
       <history-item v-else-if="type == 'history'" :items="items" />
       <transducer-item v-else-if="type == 'transducer'" :items="items" />
       <list-item v-else :items="items" />
@@ -13,13 +13,13 @@
   </div>
 </template>
 <script>
-import historyItem from "./historyItem.vue";
-import transducerItem from "./transducerItem.vue";
-import occurenceItem from "./occurenceItem.vue";
-import listItem from "./listItem.vue";
+import historyItem from './historyItem.vue'
+import transducerItem from './transducerItem.vue'
+import occurenceItem from './occurenceItem.vue'
+import listItem from './listItem.vue'
 
 export default {
-  name: "MainList",
+  name: 'MainList',
   components: {
     historyItem: historyItem,
     transducerItem: transducerItem,
@@ -29,35 +29,72 @@ export default {
   props: {
     icon: {
       type: String,
-      default: "warning"
+      default: 'warning'
     },
     title: {
       type: String
     },
+    info: {
+      type: String,
+      default: ''
+    },
+    /* eslint-disable */
     items: {
       type: Array,
       default: []
     },
+    /* eslint-enable */
     list: {
       type: Boolean,
       default: false
     },
     type: {
       type: String,
-      default: "list"
+      default: 'list'
+    },
+    serious: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
-    getIcon() {
-      return this.icon;
+    getIcon () {
+      return this.icon
     }
   }
-};
+}
 </script>
-<style lang="scss">
-.card-title {
-  font-size: 150%;
-  background: #e8e8e8;
-  padding: 5%;
+
+<style lang="scss" scoped>
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.icon {
+  height: 10%;
+  width: 12%;
+}
+
+.title_container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $color_tertiary;
+  margin-left: -1px;
+  padding-left: 2%;
+  width: 100%;
+  font-family: Roboto;
+  font-size: 7vw;
+  font-weight: 300;
+  font-style: italic;
+  color: #ffffff;
+}
+
+.light {
+  background-color: $color_secondary-accent;
 }
 </style>

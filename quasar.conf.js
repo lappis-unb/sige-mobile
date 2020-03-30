@@ -1,5 +1,11 @@
 // Configuration for your app
 // https://quasar.dev/quasar-cli/quasar-conf-js
+const fs = require('fs')
+const env = require('quasar-dotenv').config()
+
+fs.writeFileSync('./src-pwa/env-sw.js',  `const process = ${JSON.stringify({
+  env: env
+}, null, 2)}`)
 
 module.exports = function (ctx) {
   return {
@@ -7,6 +13,14 @@ module.exports = function (ctx) {
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
+      {
+        path: 'vuex_persist',
+        server: false
+      },
+      {
+        path: 'firebase',
+        server: false
+      }
     ],
 
     preFetch: true,
@@ -47,7 +61,10 @@ module.exports = function (ctx) {
       directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Cookies',
+        'Notify'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
@@ -55,6 +72,7 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      env: env,
       scopeHoisting: true,
       // vueRouterMode: 'history',
       // showProgress: false,
@@ -65,13 +83,38 @@ module.exports = function (ctx) {
 
       // https://quasar.dev/quasar-cli/cli-documentation/handling-webpack
       extendWebpack (cfg) {
+        cfg.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /node_modules/,
+          options: {
+            formatter: require('eslint').CLIEngine.getFormatter('stylish')
+          }
+        })
+      },
+      chainWebpack(chain) {
+        if (ctx.mode.pwa) {
+          chain
+            .plugin('copy-static-files')
+            .use(require('copy-webpack-plugin'), [
+              [{
+                from: 'src-pwa/firebase-messaging-sw.js',
+                to: '',
+              },
+              {
+                from: 'src-pwa/env-sw.js',
+                to: '',
+              }]
+            ])
+        }
       }
     },
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
       // https: true,
-      // port: 8080,
+      port: 8081,
       open: true // opens browser window automatically
     },
 
@@ -89,9 +132,9 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        // name: 'SMI',
-        // short_name: 'SMI',
-        // description: 'A Quasar Framework app',
+        name: 'SMI',
+        short_name: 'SMI',
+        description: 'Sistema de Monitoramento de Insumos - Universidade de Brasília.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
@@ -122,7 +165,8 @@ module.exports = function (ctx) {
             'sizes': '512x512',
             'type': 'image/png'
           }
-        ]
+        ],
+        gcm_sender_id: "103953800507" 
       }
     },
 

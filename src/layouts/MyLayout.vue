@@ -1,8 +1,6 @@
 
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-page-container>
+  <q-layout view="lHh lpr lFf" style="background-color: #fafafa">
       <router-view />
-    </q-page-container>
   </q-layout>
 </template>

@@ -6,36 +6,43 @@
 </template>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import mainList from "../components/mainList.vue";
+import mainList from '../components/mainList.vue'
 
 export default {
-  name: "SimpleList",
+  name: 'SimpleList',
   components: {
-    pageHeader: pageHeader,
     mainList: mainList
   },
   props: {
     title: {
       type: String
     },
+    /* eslint-disable */
     items: {
       type: Array,
       default: []
     },
+    /* eslint-enable */
     type: {
       type: String,
-      default: "list"
+      default: 'list'
     }
   },
-  data() {
-    return {};
+  data () {
+    return {}
   }
-};
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ListTitle {
-  color: #777777;
+  width: 141px;
+  height: 16px;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 2px;
+  color: $primary;
 }
 </style>

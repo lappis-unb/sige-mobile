@@ -1,93 +1,110 @@
 <template>
-  <div>
-    <page-header :title="'Ocorrências em andamento'" :last72h="true" />
-    <main-list :title="'Tensão crítica'" :items="critical_tension" :type="'occurence'" />
-    <main-list :title="'Queda de fase'" :items="phase_drop" :type="'occurence'" />
-    <main-list :title="'Falha de comunicação'" :items="comunication_fail" :type="'occurence'" />
+  <div :class="{'container': isLoading || transductor_connection_fail.length === 0 &&
+                critical_tension.length === 0 &&
+                precarious_tension.length === 0 &&
+                phase_drop.length === 0 }">
+    <q-spinner v-if="isLoading" size="3em" class="spinner" />
+    <div
+      v-else-if="transductor_connection_fail.length === 0 &&
+                critical_tension.length === 0 &&
+                precarious_tension.length === 0 &&
+                phase_drop.length === 0"
+    >
+      <p >Não há nenhuma ocorrência em andamento</p>
+    </div>
+    <div v-else>
+      <main-list
+        v-if="critical_tension.length > 0"
+        :title="'Tensão crítica'"
+        :items="critical_tension"
+        :type="'occurence'"
+        :info="'critical_tension'"
+        :icon="serious_icon"
+        :serious="true"
+      />
+      <main-list
+        v-if="phase_drop.length > 0"
+        :title="'Queda de fase'"
+        :items="phase_drop"
+        :type="'occurence'"
+        :info="'phase_drop'"
+        :icon="serious_icon"
+        :serious="true"
+      />
+      <main-list
+        v-if="transductor_connection_fail.length > 0"
+        :title="'Falha de comunicação'"
+        :items="transductor_connection_fail"
+        :type="'occurence'"
+        :info="'conection_fail'"
+        :icon="light_icon"
+        :serious="false"
+      />
+      <main-list
+        v-if="precarious_tension.length > 0"
+        :title="'Tensão precária'"
+        :items="precarious_tension"
+        :type="'occurence'"
+        :info="'precarious_tension'"
+        :icon="light_icon"
+        :serious="false"
+      />
+    </div>
   </div>
 </template>
 <script>
-import pageHeader from "../components/pageHeader.vue";
-import mainList from "../components/mainList.vue";
+import mainList from '../components/mainList.vue'
+import MASTER from '../services/masterApi/http-common'
 
 export default {
-  name: "Occurences",
+  name: 'Occurences',
   components: {
-    pageHeader: pageHeader,
     mainList: mainList
   },
-  data() {
+  data () {
     return {
-      critical_tension: [
-        {
-          name: "ICC Norte m1",
-          sigla: "DRA",
-          obs: "A - 198V",
-          time: "32 min",
-          id: 1
-        },
-        {
-          name: "ICC Norte m2",
-          sigla: "DRA",
-          obs: "A - 202V",
-          time: "30 min",
-          id: 2
-        }
-      ],
-      phase_drop: [
-        {
-          name: "BSA m1",
-          sigla: "DRA",
-          obs: "Fase A",
-          time: "26 min",
-          id: 1
-        }
-      ],
-      comunication_fail: [
-        {
-          name: "Prédio A m1",
-          sigla: "FGA",
-          obs: "Possível queda de energia",
-          time: "12 min",
-          id: 1
-        },
-        {
-          name: "Prédio B m1",
-          sigla: "FGA",
-          obs: "Possível queda de energia",
-          time: "12 min",
-          id: 2
-        },
-        {
-          name: "Ala principal m1",
-          sigla: "FCE",
-          obs: "Possível queda de energia",
-          time: "10 min",
-          id: 3
-        },
-        {
-          name: "Ala principal m2",
-          sigla: "FCE",
-          obs: "Possível queda de energia",
-          time: "10 min",
-          id: 4
-        },
-        {
-          name: "Ala principal m3",
-          sigla: "FCE",
-          obs: "Possível queda de energia",
-          time: "10 min",
-          id: 5
-        },
-        {
-          name: "Ala de serviço m3",
-          sigla: "FCE",
-          obs: "Possível queda de energia",
-          time: "10 min",
-          id: 6
-        }
-      ]
-    };
+      serious_icon: 'img:statics/header_ocorrencia_critica_horizontal@4x.png',
+      light_icon: 'img:statics/header_ocorrencia_precaria_horizontal@4x.png',
+      transductor_connection_fail: [],
+      critical_tension: [],
+      precarious_tension: [],
+      phase_drop: [],
+      isLoading: true
+    }
+  },
+  created () {
+    MASTER.get('occurences/')
+      .then(res => {
+        this.transductor_connection_fail = res.data.transductor_connection_fail
+        this.critical_tension = res.data.critical_tension
+        this.precarious_tension = res.data.precarious_tension
+        this.phase_drop = res.data.phase_drop
+        res.data.slave_connection_fail.forEach((elem) => {
+          if (this.transductor_connection_fail.find(x => x.transductor === elem.transductor) === undefined) {
+            this.transductor_connection_fail.push(elem)
+          }
+        })
+        this.isLoading = false
+      })
+      .catch(err => {
+        console.log('ERROR: ', err)
+        this.isLoading = false
+      })
   }
-};
+}
 </script>
+
+<style lang="scss" scoped>
+.spinner {
+  display: flex;
+  flex: center;
+  margin: 0 auto;
+}
+.container {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

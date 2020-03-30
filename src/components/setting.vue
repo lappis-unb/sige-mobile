@@ -1,112 +1,98 @@
 <template>
-  <div>
-    <page-header :title="'Configurações'" />
-    <div class="ntitle q-mt-xs h1">NOTIFICAÇÔES</div>
-    <div class="q-gutter-sm">
-      <q-list>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
+      <q-list class="q-mt-md">
+        <q-item tag="label" class="container" v-ripple>
           <q-item-section>
-            <q-item-label class="text-subtitle1">Ocorrências graves</q-item-label>
+            <q-item-label class="text">Notificações</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="secondary" v-model="permissions" val="Serious occurrences" />
+            <q-toggle color="positive" :value="notifyEnabled" @input="toggle()" val="Serious occurrences"  size="md"/>
           </q-item-section>
         </q-item>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Ocorrências leves</q-item-label>
+      <q-separator spaced inset class="bar" />
+        <q-item tag="label" class="container" to="/about" v-ripple>
+          <q-item-section >
+            <q-item-label class="text">Sobre o app</q-item-label>
           </q-item-section>
           <q-item-section avatar>
-            <q-toggle color="secondary" v-model="permissions" val="Mild Occurrences" />
+            <q-icon name="keyboard_arrow_right" class="icon"/>
           </q-item-section>
         </q-item>
       </q-list>
-
-      <q-separator spaced inset style="height: 2px;" />
-
-      <q-list>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Ceilândia</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Ceilândia" />
-          </q-item-section>
-        </q-item>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Darcy Ribeiro A</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro A" />
-          </q-item-section>
-        </q-item>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Darcy Ribeiro B</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro B" />
-          </q-item-section>
-        </q-item>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Darcy Ribeiro C</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro C" />
-          </q-item-section>
-        </q-item>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Darcy Ribeiro D</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Darcy Ribeiro D" />
-          </q-item-section>
-        </q-item>
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Gama</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Gama" />
-          </q-item-section>
-        </q-item>
-
-        <q-item tag="label" class="q-gutter-x-xs" v-ripple>
-          <q-item-section>
-            <q-item-label class="text-subtitle1">Planaltina</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="secondary" v-model="campus" val="Planaltina" />
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </div>
-  </div>
 </template>
 
 <script>
-import pageHeader from "../components/pageHeader.vue";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "Setting",
-  components: {
-    pageHeader: pageHeader,
-  },
+  name: 'Setting',
+  components: {},
   props: {},
-  data() {
-    return {
-      permissions: [],
-      campus: []
-    };
+  data () {
+    return {}
+  },
+  computed: {
+    ...mapGetters('storedData', ['notifyEnabled', 'pushIsBlocked'])
+  },
+  methods: {
+    ...mapActions('storedData', ['togglePermission']),
+    toggle () {
+      if (this.pushIsBlocked) {
+        this.triggerNegative()
+        this.triggerInfo()
+      } else {
+        this.togglePermission()
+      }
+    },
+    triggerNegative () {
+      this.$q.notify({
+        type: 'negative',
+        message: `Você bloqueou as notificações`,
+        progress: true
+      })
+    },
+    triggerInfo () {
+      this.$q.notify({
+        type: 'info',
+        message: `Acesse as configurações do seu navegador para desbloquear as notificações.`,
+        multiline: true,
+        progress: true,
+        color: '#ffffff'
+      })
+    }
   }
-};
+}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ntitle {
   color: #777777;
+}
+.bar {
+  height: 2px;
+  margin: 0 0;
+  width: 100%;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 0;
+}
+.text {
+  width: 288px;
+  height: 28px;
+  font-family: Roboto;
+  font-size: 16px;
+  line-height: 1.75;
+  letter-spacing: 0.5px;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.icon {
+  margin-right: 15%;
+  opacity: 50%;
 }
 </style>
