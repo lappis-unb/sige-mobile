@@ -2,14 +2,21 @@ version: '3.5'
 services:
   app:
     container_name: mobile
+    restart: always
     build: .
     ports:
-      - 8080:8080
-      - 3000:3000
+      - 8081:8081
+      - 3001:3000
     volumes:
       - .:/smi-mobile
       - yarn_cache:/smi-mobile/node_modules
     entrypoint: ["sh", "./scripts/start.sh"]
-        
+    networks:
+      - smi-network
+
+networks:
+  smi-network:
+    external: true
+
 volumes:
   yarn_cache:

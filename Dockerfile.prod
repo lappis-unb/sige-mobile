@@ -1,0 +1,14 @@
+FROM node:10
+
+WORKDIR /smi-mobile
+
+COPY . /smi-mobile
+
+RUN mv src/services/masterApi/http-common-homolog-deploy.js src/services/masterApi/http-common.js && \
+    yarn install && \
+    yarn build:ssr
+
+WORKDIR /smi-mobile/dist/ssr
+
+ENTRYPOINT ["yarn", "start:ssr"]
+
