@@ -12,7 +12,7 @@
     "build": "quasar build",
     "start": "quasar dev -m ssr",
     "build:ssr": "quasar build -m ssr",
-    "start:ssr": "quasar dev -m ssr"
+    "start:ssr": "node dist/ssr/index.js"
   },
   "dependencies": {
     "@babel/core": "^7.5.5",
