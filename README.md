@@ -1,13 +1,33 @@
-# SMI (smi-mobile)
-O SMI mobile é uma aplicação PWA para recebimento de alertas relacionados ao SMI.
+# Sistema de Gestão Energética da Universidade de Brasília - SIGE
+
+## About
+
+The Energy Management System (Sistema de Gestão Energética SIGE-UnB) developed by Univerity of Brasilia (Brazil) in partnership with CEB (Companhia Energética de Brasília), is a web application developed to assist in the monitoring and management of Universidade de Brasília's power consumption and distribution.
+
+The idea is to monitor, collect and display data of each campus power supply, allowing a much better comprehension of the usage patterns and energy quality received from the distribution station.
+
+The system is divided into four main layers:
+
+- the **web presentation layer**, which holds the front-end of the application, including the dashboard for researchers.
+- the **mobile presentation layer**, which holds the PWA mobile version of the front-end of the application.
+- the **master server** layer, which is responsible for all the data management, data processing, and database redundancy.
+- the **slave server** layer is responsible for the communication with energy transductors and data collection.
+
+This reposotory holds the source code for the **mobile presentation layer** layer.
+
+## License
+
+All SIGE source code is licensed under [GPL v3](https://gitlab.com/lappis-unb/projects/SMI/smi-front/-/blob/development/LICENSE)
 
 ## Como rodar
-Para subir a aplicação em sua máquina, rode o comando abaixo:
+To run the mobile front-end, execute the following command:
 
 ```
 docker-compose up
 ```
-A aplicação estará disponível na porta `8081` do seu computador. Para acessa-lo acesse: `http://localhost:8081/`
+The default container port exposed for the server is `8081`. For accessing the application go to `http://localhost:8081/` on a browser.
 
 ## Conexão com a API
-O aplicativo faz conexões com a [API Master](https://gitlab.com/lappis-unb/projects/SMI/smi-master). Essa conexão está configurada para conectar com o serviço rodando em docker na mesma máquina com o nome `master-api`. Caso o serviço esteja em outro nome ou em outra máquina, basta configurar o endereço de acesso em `src/services/masterApi/http-common.js` alterando a `baseURL`. 
+The app is tied to the [Master API ](https://gitlab.com/lappis-unb/projects/SMI/smi-master). 
+The defaul configuration is set to connect to the `master-api` container running on the same machine. 
+For a different setup configure the Master API address by altering the `baseURL` variable in the file  `src/services/masterApi/http-common.js`. 
