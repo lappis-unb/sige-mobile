@@ -19,7 +19,7 @@ This reposotory holds the source code for the **mobile presentation layer** laye
 
 All SIGE source code is licensed under [GPL v3](https://gitlab.com/lappis-unb/projects/SMI/smi-front/-/blob/development/LICENSE)
 
-## Como rodar
+## How to run
 To run the mobile front-end, execute the following command:
 
 ```
@@ -27,7 +27,7 @@ docker-compose up
 ```
 The default container port exposed for the server is `8081`. For accessing the application go to `http://localhost:8081/` on a browser.
 
-## Conexão com a API
+##  API connection
 The app is tied to the [Master API ](https://gitlab.com/lappis-unb/projects/SMI/smi-master). 
 The defaul configuration is set to connect to the `master-api` container running on the same machine. 
 For a different setup configure the Master API address by altering the `baseURL` variable in the file  `src/services/masterApi/http-common.js`. 
