@@ -77,7 +77,7 @@ export default {
     },
 
     async verfyOccurences (transducer) {
-      let id = transducer.serial_number
+      let id = transducer.id
       let occ = {
         serious: false,
         light: false

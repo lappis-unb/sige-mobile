@@ -134,7 +134,7 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    await MASTER.get('/realtime-measurements/?serial_number=' + id)
+    await MASTER.get('/realtime-measurements/?id=' + id)
       .then(res => {
         this.tension = {
           a: Math.round(res.data[0].voltage_a),
@@ -158,7 +158,7 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    await MASTER.get('/occurences/?type=period&serial_number=' + id)
+    await MASTER.get('/occurences/?type=period&id=' + id)
       .then(async res => {
         await separateInDays(
           res.data.critical_tension,
