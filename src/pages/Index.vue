@@ -15,7 +15,7 @@
       </q-tab-panel>
     </q-tab-panels>
 
-    <q-footer class="q-pa-xs toolbar">
+    <q-footer class="q-pa-sm toolbar" :class="{'toolbar-ios': $q.platform.is.iphone}">
       <q-tabs
         v-model="tab"
         indicator-color="transparent"
@@ -134,6 +134,10 @@ export default {
   width: 100%;
   text-align: center;
   justify-content: center;
+}
+
+.toolbar-ios {
+  padding-bottom: 12pt;
 }
 
 .text {
