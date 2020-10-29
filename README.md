@@ -43,27 +43,27 @@ Here we'll show step by step how to enable push notification with firebase in th
 
 After sign into your firebase console, follow the steps to create a new project.
 
-![Firebase console](https://imgur.com/a/BB6A9LS)
+![Firebase console](images/Firebase_console.png)
 
 ### 2. Create a .env file
 
-You'll need to create file called ***.env*** , this file need to be a copy of [.env.example](https://gitlab.com/lappis-unb/projects/SMI/smi-mobile/-/blob/development/.env.example) [.env.example](https://imgur.com/uoj7vGI)
+You'll need to create file called ***.env*** , this file need to be a copy of [.env.example](https://gitlab.com/lappis-unb/projects/SMI/smi-mobile/-/blob/development/.env.example) ![.env.example](images/env_example.png)
 
 ### 3. Fill .env file
 
-![Add project to firebase console](https://imgur.com/qopSbYQ)
+![Add project to firebase console](images/add_project.png)
 
-After finished of add a project, go to configurations.
+After finished steps to add a project, go to configurations.
 
-![Go To configurations](https://imgur.com/VOTM5mk)
+![Go To configurations](images/firebase_configurations.png)
 
 At the end of the page you'll see the informations that we need.
 
-![Informations to fill .env](https://imgur.com/eLVhBr2)
+![Informations to fill .env](images/firebase_sdk.png)
 
 Right, now we need of two more data, to have our .env complete, these data will be found in Cloud Messaging tab
 
-* Server Key ![Server Key](https://imgur.com/p4gXAzm)
+* Server Key ![Server Key](images/server_key.png)
 * Vapid Key
     * Generate Vapid Key ![Geneate vapid key](https://imgur.com/aoqWW0a)
     * Vapid Key ![vapid key](https://imgur.com/dSRIUld)
