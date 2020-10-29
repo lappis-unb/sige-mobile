@@ -65,9 +65,21 @@ Right, now we need of two more data, to have our .env complete, these data will 
 
 * Server Key ![Server Key](images/server_key.png)
 * Vapid Key
-    * Generate Vapid Key ![Geneate vapid key](https://imgur.com/aoqWW0a)
-    * Vapid Key ![vapid key](https://imgur.com/dSRIUld)
+    * Generate Vapid Key ![Geneate vapid key](images/generate_vapid_key.png)
+    * Vapid Key ![vapid key](images/vapid_key.png
+    )
 
 ### 4. Receive Notifications 
 
 Now you're able to receive notifications, our app work with [firebase topics](https://firebase.google.com/docs/cloud-messaging/android/topic-messaging), we defined a topic to send and receive notifications, we defined this [topic](https://gitlab.com/lappis-unb/projects/SMI/smi-mobile/-/blob/development/src/store/module-notification/mutations.js#L2), this topic must be the same of our sender [master](https://gitlab.com/lappis-unb/projects/SMI/smi-master/-/blob/development/events/models.py#L15).
+
+```
+$ curl -X POST -H "Authorization: key=${SERVERKEY}" -H "Content-Type: application/json" -d '{
+  "to": "/topics/${TOPICNAME}",
+  "notification": {
+    "title": "FCM Message",
+    "body": "This is an FCM Message",
+  }
+}' https://fcm.googleapis.com/fcm/send
+
+```
