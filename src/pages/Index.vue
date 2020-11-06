@@ -58,7 +58,7 @@ import pageHeader from '../components/pageHeader.vue'
 import occurences from '../components/occurences.vue'
 import transducerList from '../components/transducerList.vue'
 import setting from '../components/setting.vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'PageIndex',
@@ -72,12 +72,20 @@ export default {
 
   data () {
     return {
-      tab: 'occurences'
+      tab: ''
     }
+  },
+
+  computed: {
+    ...mapGetters('tabData', ['getTab'])
   },
 
   methods: {
     ...mapActions('storedData', ['togglePermission', 'saveToken'])
+  },
+
+  created () {
+    this.tab = this.getTab
   },
 
   mounted () {
