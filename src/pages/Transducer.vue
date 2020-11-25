@@ -15,19 +15,19 @@
           <th>POTÊNCIA</th>
         </tr>
         <tr>
-          <td>A - {{tension.a}}V</td>
-          <td>A - {{current.a}}A</td>
-          <td>A - {{power.a}}W</td>
+          <td>A : {{tension.a}}V</td>
+          <td>A : {{current.a}}A</td>
+          <td>A : {{power.a}}W</td>
         </tr>
         <tr>
-          <td>B - {{tension.b}}V</td>
-          <td>B - {{current.b}}A</td>
-          <td>R - {{power.r}}kVAr</td>
+          <td>B : {{tension.b}}V</td>
+          <td>B : {{current.b}}A</td>
+          <td>R : {{power.r}}kVAr</td>
         </tr>
         <tr>
-          <td>C - {{tension.c}}V</td>
-          <td>C - {{current.c}}A</td>
-          <td>T - {{power.t}}kVa</td>
+          <td>C : {{tension.c}}V</td>
+          <td>C : {{current.c}}A</td>
+          <td>T : {{power.t}}kVa</td>
         </tr>
       </table>
       <l-map
