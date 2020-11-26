@@ -1,66 +1,82 @@
 <template>
-      <q-list class="q-mt-md">
-        <q-item tag="label" class="container" v-ripple>
-          <q-item-section>
-            <q-item-label class="text">Notificações</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="positive" :value="notifyEnabled" @input="toggle()" val="Serious occurrences"  size="md"/>
-          </q-item-section>
-        </q-item>
-      <q-separator spaced inset class="bar" />
-        <q-item tag="label" class="container" to="/about" v-ripple>
-          <q-item-section >
-            <q-item-label class="text">Sobre o app</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-icon name="keyboard_arrow_right" class="icon"/>
-          </q-item-section>
-        </q-item>
-      </q-list>
+  <q-list class="q-mt-md">
+    <q-item tag="label" class="container" v-ripple>
+      <q-item-section>
+        <q-item-label class="text">Notificações</q-item-label>
+      </q-item-section>
+      <q-item-section avatar>
+        <q-toggle
+          color="positive"
+          :value="notifyEnabled"
+          @input="toggle()"
+          val="Serious occurrences"
+          size="md"
+        />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset class="bar" />
+    <q-item tag="label" class="container" to="/about" v-ripple>
+      <q-item-section>
+        <q-item-label class="text">Sobre o app</q-item-label>
+      </q-item-section>
+      <q-item-section avatar>
+        <q-icon name="keyboard_arrow_right" class="icon" />
+      </q-item-section>
+    </q-item>
+  </q-list>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: 'Setting',
+  name: "Setting",
   components: {},
   props: {},
-  data () {
-    return {}
+  data() {
+    return {};
   },
   computed: {
-    ...mapGetters('storedData', ['notifyEnabled', 'pushIsBlocked'])
+    ...mapGetters("storedData", ["notifyEnabled", "pushIsBlocked"]),
   },
   methods: {
-    ...mapActions('storedData', ['togglePermission']),
-    toggle () {
+    ...mapActions("storedData", ["togglePermission"]),
+    toggle() {
       if (this.pushIsBlocked) {
-        this.triggerNegative()
-        this.triggerInfo()
+        this.triggerNegative();
+        this.triggerInfo();
       } else {
-        this.togglePermission()
+        this.togglePermission();
       }
     },
-    triggerNegative () {
+    triggerNotifyUser(type, message, progress, multiline, progress, color) {
       this.$q.notify({
-        type: 'negative',
+        type,
+        message,
+        progress,
+        multiline,
+        progress,
+        color
+      });
+    },
+    triggerNegative() {
+      triggerNotifyUser({
+        type: "negative",
         message: `Você bloqueou as notificações`,
-        progress: true
+        progress: true,
       })
     },
-    triggerInfo () {
-      this.$q.notify({
-        type: 'info',
+    triggerInfo() {
+      triggerNotifyUser({
+        type: "info",
         message: `Acesse as configurações do seu navegador para desbloquear as notificações.`,
         multiline: true,
         progress: true,
-        color: '#ffffff'
-      })
-    }
-  }
-}
+        color: "#ffffff",
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
