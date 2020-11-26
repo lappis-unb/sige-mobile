@@ -29,7 +29,7 @@ export default {
   methods: {
     link () {
       // The link has to be changed when we publish the app on App Store
-      openURL('https://apps.apple.com/br/app/instagram/id389801252')
+      // openURL('https://apps.apple.com/br/app/instagram/id389801252')
     }
   }
 }

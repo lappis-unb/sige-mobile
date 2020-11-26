@@ -91,9 +91,7 @@ export default {
       messaging
         .requestPermission()
         .then(() => {
-          // console.log('Notification permission granted.')
           messaging.getToken().then(token => {
-            // console.log('New token created: ', token)
             this.saveToken(token)
             this.togglePermission(true)
           })
@@ -106,8 +104,7 @@ export default {
       messaging.onTokenRefresh(function () {
         messaging
           .getToken()
-          .then(function (newToken) {
-            // console.log('Token refreshed: ', newToken)
+          .then(newToken => {
             this.saveToken(newToken)
             this.togglePermission(true)
           })
