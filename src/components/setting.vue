@@ -56,7 +56,7 @@ export default {
         message: `Acesse as configurações do seu navegador para desbloquear as notificações.`,
         multiline: true,
         progress: true,
-        color: '#ffffff'
+        color: '$white'
       })
     }
   }
@@ -65,7 +65,7 @@ export default {
 
 <style lang="scss" scoped>
 .ntitle {
-  color: #777777;
+  color: $grey;
 }
 .bar {
   height: 2px;
@@ -86,7 +86,7 @@ export default {
   font-size: 16px;
   line-height: 1.75;
   letter-spacing: 0.5px;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
   display: flex;
   justify-content: flex-start;
   align-items: center;

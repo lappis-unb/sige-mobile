@@ -62,7 +62,7 @@ export default {
   font-size: 2.7vh;
   line-height: 3.5vh !important;
   letter-spacing: 0.15px;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .caption {
   font-family: Roboto;
@@ -77,6 +77,6 @@ export default {
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: right;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 </style>

@@ -57,7 +57,7 @@ export default {
 
 <style lang="scss" scoped>
 .history-container {
-  background-color: #fafafa;
+  background-color: $stdBackgroundColor;
   margin-top: 10%;
 }
 .spinner {

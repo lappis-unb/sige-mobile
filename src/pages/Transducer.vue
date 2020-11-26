@@ -227,7 +227,7 @@ export default {
   line-height: 1.5;
   letter-spacing: 0.15px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .readings {
   width: 100%;
@@ -249,7 +249,7 @@ export default {
   font-size: 14px;
   line-height: 1.43;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .map {
   border-radius: 5px;
@@ -265,7 +265,7 @@ export default {
   line-height: 1.5;
   letter-spacing: 0.15px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .bar {
   height: 1px;

@@ -91,7 +91,7 @@ export default {
   font-size: 7vw;
   font-weight: 300;
   font-style: italic;
-  color: #ffffff;
+  color: $white;
 }
 
 .light {

@@ -45,7 +45,7 @@ export default {
   font-size: 16px;
   line-height: 1.75;
   letter-spacing: 0.5px;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 
 .icons {
