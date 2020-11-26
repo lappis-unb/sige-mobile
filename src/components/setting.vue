@@ -27,56 +27,55 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  name: "Setting",
+  name: 'Setting',
   components: {},
   props: {},
-  data() {
-    return {};
+  data () {
+    return {}
   },
   computed: {
-    ...mapGetters("storedData", ["notifyEnabled", "pushIsBlocked"]),
+    ...mapGetters('storedData', ['notifyEnabled', 'pushIsBlocked'])
   },
   methods: {
-    ...mapActions("storedData", ["togglePermission"]),
-    toggle() {
+    ...mapActions('storedData', ['togglePermission']),
+    toggle () {
       if (this.pushIsBlocked) {
-        this.triggerNegative();
-        this.triggerInfo();
+        this.triggerNegative()
+        this.triggerInfo()
       } else {
-        this.togglePermission();
+        this.togglePermission()
       }
     },
-    triggerNotifyUser(type, message, progress, multiline, progress, color) {
+    triggerNotifyUser ({ type, message, progress, multiline, color }) {
       this.$q.notify({
         type,
         message,
         progress,
         multiline,
-        progress,
         color
-      });
-    },
-    triggerNegative() {
-      triggerNotifyUser({
-        type: "negative",
-        message: `Você bloqueou as notificações`,
-        progress: true,
       })
     },
-    triggerInfo() {
-      triggerNotifyUser({
-        type: "info",
+    triggerNegative () {
+      this.triggerNotifyUser({
+        type: 'negative',
+        message: `Você bloqueou as notificações`,
+        progress: true
+      })
+    },
+    triggerInfo () {
+      this.triggerNotifyUser({
+        type: 'info',
         message: `Acesse as configurações do seu navegador para desbloquear as notificações.`,
         multiline: true,
         progress: true,
-        color: "#ffffff",
-      });
-    },
-  },
-};
+        color: '#ffffff'
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

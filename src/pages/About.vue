@@ -27,7 +27,7 @@ export default {
 
   data () {
     return {
-      projectVersion: "1.0"
+      projectVersion: '1.0'
     }
   }
 }

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { openURL } from 'quasar'
+/* import { openURL } from 'quasar' */
 
 export default {
   name: 'popup',
