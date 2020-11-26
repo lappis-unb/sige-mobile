@@ -10,7 +10,7 @@
         <q-icon class="img q-mb-xl" name="img:statics/logo_aneel.svg" />
         <q-icon class="img q-mb-xl" name="img:statics/logo_finatec@4x.png" style="width: 65%"/>
         <q-separator inset class="bar q-mb-lg" />
-        <div class="version">App v 1.0</div>
+        <div class="version">App v "projectVersion"</div>
         <div class="subtitle-2 q-mb-lg">Criação:</div>
         <q-icon class="img q-mb-xl" name="img:statics/logo_lappis.svg" style="width: 65%"/>
     </div>
@@ -26,7 +26,9 @@ export default {
   },
 
   data () {
-    return {}
+    return {
+      projectVersion: "1.0"
+    }
   }
 }
 </script>
