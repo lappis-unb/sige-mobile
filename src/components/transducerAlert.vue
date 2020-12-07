@@ -101,7 +101,7 @@ export default {
 }
 .caption {
   font-family: Roboto;
-  font-size: 4vw;
+  font-size: 100%;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
@@ -112,7 +112,7 @@ export default {
 }
 .caption-light {
   font-family: Roboto;
-  font-size: 4vw;
+  font-size: 100%;
   line-height: 1.43;
   letter-spacing: 0.25px;
   color: rgba(0, 0, 0, 0.87);

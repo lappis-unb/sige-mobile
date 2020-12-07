@@ -2,21 +2,22 @@
   <div>
     <page-header :type="tab" />
     <q-tab-panels v-model="tab" class="main-panel">
-      <q-tab-panel name="occurences" class="q-pl-none">
+      <q-tab-panel name="occurences" class="q-pl-none" >
         <occurences class="q-mb-xl"/>
       </q-tab-panel>
 
-      <q-tab-panel name="meters">
+      <q-tab-panel name="meters" >
         <transducer-list />
       </q-tab-panel>
 
-      <q-tab-panel name="settings">
+      <q-tab-panel name="settings" >
         <setting/>
       </q-tab-panel>
     </q-tab-panels>
 
-    <q-footer class="q-pa-xs toolbar">
+    <q-footer class="q-pa-sm toolbar" :class="{'toolbar-ios': $q.platform.is.iphone}">
       <q-tabs
+        @input="onChangeTab()"
         v-model="tab"
         indicator-color="transparent"
         active-color="white"
@@ -58,7 +59,7 @@ import pageHeader from '../components/pageHeader.vue'
 import occurences from '../components/occurences.vue'
 import transducerList from '../components/transducerList.vue'
 import setting from '../components/setting.vue'
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'PageIndex',
@@ -72,12 +73,24 @@ export default {
 
   data () {
     return {
-      tab: 'occurences'
+      tab: ''
     }
   },
 
+  computed: {
+    ...mapGetters('tabData', ['getTab'])
+  },
+
   methods: {
-    ...mapActions('storedData', ['togglePermission', 'saveToken'])
+    ...mapActions('storedData', ['togglePermission', 'saveToken']),
+    ...mapActions('tabData', ['changeTab']),
+    onChangeTab () {
+      this.changeTab(this.tab)
+    }
+  },
+
+  created () {
+    this.tab = this.getTab
   },
 
   mounted () {
@@ -134,6 +147,10 @@ export default {
   width: 100%;
   text-align: center;
   justify-content: center;
+}
+
+.toolbar-ios {
+  padding-bottom: 12pt;
 }
 
 .text {
