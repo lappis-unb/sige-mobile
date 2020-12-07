@@ -51,7 +51,7 @@ export default {
     await MASTER.get('/energy-transductors/')
       .then((res) => {
         res.data.forEach(async (i) => {
-          this.transducers.push(await this.addInfos(i))
+          this.transducers.push(this.addInfos(i))
         })
       })
       .catch((err) => {
@@ -63,9 +63,9 @@ export default {
     ...mapGetters('campusData', ['campus'])
   },
   methods: {
-    async addInfos (item) {
+    addInfos (item) {
       let id = parseInt(item.campus.split('/')[4], 10)
-      let occ = await this.verfyOccurences(item)
+      let occ = this.verfyOccurences(item)
 
       return {
         ...item,
@@ -76,20 +76,20 @@ export default {
       }
     },
 
-    async verfyOccurences (transducer) {
+    verfyOccurences (transducer) {
       let id = transducer.id
       let occ = {
         serious: false,
         light: false
       }
-      if (await this.checkArr(this.occurences.transductor_connection_fail, id, occ.light) ||
-          await this.checkArr(this.occurences.slave_connection_fail, id, occ.light) ||
-          await this.checkArr(this.occurences.precarious_tension, id, occ.light)) {
+      if (this.checkArr(this.occurences.transductor_connection_fail, id, occ.light) ||
+          this.checkArr(this.occurences.slave_connection_fail, id, occ.light) ||
+          this.checkArr(this.occurences.precarious_tension, id, occ.light)) {
         occ.light = true
       }
 
-      if (await this.checkArr(this.occurences.critical_tension, id, occ.serious) ||
-          await this.checkArr(this.occurences.phase_drop, id, occ.serious)) {
+      if (this.checkArr(this.occurences.critical_tension, id, occ.serious) ||
+          this.checkArr(this.occurences.phase_drop, id, occ.serious)) {
         occ.serious = true
       }
 
