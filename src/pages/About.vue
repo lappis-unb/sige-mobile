@@ -65,7 +65,7 @@ export default {
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .bar {
   height: 2px;
@@ -94,6 +94,6 @@ export default {
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: center;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 </style>

@@ -1,6 +1,6 @@
 
 <template>
-  <q-layout view="lHh lpr lFf" style="background-color: #fafafa">
+  <q-layout view="lHh lpr lFf" style="background-color: $stdBackgroundColor">
       <router-view />
   </q-layout>
 </template>

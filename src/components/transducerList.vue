@@ -123,7 +123,7 @@ export default {
 
 <style lang="scss" scoped>
 .ListTitle {
-  color: #777777;
+  color: $grey;
 }
 .bar {
   height: 2px;

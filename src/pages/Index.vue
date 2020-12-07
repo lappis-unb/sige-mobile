@@ -136,11 +136,11 @@ export default {
   }
 }
 </script>
-
 <style lang = "scss">
+
 .toolbar {
   display: flex;
-  background: #00417e;
+  background: $primary;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -165,6 +165,6 @@ export default {
 
 .main-panel {
   margin-top: 8%;
-  background-color: #fafafa;
+  background-color: $stdBackgroundColor;
 }
 </style>
