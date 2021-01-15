@@ -20,10 +20,7 @@ if (firebase.messaging.isSupported()) {
 
 }
 
-// if event listener receive a notification object in background it show more than one push
 self.addEventListener('push', function(event) {
-  //console.log('[Service Worker] Push Received.');
-  //console.log('[Service Worker] Push had this data:', event.data.json());
 
   const title = event.data.json().data['title'];
   const options = {
@@ -40,5 +37,4 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
   clients.openWindow("/");
-  //handle click event onClick on Web Push Notification
 });

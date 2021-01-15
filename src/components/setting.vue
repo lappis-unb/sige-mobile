@@ -1,23 +1,29 @@
 <template>
-      <q-list class="q-mt-md">
-        <q-item tag="label" class="container" v-ripple>
-          <q-item-section>
-            <q-item-label class="text">Notificações</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-toggle color="positive" :value="notifyEnabled" @input="toggle()" val="Serious occurrences"  size="md"/>
-          </q-item-section>
-        </q-item>
-      <q-separator spaced inset class="bar" />
-        <q-item tag="label" class="container" to="/about" v-ripple>
-          <q-item-section >
-            <q-item-label class="text">Sobre o app</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-icon name="keyboard_arrow_right" class="icon"/>
-          </q-item-section>
-        </q-item>
-      </q-list>
+  <q-list class="q-mt-md">
+    <q-item tag="label" class="container" v-ripple>
+      <q-item-section>
+        <q-item-label class="text">Notificações</q-item-label>
+      </q-item-section>
+      <q-item-section avatar>
+        <q-toggle
+          color="positive"
+          :value="notifyEnabled"
+          @input="toggle()"
+          val="Serious occurrences"
+          size="md"
+        />
+      </q-item-section>
+    </q-item>
+    <q-separator spaced inset class="bar" />
+    <q-item tag="label" class="container" to="/about" v-ripple>
+      <q-item-section>
+        <q-item-label class="text">Sobre o app</q-item-label>
+      </q-item-section>
+      <q-item-section avatar>
+        <q-icon name="keyboard_arrow_right" class="icon" />
+      </q-item-section>
+    </q-item>
+  </q-list>
 </template>
 
 <script>
@@ -43,15 +49,24 @@ export default {
         this.togglePermission()
       }
     },
-    triggerNegative () {
+    triggerNotifyUser ({ type, message, progress, multiline, color }) {
       this.$q.notify({
+        type,
+        message,
+        progress,
+        multiline,
+        color
+      })
+    },
+    triggerNegative () {
+      this.triggerNotifyUser({
         type: 'negative',
         message: `Você bloqueou as notificações`,
         progress: true
       })
     },
     triggerInfo () {
-      this.$q.notify({
+      this.triggerNotifyUser({
         type: 'info',
         message: `Acesse as configurações do seu navegador para desbloquear as notificações.`,
         multiline: true,
