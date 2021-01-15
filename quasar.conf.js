@@ -137,8 +137,8 @@ module.exports = function (ctx) {
         description: 'Sistema de Monitoramento de Insumos - Universidade de Brasília.',
         display: 'standalone',
         orientation: 'portrait',
-        background_color: '#ffffff',
-        theme_color: '#ffffff',
+        background_color: '$white',
+        theme_color: '$white',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',

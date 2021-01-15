@@ -78,8 +78,8 @@ export default {
 
 <style lang="scss">
 .title {
-  background: white;
-  color: #000000;
+  background: $white;
+  color: $black;
   font-family: Roboto;
   font-size: 20px;
   font-weight: 500;
@@ -96,6 +96,6 @@ export default {
   font-size: 20px;
   font-weight: 500;
   letter-spacing: 0.25px;
-  color: #ffffff;
+  color: $white;
 }
 </style>

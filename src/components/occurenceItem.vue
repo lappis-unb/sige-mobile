@@ -54,7 +54,7 @@ export default {
   font-size: 3vh;
   line-height: 1.5;
   letter-spacing: 0.15px;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
   margin-bottom: 5%;
 }
 
@@ -72,7 +72,7 @@ export default {
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: right;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 
 .label-container {

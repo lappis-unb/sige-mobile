@@ -50,13 +50,13 @@ export default {
 <style lang="scss" scoped>
 .occurrence {
   text-align: center;
-  background-color: #fafafa;
+  background-color: $stdBackgroundColor;
   margin: 10%;
   margin-top: 0;
   margin-bottom: 5%;
 }
 .occurrence-img {
-  color: white;
+  color: $white;
   text-align: center;
   margin-top: 10px;
   width: 20%;
@@ -76,7 +76,7 @@ export default {
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: right;
-  color: #ffffff;
+  color: $white;
   padding-top: 2%;
   padding-bottom: 7%;
 }
@@ -89,7 +89,7 @@ export default {
   line-height: normal;
   letter-spacing: normal;
   text-align: center;
-  color: #ffffff;
+  color: $white;
   padding-bottom: 5%;
   padding-top: 6%;
   padding-left: 0;
@@ -97,7 +97,7 @@ export default {
 }
 .text-type-light {
   font-family: Roboto;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .caption {
   font-family: Roboto;
@@ -108,14 +108,14 @@ export default {
   line-height: 1.33;
   letter-spacing: 0.4px;
   text-align: right;
-  color: #ffffff;
+  color: $white;
 }
 .caption-light {
   font-family: Roboto;
   font-size: 100%;
   line-height: 1.43;
   letter-spacing: 0.25px;
-  color: rgba(0, 0, 0, 0.87);
+  color: $dark;
 }
 .my-card {
   width: 100%;
