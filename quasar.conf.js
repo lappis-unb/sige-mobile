@@ -132,9 +132,9 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {}, // only for NON InjectManifest
       manifest: {
-        name: 'SMI',
-        short_name: 'SMI',
-        description: 'Sistema de Monitoramento de Insumos - Universidade de Brasília.',
+        name: 'SIGE',
+        short_name: 'SIGE',
+        description: 'Sistema de Gestão Energética - Universidade de Brasília.',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '$white',
