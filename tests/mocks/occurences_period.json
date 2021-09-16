@@ -1,0 +1,22 @@
+{
+  "critical_tension": [],
+  "precarious_tension": [
+    {
+      "id": 20909,
+      "location": "UED2",
+      "campus": "FGA",
+      "transductor": 6,
+      "data": {
+        "voltage_a": 228.35223388671875
+      },
+      "start_time": "2021-03-08T16:04:03.097422",
+      "end_time": null
+    }
+  ],
+  "phase_drop": [],
+  "transductor_connection_fail": [],
+  "slave_connection_fail": [],
+  "count": 244,
+  "critical_events_count": 0,
+  "light_events_count": 245
+}
