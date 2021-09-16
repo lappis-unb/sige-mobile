@@ -1,0 +1,32 @@
+{
+  "critical_tension": [],
+  "precarious_tension": [
+    {
+      "id": 20909,
+      "location": "UED2",
+      "campus": "FGA",
+      "transductor": 6,
+      "data": {
+        "voltage_a": 228.35223388671875
+      },
+      "start_time": "2021-03-08T16:04:03.097422",
+      "end_time": null
+    }
+  ],
+  "phase_drop": [],
+  "transductor_connection_fail": [
+    {
+      "id": 7296,
+      "location": "FT III (GRACO)",
+      "campus": "Darcy A",
+      "transductor": 8,
+      "data": {},
+      "start_time": "2020-11-03T08:52:03.733013",
+      "end_time": null
+    }
+  ],
+  "slave_connection_fail": [],
+  "count": 4,
+  "critical_events_count": 0,
+  "light_events_count": 5
+}
