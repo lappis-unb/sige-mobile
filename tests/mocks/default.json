@@ -1,0 +1,19 @@
+{
+  "slave": "http://sige.unb.br:443/slave/",
+  "users": "http://sige.unb.br:443/users/",
+  "minutely-measurements": "http://sige.unb.br:443/minutely-measurements/",
+  "quarterly-measurements": "http://sige.unb.br:443/quarterly-measurements/",
+  "monthly-measurements": "http://sige.unb.br:443/monthly-measurements/",
+  "realtime-measurements": "http://sige.unb.br:443/realtime-measurements/",
+  "tax": "http://sige.unb.br:443/tax/",
+  "voltage-related-events": "http://sige.unb.br:443/voltage-related-events/",
+  "failed-connection-slave-events": "http://sige.unb.br:443/failed-connection-slave-events/",
+  "failed-connection-transductor-events": "http://sige.unb.br:443/failed-connection-transductor-events/",
+  "occurences": "http://sige.unb.br:443/occurences/",
+  "groups": "http://sige.unb.br:443/groups/",
+  "group-types": "http://sige.unb.br:443/group-types/",
+  "energy-transductors": "http://sige.unb.br:443/energy-transductors/",
+  "energy-transductors-list": "http://sige.unb.br:443/energy-transductors-list/",
+  "lines": "http://sige.unb.br:443/lines/",
+  "campi": "http://sige.unb.br:443/campi/"
+}
