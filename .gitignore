@@ -41,3 +41,4 @@ yarn-error.log*
 # environment variable
 .env
 /src-pwa/env-sw.js
+/coverage
