@@ -28,17 +28,17 @@ docker-compose up
 The default container port exposed for the server is `8081`. For accessing the application go to `http://localhost:8081/` on a browser.
 
 ##  API connection
-The app is tied to the [Master API ](https://gitlab.com/lappis-unb/projects/SMI/smi-master). 
-The defaul configuration is set to connect to the `master-api` container running on the same machine. 
-For a different setup configure the Master API address by altering the `baseURL` variable in the file  `src/services/masterApi/http-common.js`. 
+The app is tied to the [Master API ](https://gitlab.com/lappis-unb/projects/SMI/smi-master).
+The defaul configuration is set to connect to the `master-api` container running on the same machine.
+For a different setup configure the Master API address by altering the `baseURL` variable in the file  `src/services/masterApi/http-common.js`.
 
 
-## Enable Push notification  
+## Enable Push notification
 ***Android only***
 
 Here we'll show step by step how to enable push notification with firebase in this project.
 
-### 1. Create a firebase project: 
+### 1. Create a firebase project:
 ***If you already have an project then you can skip this step***
 
 After sign into your firebase console, follow the steps to create a new project.
@@ -69,7 +69,7 @@ Right, now we need of two more data, to have our .env complete, these data will 
     * Vapid Key ![vapid key](images/vapid_key.png
     )
 
-### 4. Receive Notifications 
+### 4. Receive Notifications
 
 Now you're able to receive notifications, our app work with [firebase topics](https://firebase.google.com/docs/cloud-messaging/android/topic-messaging), we defined a topic to send and receive notifications, we defined this [topic](https://gitlab.com/lappis-unb/projects/SMI/smi-mobile/-/blob/development/src/store/module-notification/mutations.js#L2), this topic must be the same of our sender [master](https://gitlab.com/lappis-unb/projects/SMI/smi-master/-/blob/development/events/models.py#L15).
 
@@ -83,3 +83,18 @@ $ curl -X POST -H "Authorization: key=${SERVERKEY}" -H "Content-Type: applicatio
 }' https://fcm.googleapis.com/fcm/send
 
 ```
+
+
+### Team
+
+|        Member       |            E-mail            |     Contribution Period      |
+|:-------------------:|:----------------------------:|:----------------------------:|
+|	Alax Alves	|	alaxallves@gmail.com	|	19	-	20	|
+|	Arthur Assis	|	arthur120496@gmail.com	|	20	-	20	|
+|	Ezequiel De Oliveira	|	ezequiel1de1oliveira@gmail.com	|	19	-	20	|
+|	Gabriela Barrozo Guedes	|	gabrielabguedes@gmail.com	|	19	-	20	|
+|	lievertom	|	lievertom@gmail.com	|	21	-	21	|
+|	Natália Rodrigues	|	nataliamrq@gmail.com	|	20	-	20	|
+|	Renato Sampaio	|	renatocoral@gmail.com	|	20	-	21	|
+|	Rodrigo Maia	|	design@rodmaia.net	|	20	-	20	|
+|	Victor Rodrigues | victorrsilva17@gmail.com	|	20	-	20	|
